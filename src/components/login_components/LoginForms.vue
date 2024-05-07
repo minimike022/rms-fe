@@ -1,33 +1,34 @@
 <script setup>
-import {ref, defineAsyncComponent} from 'vue'
-import axios from 'axios'
+import {ref, onMounted} from 'vue'
 import axiosClient from "../../utils/axiosClient"
+import axios from "axios"
+import VueCookies from 'vue-cookies'
+
+
 
 const user_account = ref({
     account_username: '', 
     account_password: ''
 })
-
-const login_account = async() => {
-    // const res = await axiosClient.post("/user/login", {
-    //     Username: user_account.value.account_username,
-    //     Password: user_account.value.account_password
-    // }).catch(error => console.log(error))
-
-    // console.log(res)
-    const formData = new FormData()
-      formData.append('username', "MiniMike022")
-      formData.append('password', "MiniMike04")
-
- 
-axiosClient.post('account/login', formData)
- 
-.then(response => {
-     console.log(response)  
-      return response.data
-}) .catch((err) => {
-       console.log(err)
+onMounted(() => {
+    applicants()
 })
+
+const applicants = () => {
+    axiosClient.get("/applicants")
+    .then(res => console.log(res.data))
+    .catch(error => console.log(error))
+}
+
+const login_account = () => {
+    axiosClient.post("/user/login",{
+        username: user_account.value.account_username,
+        password: user_account.value.account_password
+    })
+    .then(res => {
+        this.$cookies.set("access_token", res.data.value.access_token,"4h")
+    })
+    .catch(error => console.log(error))
 }
 
 </script>

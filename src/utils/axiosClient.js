@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios'
  
 // Create an instance of Axios with default configurations
 const axiosClient = axios.create({
@@ -13,7 +13,7 @@ const axiosClient = axios.create({
 // You can also add request interceptors to modify requests before they are sent
 axiosClient.interceptors.request.use(
   (config) => {
-    // You can modify config headers or do any other transformations
+    console.log(config)
     return config;
   },
   (error) => {
