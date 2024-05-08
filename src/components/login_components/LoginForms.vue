@@ -1,24 +1,16 @@
 <script setup>
-import {ref, onMounted} from 'vue'
+import {ref} from 'vue'
 import axiosClient from "../../utils/axiosClient"
-import axios from "axios"
 import VueCookies from 'vue-cookies'
+import { useRouter } from 'vue-router';
 
 
+const router = useRouter()
 
 const user_account = ref({
     account_username: '', 
     account_password: ''
 })
-onMounted(() => {
-    applicants()
-})
-
-const applicants = () => {
-    axiosClient.get("/applicants")
-    .then(res => console.log(res.data))
-    .catch(error => console.log(error))
-}
 
 const login_account = () => {
     axiosClient.post("/user/login",{
@@ -26,11 +18,10 @@ const login_account = () => {
         password: user_account.value.account_password
     })
     .then(res => {
-        this.$cookies.set("access_token", res.data.value.access_token,"4h")
-    })
+        router.push("/application_forms")
+    })  
     .catch(error => console.log(error))
 }
-
 </script>
 
 <template>

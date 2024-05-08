@@ -13,7 +13,6 @@ const axiosClient = axios.create({
 // You can also add request interceptors to modify requests before they are sent
 axiosClient.interceptors.request.use(
   (config) => {
-    console.log(config)
     return config;
   },
   (error) => {
