@@ -32,60 +32,24 @@ const submit_application_forms = () => {
 </script>
 
 <template>
-    <div>
-        <form @submit.prevent="submit_application_forms">
-            <div>
-                <input class="border-b border-[#D1D1D1] outline-none h-[7dvh]" type="text" name="first_name" placeholder="First Name*" v-model="application_forms.first_name">
-                <input class="border-b border-[#D1D1D1] outline-none h-[7dvh]" type="text" name="middle_name" placeholder="Middle Name*" v-model="application_forms.middle_name">
-                <input class="border-b border-[#D1D1D1] outline-none h-[7dvh]" type="text" name="last_name" placeholder="Last Name*" v-model="application_forms.last_name">
-                <input class="border-b border-[#D1D1D1] outline-none h-[7dvh]" type="text" name="extension_name" placeholder="Extension Name*" v-model="application_forms.extension_name">
-                <input class="border-b border-[#D1D1D1] outline-none h-[7dvh]" type="date" name="birthdate*" v-model="application_forms.birthdate">
-                <input class="border-b border-[#D1D1D1] outline-none h-[7dvh]" type="number" name="age" placeholder="Age" v-model="application_forms.age">
-                <input class="border-b border-[#D1D1D1] outline-none h-[7dvh]" type="text" name="present_address" placeholder="Present Address" v-model="application_forms.present_address">
-            </div>
-            <div>
-                <input type="radio" name="position_id" v-model="application_forms.position_id" value="1">
-                <input type="radio" name="position_id" v-model="application_forms.position_id" value="2">
-                <input type="radio" name="position_id" v-model="application_forms.position_id" value="3">
-            </div>
-
+    <div class="h-[100dvh] w-full bg-blue-500 ">
             
-            <input type="text" name="facebook_link" placeholder="Facebook Link" v-model="application_forms.facebook_link">
-            <!-- Radio Buttons -->
-            <div>
-                <h1>
-                    Do you have BPO
-                </h1>
-                <span>
-                    <input type="radio" name="bpo_exp_yes" value="yes" v-model="application_forms.bpo_exp">
-                    <label for="bpo_exp_yes">Yes</label>
-                    <input type="radio" name="bpo_exp_no" value="no" v-model="application_forms.bpo_exp">
-                    <label for="bpo_exp_no">No</label>
-                </span>
-                <span>
-                    <input type="radio" name="shift_sched" value="yes" v-model="application_forms.shift_sched">
-                    <input type="radio" name="shift_sched" value="no" v-model="application_forms.shift_sched">
-                </span>
-                <span>
-                    <input type="radio" name="work_report" value="yes" v-model="application_forms.work_report">
-                    <input type="radio" name="work_report" value="no" v-model="application_forms.work_report">
-                </span>
-                <span>
-                    <input type="radio" name="platform_id" value="yes" v-model="application_forms.platform_id">
-                    <input type="radio" name="platform_id" value="no" v-model="application_forms.platform_id">
-                </span>
+            <div class="relative w-screen flex flex-col items-center justify-center">
+                <!-- Header -->
+                <div class="mt-[10dvh]">
+                    <h1 class="font-bold text-white text-3xl">Application Form</h1>
+                </div>
+                <!-- Contents -->
+                <div>
+                    <form @submit.prevent="">
+                        <div class="w-[95dvh] h-[65dvh] mt-6 px-10 py-4 
+                        drop-shadow-xl
+                        bg-white  rounded-2xl">
+                            <!--Personal Information-->
+                            <h1>Personal Information</h1>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <input type="text" name="ref_full_name" v-model="application_forms.ref_full_name">
-            <input type="text" name="ref_position" v-model="application_forms.ref_position">
-            <input type="text" name="ref_contact_num" v-model="application_forms.ref_contact_num">
-            <input type="text" name="ref_email" v-model="application_forms.ref_email">
-            <input type="text" name="applicant_cv" v-model="application_forms.applicant_cv">
-            <input type="text" name="portfolio_link" v-model="application_forms.applicant_portfolio_link">
-
-            <span>
-                
-            </span>
-            <input type="submit">
-        </form>
     </div>
 </template>

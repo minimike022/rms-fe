@@ -6,8 +6,51 @@ const Applicants = () => import("/src/pages/applicants/Applicants.vue")
 const Jobs = () => import("/src/pages/jobs/Jobs.vue")
 const Calendar = () => import("/src/pages/calendar/Calendar.vue")
 const Analysis = () => import("/src/pages/analysis/Analysis.vue")
+const Main = () => import("/src/pages/main.vue")
 
 const routes = [
+    {
+        path:"/",
+        component: Main, 
+        children: [
+            {
+                path:"/dashboard",
+                component: Dashboard,
+                meta: {
+                    header: "Dashboard"
+                }
+            },
+            {
+                path:"/applicants",
+                component: Applicants,
+                meta: {
+                    header: "Applicants"
+                }
+            },
+            {
+                path:"/calendar",
+                component: Calendar,
+                meta: {
+                    header: "Calendar"
+                }
+            },
+            {
+                path:"/jobs",
+                component: Jobs,
+                meta: {
+                    header: "Jobs"
+                }
+            },
+            {
+                path:"/analysis",
+                component: Analysis,
+                meta: {
+                    header: "Analysis"
+                }
+            }
+        
+        ]
+    },
     {
         path:"/login",
         component: Login
@@ -16,42 +59,7 @@ const routes = [
         path:"/application_forms",
         component: Application
     },
-    {
-        path:"/dashboard",
-        component: Dashboard,
-        meta: {
-            header: "Dashboard"
-        }
-    },
-    {
-        path:"/applicants",
-        component: Applicants,
-        meta: {
-            header: "Applicants"
-        }
-    },
-    {
-        path:"/calendar",
-        component: Calendar,
-        meta: {
-            header: "Calendar"
-        }
-    },
-    {
-        path:"/jobs",
-        component: Jobs,
-        meta: {
-            header: "Jobs"
-        }
-    },
-    {
-        path:"/analysis",
-        component: Analysis,
-        meta: {
-            header: "Analysis"
-        }
-    }
-
+    
 ]
 
 const router = createRouter({

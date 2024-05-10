@@ -19,6 +19,6 @@
             <RouterLink class="font-bold text-[#D1D1D1] hover:text-[#46D1FE]" to="/applicants">See all</RouterLink>
         </div>
     </div>
-    <!-- Recruitment Progress -->
+    <!-- Recruitment Progress Graph -->
     
 </template>
