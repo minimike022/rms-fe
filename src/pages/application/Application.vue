@@ -4,8 +4,8 @@ import ApplicationHeader from '../../components/application_components/Applicati
 </script>
 
 <template>
-    <div class="overflow-x-hidden">
+    <div class="overflow-hidden">
         <ApplicationHeader/>
-    <ApplicationForms/>
+        <ApplicationForms/>
     </div>
 </template>
