@@ -7,6 +7,7 @@ export default {
       'Poppins': ['Poppins', 'sans-serif']
     }
   },
-  plugins: [],
+  plugins: [
+  ],
 }
 

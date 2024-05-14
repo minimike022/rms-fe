@@ -1,8 +1,14 @@
 <script setup>
+import {ref} from 'vue'
+
+const age = ref(null)
+const extension_name = ref("Hello World")
+
+
 </script>
 
 <template>
-    <div class="w-[95dvh] h-auto mt-6 px-11 py-8 
+    <div class="w-[95dvh] h-[65dvh] mt-6 px-11 py-8 
         drop-shadow-xl
         bg-white  rounded-2xl">
         <h1 class="text-2xl font-semibold">Personal Information</h1>
@@ -53,19 +59,22 @@
                                         transition-all duration-100
                                         ">Last Name*</label>
             </div>
-            <div class="relative">
-                <label for="extension_name" class="
-                                        absolute
-                                        text-sm text-gray-400
-                                        left-0 top-1
-                                        ">Extension Name (if any)</label>
-                <input type="text" id="extension_name" class="
-                                        w-full
-                                     focus:border-blue-600 focus:border-b-2
-                                        outline-none border-b border-gray-400 
-                                        text-md py-3
-                                        transition-colors duration-500 peer">
+            <div class="relative flex">
+                <h1 class="text-sm 
+                absolute -top-4
+                ">Extension Name (if any)</h1>
+                <select class="w-full outline-none border-b border-gray-400">
+                    <option value="" class="text-lg text-gray-400">Choose your option</option>
+                    <option value="Jr" class="text-lg text-blue-500">Jr</option>
+                    <option value="Sr" class="text-lg text-blue-500">Sr</option>
+                    <option value="I" class="text-lg text-blue-500">I</option>
+                    <option value="II" class="text-lg text-blue-500">II</option>
+                    <option value="III" class="text-lg text-blue-500">III</option>
+                    <option value="IV" class="text-lg text-blue-500">IV</option>
+                    <option value="V" class="text-lg text-blue-500">V</option>
+                </select>
             </div>
+                
             <div class="relative">
                 <input type="date" id="birthdate" class="
                                         w-full
@@ -82,7 +91,8 @@
                                         ">Birthdate *</label>
             </div>
             <div class="relative">
-                <input type="text" v-model="age" id="age" class="
+                <input type="text" disabled v-model="age" id="age" class="
+                                     bg-white
                                         w-full
                                         outline-none border-b border-dotted border-gray-400 
                                         text-md py-3">

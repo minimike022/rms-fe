@@ -3,7 +3,8 @@ import { ref } from 'vue'
 import PersonalInformation from './input_forms/PersonalInformation.vue';
 import ContactInformation from './input_forms/ContactInformation.vue';
 import DesiredPosition from './input_forms/DesiredPosition.vue';
-
+import EducationalBackground from './input_forms/EducationalBackground.vue';
+import Others from './input_forms/Others.vue'
 </script>
 
 <template>
@@ -12,10 +13,12 @@ import DesiredPosition from './input_forms/DesiredPosition.vue';
             <!-- Header -->
             <h1 class="font-bold text-white text-3xl mt-10">Application Form</h1>
             <!-- Contents -->
-            <form @submit.prevent="">
+            <form @submit.prevent="" class="my-5">
                 <PersonalInformation />
                 <ContactInformation />
-                <DesiredPosition/>
+                <DesiredPosition />
+                <EducationalBackground />
+                <Others/>
             </form>
         </div>
     </div>
