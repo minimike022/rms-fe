@@ -1,8 +1,31 @@
-<script setup></script>
+<script setup>
+import {ref, watch} from 'vue'
+
+const emit = defineEmits(['contact_info'])
+
+
+const contact_info = ref({
+    mobile_number: '',
+    email_address: '',
+    facebook_link: ''
+})
+
+const contactInfo_toParent = () => {
+    emit('contact_info', contact_info.value)
+}
+
+
+watch(contact_info.value,
+    () => {
+        contactInfo_toParent()
+    }
+)
+
+</script>
 
 <template>
     <!--Contact Information-->
-    <div class="w-[95dvh] h-[50dvh] mt-6 px-11 py-8
+    <div class="w-[95dvh] h-auto mt-6 px-11 py-8
                         drop-shadow-xl
                         bg-white  rounded-2xl">
         <h1 class="text-2xl font-semibold">Contact Information</h1>
@@ -10,7 +33,7 @@
         <div class="grid grid-cols-1  gap-y-8
                                 mt-4">
             <div class="relative">
-                <input type="text" id="mobile_number" class="
+                <input type="text" v-model.lazy="contact_info.mobile_number" id="mobile_number" class="
                                         w-full
                                      focus:border-blue-600 focus:border-b-2
                                         outline-none border-b border-gray-400 
@@ -25,7 +48,7 @@
                                         ">Mobile Number*</label>
             </div>
             <div class="relative">
-                <input type="text" id="email_address" class="
+                <input type="text" v-model.lazy="contact_info.email_address" id="email_address" class="
                                         w-full
                                      focus:border-blue-600 focus:border-b-2
                                         outline-none border-b border-gray-400 
@@ -40,7 +63,7 @@
                                         ">Email Address*</label>
             </div>
             <div class="relative">
-                <input type="text" id="facebook_link" class="
+                <input type="text" v-model.lazy="contact_info.facebook_link" id="facebook_link" class="
                                         w-full
                                      focus:border-blue-600 focus:border-b-2
                                         outline-none border-b border-gray-400 

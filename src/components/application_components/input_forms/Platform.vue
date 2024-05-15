@@ -10,39 +10,43 @@ watch(
         console.log(selected_platform.value)
     }
 )
+
 </script>
 
 <template>
-    <div class="w-[95dvh] h-auto mt-6 px-11 py-8
-                        drop-shadow-xl
-                        bg-white  rounded-2xl">
+    <div>
         <h1 class="text-xl font-semibold">HOW DID YOU FOUND OUT ABOUT THIS JOB VACANCY?</h1>
-        <!-- Input Forms -->
+        <!-- Platform Forms -->
         <div class="
+        w-[30dvh]
         my-4
         grid grid-cols-1 gap-y-5">
-            <span class="flex items-center justify-start">
+            <label for="MotivIT Website" class="flex items-center peer-checked:text-blue-500">
                 <input type="checkbox" v-model="selected_platform" value="MotivIT Website" name="MotivIT Website"
+                    class="h-[3dvh] w-[3dvh] accent-blue-500 peer">
+                <h1 class="text-gray-600 font-semibold ml-4">MotivIT Website</h1>
+            </label>
+            <label for="Facebook" class="flex items-center peer-checked:text-blue-500">
+                <input type="checkbox" v-model="selected_platform" value="Facebook" id="Facebook"
                     class="h-[3dvh] w-[3dvh] accent-blue-500">
-                <label for="MotivIT Website" class="text-gray-400">MotivIT Website</label>
-            </span>
-            <span class="flex items-center justify-start">
-                <input type="checkbox" v-model="selected_platform" value="Facebook" id="Facebook" class="h-[3dvh] w-[3dvh] accent-blue-500">
-                <label for="Facebook" class="text-gray-400">Facebook</label>
-            </span>
-            <span class="flex items-center justify-start">
-                <input type="checkbox" v-model="selected_platform" value="LinkedIn" id="LinkedIn" class="h-[3dvh] w-[3dvh] accent-blue-500">
-                <label for="LinkedIn" class="text-gray-400">LinkedIn</label>
-            </span>
-            <span class="flex items-center justify-start">
-                <input type="checkbox" v-model="selected_platform" value="Job Fair" id="Job Fair" class="h-[3dvh] w-[3dvh] accent-blue-500">
-                <label for="Job Fair" class="text-gray-400">Job Fair</label>
-            </span>
-            <span class="flex items-center justify-start">
-                <input type="checkbox" v-model="selected_platform" value="Referral" id="Referral" class="h-[3dvh] w-[3dvh] accent-blue-500">
-                <label for="Referral" class="text-gray-400">Referral</label>
-            </span>
-            <div v-if="selected_platform == 'Referral'" class="relative mt-2 ">
+                <h1 class="text-gray-600 font-semibold ml-4">Facebook</h1>
+            </label>
+            <label for="LinkedIn" class="flex items-center has-[:checked]:text-blue-600">
+                <input type="checkbox" v-model="selected_platform" value="LinkedIn" id="LinkedIn"
+                    class="h-[3dvh] w-[3dvh] accent-blue-500">
+                <h1 class="text-gray-600 font-semibold ml-4">LinkedIn</h1>
+            </label>
+            <label for="Job Fair" class="flex items-center has-[:checked]:text-blue-600">
+                <input type="checkbox" v-model="selected_platform" value="Job Fair" id="Job Fair"
+                    class="h-[3dvh] w-[3dvh] accent-blue-500">
+                <h1 class="text-gray-600 font-semibold ml-4">Job Fair</h1>
+            </label>
+            <label for="Referral" class="text-gray-600 font-semibold flex items-center has-[:checked]:text-blue-600">
+                <input type="checkbox" v-model="selected_platform" value="Referral" id="Referral"
+                    class="h-[3dvh] w-[3dvh] accent-blue-500">
+                <h1 class="text-gray-600 font-semibold ml-4">Referral</h1>
+            </label>
+            <div class="relative mt-2">
                 <input type="text" id="referral" class="
                                         cursor-text
                                         w-full
@@ -60,8 +64,9 @@ watch(
             </div>
 
             <span class="flex items-center justify-start">
-                <input type="checkbox" v-model="selected_platform" id="Others" value="Others" class="h-[3dvh] w-[3dvh] accent-blue-500">
-                <label for="Others" class="text-gray-400">Others</label>
+                <input type="checkbox" v-model="selected_platform" id="Others" value="Others"
+                    class="h-[3dvh] w-[3dvh] accent-blue-500 peer">
+                <label for="Others" class="text-gray-600 font-semibold ml-4 peer-checked:text-blue-500">Others</label>
             </span>
             <div v-for="platform in selected_platform" v-if="platform == 'Others'" class="relative mt-2">
                 <input type="text" id="other_platform" class="

@@ -1,21 +1,62 @@
 <script setup>
-import {ref} from 'vue'
+import {computed, ref, watch} from 'vue'
 
-const age = ref(null)
-const extension_name = ref("Hello World")
+const emit = defineEmits(['personal_info'])
+
+const personalInfo_toParent = () => {
+    emit('personal_info', personal_information.value)
+} 
+
+const calculateAge = (birthdate) => {
+      const birthday = new Date(birthdate);
+      const today = new Date();
+      let age = today.getFullYear() - birthday.getFullYear();
+      const m = today.getMonth() - birthday.getMonth();
+
+      if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) {
+        age--;
+      }
+
+      return age;
+    }
+
+const personal_information = ref({
+    first_name: '',
+    middle_name: '',
+    last_name: '',
+    extension_name: '',
+    birthdate: null,
+    age: null,
+    present_address: ''
+})
+
+watch(
+    () => personal_information.value.birthdate,
+    () => {
+        personal_information.value.age = computed(() => {
+            return calculateAge(personal_information.value.birthdate)
+        })
+    }
+)
+
+watch(personal_information.value,
+    () => {
+        personalInfo_toParent()
+    }
+)
 
 
 </script>
 
 <template>
-    <div class="w-[95dvh] h-[65dvh] mt-6 px-11 py-8 
+    <div class="w-[95dvh] h-auto mt-6 px-11 py-8 
         drop-shadow-xl
         bg-white  rounded-2xl">
         <h1 class="text-2xl font-semibold">Personal Information</h1>
         <div class="grid grid-cols-2 gap-x-4 gap-y-8
             mt-6">
             <div class="relative">
-                <input type="text" id="first_name" class="
+                <input type="text" v-model.lazy="personal_information.first_name" id="first_name" class="
                                         w-full
                                      focus:border-blue-600 focus:border-b-2
                                         outline-none border-b border-gray-400 
@@ -30,7 +71,7 @@ const extension_name = ref("Hello World")
                                         ">First Name*</label>
             </div>
             <div class="relative">
-                <input type="text" id="middle_name" class="
+                <input type="text" v-model.lazy="personal_information.middle_name" id="middle_name" class="
                                         w-full
                                      focus:border-blue-600 focus:border-b-2
                                         outline-none border-b border-gray-400 
@@ -45,7 +86,7 @@ const extension_name = ref("Hello World")
                                         ">Middle Name*</label>
             </div>
             <div class="relative">
-                <input type="text" id="last_name" class="
+                <input type="text" v-model.lazy="personal_information.last_name" id="last_name" class="
                                         w-full
                                      focus:border-blue-600 focus:border-b-2
                                         outline-none border-b border-gray-400 
@@ -63,7 +104,7 @@ const extension_name = ref("Hello World")
                 <h1 class="text-sm 
                 absolute -top-4
                 ">Extension Name (if any)</h1>
-                <select class="w-full outline-none border-b border-gray-400">
+                <select v-model.lazy="personal_information.extension_name" class="w-full outline-none border-b border-gray-400">
                     <option value="" class="text-lg text-gray-400">Choose your option</option>
                     <option value="Jr" class="text-lg text-blue-500">Jr</option>
                     <option value="Sr" class="text-lg text-blue-500">Sr</option>
@@ -76,7 +117,7 @@ const extension_name = ref("Hello World")
             </div>
                 
             <div class="relative">
-                <input type="date" id="birthdate" class="
+                <input type="date" v-model.lazy="personal_information.birthdate" id="birthdate" class="
                                         w-full
                                      focus:border-blue-600 focus:border-b-2
                                         outline-none border-b border-gray-400 
@@ -91,7 +132,7 @@ const extension_name = ref("Hello World")
                                         ">Birthdate *</label>
             </div>
             <div class="relative">
-                <input type="text" disabled v-model="age" id="age" class="
+                <input type="text" disabled v-model="personal_information.age" id="age" class="
                                      bg-white
                                         w-full
                                         outline-none border-b border-dotted border-gray-400 
@@ -104,7 +145,7 @@ const extension_name = ref("Hello World")
             </div>
         </div>
         <div class="relative mt-8">
-            <input type="text" id="present_address" class="
+            <input type="text" v-model.lazy="personal_information.present_address" id="present_address" class="
                                         cursor-text
                                         w-full
                                      focus:border-blue-600 focus:border-b-2
