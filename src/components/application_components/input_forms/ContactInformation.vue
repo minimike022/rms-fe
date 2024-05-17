@@ -33,48 +33,48 @@ watch(contact_info.value,
         <div class="grid grid-cols-1  gap-y-8
                                 mt-4">
             <div class="relative">
-                <input type="text" v-model.lazy="contact_info.mobile_number" id="mobile_number" class="
+                <input required type="text" v-model.lazy="contact_info.mobile_number" placeholder="Mobile Number*" id="mobile_number" class="
                                         w-full
-                                     focus:border-blue-600 focus:border-b-2
+                                     focus:border-blue-600 focus:border-b-2 placeholder-transparent
                                         outline-none border-b border-gray-400 
                                         text-md py-3
                                         transition-colors duration-500 peer">
                 <label for="mobile_number" class="
+                pointer-events-none
                                         absolute
-                                        text-md text-gray-400
-                                        left-0 top-1
-                                        peer-focus:text-blue-600 peer-focus:text-sm peer-focus:-top-4 
-                                        transition-all duration-100
+                                        left-0 -translate-y-5 bg-white p-0.5 text-gray-400 transition-all text-sm 
+                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base 
+                                        peer-focus:text-sm peer-focus:text-blue-500 peer-focus:top-0
                                         ">Mobile Number*</label>
             </div>
             <div class="relative">
-                <input type="text" v-model.lazy="contact_info.email_address" id="email_address" class="
+                <input required type="text" v-model.lazy="contact_info.email_address" placeholder="Email Address*" id="email_address" class="
                                         w-full
-                                     focus:border-blue-600 focus:border-b-2
+                                     focus:border-blue-600 focus:border-b-2 placeholder-transparent
                                         outline-none border-b border-gray-400 
                                         text-md py-3
                                         transition-colors duration-500 peer">
                 <label for="email_address" class="
+                pointer-events-none
                                         absolute
-                                        text-md text-gray-400
-                                        left-0 top-1
-                                        peer-focus:text-blue-600 peer-focus:text-sm peer-focus:-top-4 
-                                        transition-all duration-100
+                                        left-0 -translate-y-5 bg-white p-0.5 text-gray-400 transition-all text-sm 
+                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base 
+                                        peer-focus:text-sm peer-focus:text-blue-500 peer-focus:top-0
                                         ">Email Address*</label>
             </div>
             <div class="relative">
-                <input type="text" v-model.lazy="contact_info.facebook_link" id="facebook_link" class="
+                <input required type="text" v-model.lazy="contact_info.facebook_link" placeholder="Facebook_Username/link" id="facebook_link" class="
                                         w-full
-                                     focus:border-blue-600 focus:border-b-2
+                                     focus:border-blue-600 focus:border-b-2 placeholder-transparent
                                         outline-none border-b border-gray-400 
                                         text-md py-3
                                         transition-colors duration-500 peer">
                 <label for="facebook_link" class="
+                pointer-events-none
                                         absolute
-                                        text-md text-gray-400
-                                        left-0 top-1
-                                        peer-focus:text-blue-600 peer-focus:text-sm peer-focus:-top-4 
-                                        transition-all duration-100
+                                        left-0 -translate-y-5 bg-white p-0.5 text-gray-400 transition-all text-sm 
+                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base 
+                                        peer-focus:text-sm peer-focus:text-blue-500 peer-focus:top-0
                                         ">Facebook_Username/link</label>
             </div>
         </div>

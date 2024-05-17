@@ -1,13 +1,18 @@
 <script setup>
 import { ref, watch } from 'vue'
 
+const emit = defineEmits(['platform_info'])
 
 const selected_platform = ref([])
+
+const platformsInfo_toParent = () => {
+    emit('platform_info', selected_platform.value)
+}
 
 watch(
     () => selected_platform.value,
     () => {
-        console.log(selected_platform.value)
+        platformsInfo_toParent()
     }
 )
 
@@ -18,7 +23,6 @@ watch(
         <h1 class="text-xl font-semibold">HOW DID YOU FOUND OUT ABOUT THIS JOB VACANCY?</h1>
         <!-- Platform Forms -->
         <div class="
-        w-[30dvh]
         my-4
         grid grid-cols-1 gap-y-5">
             <label for="MotivIT Website" class="flex items-center peer-checked:text-blue-500">
@@ -41,8 +45,8 @@ watch(
                     class="h-[3dvh] w-[3dvh] accent-blue-500">
                 <h1 class="text-gray-600 font-semibold ml-4">Job Fair</h1>
             </label>
-            <label for="Referral" class="text-gray-600 font-semibold flex items-center has-[:checked]:text-blue-600">
-                <input type="checkbox" v-model="selected_platform" value="Referral" id="Referral"
+            <label for="Referral"  class="text-gray-600 font-semibold flex items-center has-[:checked]:text-blue-600">
+                <input type="checkbox" v-model="selected_platform"  value="Referral" id="Referral"
                     class="h-[3dvh] w-[3dvh] accent-blue-500">
                 <h1 class="text-gray-600 font-semibold ml-4">Referral</h1>
             </label>
@@ -63,12 +67,12 @@ watch(
                                         ">Name of Referrer*</label>
             </div>
 
-            <span class="flex items-center justify-start">
-                <input type="checkbox" v-model="selected_platform" id="Others" value="Others"
-                    class="h-[3dvh] w-[3dvh] accent-blue-500 peer">
-                <label for="Others" class="text-gray-600 font-semibold ml-4 peer-checked:text-blue-500">Others</label>
-            </span>
-            <div v-for="platform in selected_platform" v-if="platform == 'Others'" class="relative mt-2">
+            <label for="Others" class="text-gray-600 font-semibold flex items-center has-[:checked]:text-blue-600">
+                <input type="checkbox" v-model="selected_platform" value="Others" id="Others"
+                    class="h-[3dvh] w-[3dvh] accent-blue-500">
+                <h1 class="text-gray-600 font-semibold ml-4">Others</h1>
+            </label>
+            <div class="relative mt-2">
                 <input type="text" id="other_platform" class="
                                         cursor-text
                                         w-full

@@ -1,24 +1,24 @@
 <script setup>
-import {computed, ref, watch} from 'vue'
+import { computed, ref, watch } from 'vue'
 
 const emit = defineEmits(['personal_info'])
 
 const personalInfo_toParent = () => {
     emit('personal_info', personal_information.value)
-} 
+}
 
 const calculateAge = (birthdate) => {
-      const birthday = new Date(birthdate);
-      const today = new Date();
-      let age = today.getFullYear() - birthday.getFullYear();
-      const m = today.getMonth() - birthday.getMonth();
+    const birthday = new Date(birthdate);
+    const today = new Date();
+    let age = today.getFullYear() - birthday.getFullYear();
+    const m = today.getMonth() - birthday.getMonth();
 
-      if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) {
+    if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) {
         age--;
-      }
-
-      return age;
     }
+
+    return age;
+}
 
 const personal_information = ref({
     first_name: '',
@@ -56,55 +56,58 @@ watch(personal_information.value,
         <div class="grid grid-cols-2 gap-x-4 gap-y-8
             mt-6">
             <div class="relative">
-                <input type="text" v-model.lazy="personal_information.first_name" id="first_name" class="
+                <input type="text" v-model.lazy="personal_information.first_name" placeholder="First Name*"
+                    id="first_name" class="
                                         w-full
-                                     focus:border-blue-600 focus:border-b-2
+                                     focus:border-blue-600 focus:border-b-2 placeholder-transparent
                                         outline-none border-b border-gray-400 
                                         text-md py-3
-                                        transition-colors duration-500 peer">
+                                        transition-colors duration-500 peer" required>
                 <label for="first_name" class="
+                                        pointer-events-none
                                         absolute
-                                        text-md text-gray-400 cursor-text
-                                        left-0 top-1
-                                        peer-focus:text-blue-600 peer-focus:text-sm peer-focus:-top-4 
-                                        transition-all duration-100
+                                        left-0 -translate-y-5 bg-white p-0.5 text-gray-400 transition-all text-sm 
+                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base 
+                                        peer-focus:text-sm peer-focus:text-blue-500 peer-focus:top-0
                                         ">First Name*</label>
             </div>
             <div class="relative">
-                <input type="text" v-model.lazy="personal_information.middle_name" id="middle_name" class="
+                <input type="text" v-model.lazy="personal_information.middle_name" placeholder="Middle Name*"
+                    id="middle_name" class="
                                         w-full
-                                     focus:border-blue-600 focus:border-b-2
+                                     focus:border-blue-600 focus:border-b-2 placeholder-transparent
                                         outline-none border-b border-gray-400 
                                         text-md py-3
-                                        transition-colors duration-500 peer">
+                                        transition-colors duration-500 peer" required>
                 <label for="middle_name" class="
+                                        pointer-events-none
                                         absolute
-                                        text-md text-gray-400
-                                        left-0 top-1
-                                        peer-focus:text-blue-600 peer-focus:text-sm peer-focus:-top-4 
-                                        transition-all duration-100
+                                        left-0 -translate-y-5 bg-white p-0.5 text-gray-400 transition-all text-sm 
+                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base 
+                                        peer-focus:text-sm peer-focus:text-blue-500 peer-focus:top-0
                                         ">Middle Name*</label>
             </div>
             <div class="relative">
-                <input type="text" v-model.lazy="personal_information.last_name" id="last_name" class="
+                <input type="text" v-model.lazy="personal_information.last_name" placeholder="Last Name*" id="last_name" class="
                                         w-full
-                                     focus:border-blue-600 focus:border-b-2
+                                     focus:border-blue-600 focus:border-b-2 placeholder-transparent
                                         outline-none border-b border-gray-400 
                                         text-md py-3
-                                        transition-colors duration-500 peer">
+                                        transition-colors duration-500 peer" required>
                 <label for="last_name" class="
+                pointer-events-none
                                         absolute
-                                        text-md text-gray-400
-                                        left-0 top-1
-                                        peer-focus:text-blue-600 peer-focus:text-sm peer-focus:-top-4 
-                                        transition-all duration-100
+                                        left-0 -translate-y-5 bg-white p-0.5 text-gray-400 transition-all text-sm 
+                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base 
+                                        peer-focus:text-sm peer-focus:text-blue-500 peer-focus:top-0
                                         ">Last Name*</label>
             </div>
             <div class="relative flex">
                 <h1 class="text-sm 
                 absolute -top-4
                 ">Extension Name (if any)</h1>
-                <select v-model.lazy="personal_information.extension_name" class="w-full outline-none border-b border-gray-400">
+                <select v-model.lazy="personal_information.extension_name"
+                    class="w-full outline-none border-b border-gray-400">
                     <option value="" class="text-lg text-gray-400">Choose your option</option>
                     <option value="Jr" class="text-lg text-blue-500">Jr</option>
                     <option value="Sr" class="text-lg text-blue-500">Sr</option>
@@ -115,14 +118,14 @@ watch(personal_information.value,
                     <option value="V" class="text-lg text-blue-500">V</option>
                 </select>
             </div>
-                
+
             <div class="relative">
                 <input type="date" v-model.lazy="personal_information.birthdate" id="birthdate" class="
                                         w-full
                                      focus:border-blue-600 focus:border-b-2
                                         outline-none border-b border-gray-400 
                                         text-md py-3
-                                        transition-colors duration-500 peer">
+                                        transition-colors duration-500 peer" required>
                 <label for="birthdate" class="
                                         absolute
                                         text-sm text-gray-400
@@ -145,19 +148,19 @@ watch(personal_information.value,
             </div>
         </div>
         <div class="relative mt-8">
-            <input type="text" v-model.lazy="personal_information.present_address" id="present_address" class="
+            <input type="text" v-model.lazy="personal_information.present_address" placeholder="Present Address*" id="present_address" class="
                                         cursor-text
                                         w-full
-                                     focus:border-blue-600 focus:border-b-2
+                                     focus:border-blue-600 focus:border-b-2 placeholder-transparent
                                         outline-none border-b border-gray-400 
                                         text-md py-3
-                                        transition-colors duration-500 peer">
+                                        transition-colors duration-500 peer" required>
             <label for="present_address" class="
+            pointer-events-none
                                         absolute
-                                        text-md text-gray-400
-                                        left-0 top-1
-                                        peer-focus:text-blue-600 peer-focus:text-sm peer-focus:-top-4 
-                                        transition-all duration-100
+                                        left-0 -translate-y-5 bg-white p-0.5 text-gray-400 transition-all text-sm 
+                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base 
+                                        peer-focus:text-sm peer-focus:text-blue-500 peer-focus:top-0
                                         ">Present Address*</label>
         </div>
     </div>

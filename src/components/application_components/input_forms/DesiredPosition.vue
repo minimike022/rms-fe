@@ -3,6 +3,10 @@ import { ref, watch } from 'vue'
 
 const emit = defineEmits(['desired_position'])
 
+const desiredPosition_toParent = () => {
+    emit('desired_position', selected_answer.value)
+}
+
 const selected_answer = ref({
     selected_position: '',
     BPO_exp: '',
@@ -11,9 +15,13 @@ const selected_answer = ref({
     work_site:''
 })
 
-watch(selected_answer.value, () => {
-    console.log(selected_answer.value)
-})
+
+
+watch(selected_answer.value, 
+    () => {
+        desiredPosition_toParent()
+    }
+)
 
 
 </script>
@@ -33,9 +41,9 @@ watch(selected_answer.value, () => {
                 outline-none border-b border-black
                 ">
                 <option disabled value="">Choose Available Position</option>
-                <option value="Linux" class="text-blue-500 h-">Linux Administrator</option>
-                <option value="Web Developer">Web Developer</option>
-                <option value="Data Analyst">Data Analyst</option>
+                <option value=1 class="text-blue-500 h-">Linux Administrator</option>
+                <option value=2>Web Developer</option>
+                <option value=3>Data Analyst</option>
             </select>
             <div class="grid grid-cols-2 gap-y-4 items-center">
                 <!-- Do you have BPO Experience? -->

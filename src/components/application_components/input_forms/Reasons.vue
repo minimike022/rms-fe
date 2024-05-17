@@ -14,7 +14,7 @@
                                      focus:border-blue-600 focus:border-b-2
                                         outline-none border-b border-gray-400 
                                         text-md py-3
-                                        transition-colors duration-500 peer">
+                                        transition-colors duration-500 peer" required>
                 <label for="reason" class="
                                         absolute
                                         text-md text-gray-400
