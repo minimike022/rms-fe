@@ -72,9 +72,9 @@ const receive_educational_background = (educational_info) => {
     form_data.append('school_name', educational_info.school_name)
 }
 
-const receive_platform_info = (platform_info) => {
-    form_data.append('platform[]',)
-}
+// const receive_platform_info = (platform_info) => {
+//     form_data.append('platform[]', platform_info)
+// }
 
 // const receive_character_reference = (character_reference) => {
 //     form_data.value.ref_full_name = character_reference.ref_full_name,
@@ -88,8 +88,6 @@ const receive_platform_info = (platform_info) => {
 //     form_data.value.selected_file = personal_cv.selected_file,
 //     form_data.value.portfolio_link = personal_cv.portfolio_link
 // }
-
-
 
 const checked = computed(() => {
     return privacy_policy.value && data_accuracy.value

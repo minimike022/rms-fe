@@ -15,7 +15,6 @@ watch(
         platformsInfo_toParent()
     }
 )
-
 </script>
 
 <template>
@@ -50,7 +49,7 @@ watch(
                     class="h-[3dvh] w-[3dvh] accent-blue-500">
                 <h1 class="text-gray-600 font-semibold ml-4">Referral</h1>
             </label>
-            <div class="relative mt-2">
+            <div class="relative mt-2" v-if="selected_platform.includes('Referral')">
                 <input type="text" id="referral" class="
                                         cursor-text
                                         w-full
@@ -72,7 +71,7 @@ watch(
                     class="h-[3dvh] w-[3dvh] accent-blue-500">
                 <h1 class="text-gray-600 font-semibold ml-4">Others</h1>
             </label>
-            <div class="relative mt-2">
+            <div class="relative mt-2" v-if="selected_platform.includes('Others')">
                 <input type="text" id="other_platform" class="
                                         cursor-text
                                         w-full
