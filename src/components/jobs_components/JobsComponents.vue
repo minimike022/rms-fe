@@ -2,9 +2,11 @@
 import { ref, watch, onMounted } from 'vue'
 import axios from 'axios'
 import AddJobsModal from './AddJobsModal.vue';
+import dash from 'lodash'
 
 const job_listing = ref([])
 const add_jobs_modal = ref(false)
+const update_jobs_modal = ref(false)
 const search_jobs = ref('')
 
 
@@ -14,16 +16,13 @@ const get_job_lists = () => {
     })
 }
 
-
-
 onMounted(() => {
     get_job_lists()
 })
 
-watch(() => search_jobs.value, () => {
-    console.log(search_jobs.value)
-})
-
+const search = dash.debounce(() => {
+    // Axios Request to Back End
+}, 2000)
 
 </script>
 <template>
@@ -31,7 +30,7 @@ watch(() => search_jobs.value, () => {
         <div class="w-full px-4 py-4">
             <div class="flex justify-between items-center">
                 <div class="flex h-[7dvh] rounded-lg items-center drop-shadow-md">
-                    <input type="text" placeholder="Search" v-model="search_jobs" class="h-full w-[35vh] outline-none border-blue-600 border pl-4 rounded-l-md text-gray-600">
+                    <input type="text" placeholder="Search" @input="search" v-model="search_jobs" class="h-full w-[35vh] outline-none border-blue-600 border pl-4 rounded-l-md text-gray-600">
                     <div class="w-[10dvh] h-full bg-blue-600 rounded-r-md flex items-center justify-center">
                         <img src="/src/assets/search.svg" alt="">
                     </div>
@@ -64,7 +63,7 @@ watch(() => search_jobs.value, () => {
                             :class="{ 'text-red-500': jobs.position_status === 'Urgent', 'text-green-500': jobs.position_status === 'Open', 'text-yellow-500': jobs.position_status === 'Filled' }">
                             {{ jobs.position_status }}</td>
                         <td class="text-center text-sm h-[10dvh] border-y">
-                            <button>
+                            <button @click="update_jobs_modal = !update_jobs_modal">
                                 <h1 class="font-bold text-green-400">Update</h1>
                             </button>
                         </td>

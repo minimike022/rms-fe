@@ -41,12 +41,12 @@ onMounted(() => {
     <div class="absolute -top-4 w-[55dvh] h-[65dvh] bg-white
     flex justify-center
     drop-shadow-lg rounded-lg
-    ring-1 ring-blue-600
+    ring-1 ring-blue-100
     ">
         <div class="flex flex-col my-5">
             <div class="flex items-center justify-between">
                 <h1 class="text-4xl font-bold text-blue-600 drop-shadow-lg">Add Jobs</h1>
-                <img src="/src/assets/exit.svg" alt="" @click="hide_modal">
+                <img src="/src/assets/exit.svg" alt="" @click="hide_modal" class="cursor-pointer">
             </div>
             <form @submit="post_jobs" class="flex flex-col my-2">
                 <div class="relative my-2">
@@ -62,7 +62,7 @@ onMounted(() => {
                                         absolute
                                         left-0 -translate-y-5 bg-white p-0.5 text-gray-400 transition-all text-sm 
                                         peer-placeholder-shown:top-8 peer-placeholder-shown:text-base 
-                                        peer-focus:text-sm peer-focus:text-blue-500 peer-focus:top-0
+                                        peer-focus:text-sm peer-focus:text-blue-600 peer-focus:top-0
                                         ">Position Name*</label>
                 </div>
                 <select name="department_name" class="focus:border-blue-600 focus:border-b-2 

@@ -8,7 +8,7 @@
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <h1 class="text-2xl text-transparent bg-clip-text w-[40dvh]
-            bg-gradient-to-r from-[#46D1FE] to-[#0390EA] drop-shadow-lg
+                bg-gradient-to-r from-blue-400 to-blue-800 drop-shadow-lg
             font-bold">Recruitment Progress
                 </h1>
                 <h1 class="bg-yellow-500 w-[14dvh] h-[4dvh] 

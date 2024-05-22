@@ -1,5 +1,4 @@
 <script setup>
-import DashboardComponents from '/src/components/dashboard_components/DashboardComponents.vue'
 import DashboardScheduled from '../../components/dashboard_components/DashboardScheduled.vue';
 import DashboardHiring from '../../components/dashboard_components/DashboardHiring.vue';
 import DashboardApplicants from '../../components/dashboard_components/DashboardApplicants.vue';
@@ -11,8 +10,7 @@ import DashboardStatus from '../../components/dashboard_components/DashboardStat
         mt-[4dvh] font-Poppins
         ">
             <!--Left Components-->
-            <div class="flex flex-col">
-                <DashboardComponents/>
+            <div class="flex flex-col w-[100dvh]">
                 <DashboardHiring/>
                 <DashboardStatus/>
             </div>
