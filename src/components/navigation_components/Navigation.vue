@@ -11,11 +11,11 @@ import {RouterLink} from 'vue-router'
             <div class="flex flex-col
             pl-[10dvh]
             text-lg font-bold text-[#D1D1D1]">
-                <RouterLink to="/dashboard" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#46D1FE] to-[#0390EA] active:bg-slate-600" :class="'bg-black'"> Dashboard</RouterLink>
-                <RouterLink to="/applicants" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#46D1FE] to-[#0390EA]"> Applicants </RouterLink>
-                <RouterLink to="/calendar" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#46D1FE] to-[#0390EA]"> Calendar </RouterLink>
-                <RouterLink to="/jobs" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#46D1FE] to-[#0390EA]"> Jobs </RouterLink>
-                <RouterLink to="/analysis" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#46D1FE] to-[#0390EA]"> Analysis </RouterLink>
+                <RouterLink to="/dashboard" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#0390EA] to-blue-800 active:bg-slate-600" :class="'bg-black'"> Dashboard</RouterLink>
+                <RouterLink to="/applicants" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#0390EA] to-blue-800"> Applicants </RouterLink>
+                <RouterLink to="/calendar" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#0390EA] to-blue-800"> Calendar </RouterLink>
+                <RouterLink to="/jobs" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#0390EA] to-blue-800"> Jobs </RouterLink>
+                <RouterLink to="/analysis" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#0390EA] to-blue-800"> Analysis </RouterLink>
             </div>
         </div>
     </div>
