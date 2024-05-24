@@ -10,6 +10,7 @@ import HeaderComponent from "/src/components/HeaderComponent.vue"
     <Navigation/>
     <div class="
     mt-[8.5dvh] px-[2dvh]
+    h-screen
     w-screen
     ">
       <HeaderComponent/>

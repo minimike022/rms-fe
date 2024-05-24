@@ -5,20 +5,35 @@ import AddJobsModal from './AddJobsModal.vue';
 import dash from 'lodash'
 
 const job_listing = ref([])
-const add_jobs_modal = ref(false)
-const update_jobs_modal = ref(false)
+const is_add_active = ref(false)
+const is_update_active = ref(false)
 const search_jobs = ref('')
+
+const update_jobs = ref({
+    position_id: null,
+    position_name: '',
+    department_name: ''
+})
 
 
 const get_job_lists = () => {
     axios.get('http://127.0.0.1:3000/jobs').then(res => {
-        job_listing.value = res.data
+        job_listing.value = res.data.job_positions
     })
 }
 
 onMounted(() => {
     get_job_lists()
 })
+
+const update_jobs_modal = (id, position_name, department_name) => {
+    console.log("Position ID: " + id)
+    console.log("Position Name: " + position_name)
+    console.log("Department Name: " + department_name)
+
+    is_update_active = !is_update_active
+}
+
 
 const search = dash.debounce(() => {
     // Axios Request to Back End
@@ -35,7 +50,7 @@ const search = dash.debounce(() => {
                         <img src="/src/assets/search.svg" alt="">
                     </div>
                 </div>
-                <button @click="add_jobs_modal = !add_jobs_modal" class="bg-blue-600 h-[7dvh] w-[19vh] outline-none rounded-md 
+                <button @click="is_add_active = !is_add_active" class="bg-blue-600 h-[7dvh] w-[19vh] outline-none rounded-md 
                     text-center text-white font-bold
                     shadow-md">
                     <h1>Add Jobs</h1>
@@ -46,7 +61,7 @@ const search = dash.debounce(() => {
             </div>
             <table class="w-full">
                 <thead>
-                    <tr class="text-blue-500">
+                    <tr class="text-blue-500 text-[18px]">
                         <th class="text-left h-[10dvh] px-3">Position</th>
                         <th class="text-left h-[10dvh] px-3">Department</th>
                         <th class="text-center h-[10dvh] px-3">Available Slots</th>
@@ -55,17 +70,17 @@ const search = dash.debounce(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="jobs in job_listing" class="text-gray-600">
-                        <td class="text-left h-[10dvh] border-y px-3 font-bold">{{ jobs.position_name }}</td>
-                        <td class="text-left text-sm h-[10dvh] border-y px-3">{{ jobs.department_name }}</td>
-                        <td class="text-center text-sm h-[10dvh] border-y px-3">{{ jobs.available_slot }}</td>
-                        <td class="text-center text-sm h-[10dvh] border-y font-bold"
+                    <tr v-for="jobs in job_listing" class="text-gray-600 border-y">
+                        <td class="text-left h-[10dvh] px-3 font-bold">{{ jobs.position_name }}</td>
+                        <td class="text-left text-sm h-[10dvh] px-3">{{ jobs.department_name }}</td>
+                        <td class="text-center text-sm h-[10dvh] px-3">{{ jobs.available_slot }}</td>
+                        <td class="text-center text-sm h-[10dvh] font-bold"
                             :class="{ 'text-red-500': jobs.position_status === 'Urgent', 'text-green-500': jobs.position_status === 'Open', 'text-yellow-500': jobs.position_status === 'Filled' }">
                             {{ jobs.position_status }}</td>
-                        <td class="text-center text-sm h-[10dvh] border-y">
-                            <button @click="update_jobs_modal = !update_jobs_modal">
-                                <h1 class="font-bold text-green-400">Update</h1>
-                            </button>
+                        <td class="flex justify-center items-center h-[10dvh]">
+                            <div class="w-[6dvh] h-[6dvh] shadow-md rounded-lg flex items-center justify-center">
+                                <img src="/src/assets/edit.svg" alt="">
+                            </div>
                         </td>
                     </tr>
                 </tbody>
