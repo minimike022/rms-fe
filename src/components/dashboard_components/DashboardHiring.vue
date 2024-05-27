@@ -17,7 +17,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="w-full">
+    <div>
         <!-- Header -->
         <div class="flex items-center justify-between">
             <h1 class="text-2xl text-transparent bg-clip-text w-[35dvh]

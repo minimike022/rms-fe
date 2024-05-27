@@ -6,18 +6,18 @@ import DashboardStatus from '../../components/dashboard_components/DashboardStat
 </script>
 
 <template>
-        <div class="flex justify-between
+    <div class="grid grid-cols-2 gap-x-[60dvh] w-full h-screen
         mt-[4dvh] font-Poppins
         ">
-            <!--Left Components-->
-            <div class="flex flex-col w-[100dvh]">
-                <DashboardHiring/>
-                <DashboardStatus/>
-            </div>
-            <!--Right Components-->
-            <div class="flex flex-col">
-                <DashboardScheduled/>
-                <DashboardApplicants/>
-            </div>
+        <!--Left Components-->
+        <div class="w-[80dvh]">
+            <DashboardHiring />
+            <DashboardStatus />
         </div>
+
+        <div class="w-[50dvh] flex flex-col">
+            <DashboardScheduled />
+            <DashboardApplicants />
+        </div>
+    </div>
 </template>

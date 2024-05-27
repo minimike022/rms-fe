@@ -4,7 +4,7 @@
 
 
 <template>
-    <div class="w-[49dvh] mt-[33.5dvh] px-[2dvh]">
+    <div class="mt-[33.5dvh] px-[2dvh]">
         <div class="flex items-center justify-between">
             <h1 class="text-xl text-transparent bg-clip-text w-[30dvh]
             bg-gradient-to-r from-blue-400 to-blue-800 drop-shadow-lg

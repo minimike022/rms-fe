@@ -26,23 +26,19 @@ onMounted(() => {
     get_job_lists()
 })
 
-const update_jobs_modal = (id, position_name, department_name) => {
-    console.log("Position ID: " + id)
-    console.log("Position Name: " + position_name)
-    console.log("Department Name: " + department_name)
-
-    is_update_active = !is_update_active
-}
-
+watch(() => job_listing.value, () => {
+    console.log(job_listing.value)
+})
 
 const search = dash.debounce(() => {
-    // Axios Request to Back End
-}, 2000)
+    axios.get(`http://127.0.0.1:3000/jobs?q=${search_jobs.value}`).then(res => {
+        job_listing.value = res.data.job_positions
+    })
+}, 500)
 
 </script>
 <template>
-    <div>
-        <div class="w-full px-4 py-4">
+    <div class="w-full px-4 shadow-lg rounded-lg my-11">
             <div class="flex justify-between items-center">
                 <div class="flex h-[7dvh] rounded-lg items-center drop-shadow-md">
                     <input type="text" placeholder="Search" @input="search" v-model="search_jobs" class="h-full w-[35vh] outline-none border-blue-600 border pl-4 rounded-l-md text-gray-600">
@@ -59,7 +55,7 @@ const search = dash.debounce(() => {
             <div class="relative flex items-center justify-center w-full" v-if="add_jobs_modal">
                 <AddJobsModal @add_jobs="add_jobs_modal = !add_jobs_modal" />
             </div>
-            <table class="w-full">
+            <table class="w-full mt-6">
                 <thead>
                     <tr class="text-blue-500 text-[18px]">
                         <th class="text-left h-[10dvh] px-3">Position</th>
@@ -86,5 +82,4 @@ const search = dash.debounce(() => {
                 </tbody>
             </table>
         </div>
-    </div>
 </template>

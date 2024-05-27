@@ -7,6 +7,5 @@ import ApplicantsData from './ApplicantsData.vue'
 <template>
     <div>
         <ApplicationStatus/>
-        <ApplicantsData/>
     </div>
 </template>
