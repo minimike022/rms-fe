@@ -4,7 +4,8 @@ import { ref, onMounted } from 'vue'
 import dash from 'lodash'
 import AssignInterview from './AssignInterview.vue';
 
-const status_id = ref('')
+const status_id = ref(null)
+
 const application_status = ref([])
 const search_applicants = ref('')
 const assign_interview = ref(false)
@@ -30,13 +31,14 @@ const search = dash.debounce(() => {
 
 const assign_interview_modal = (id) => {
     status_id.value = id
+
     assign_interview.value = !assign_interview.value
 }
 
 </script>
 
 <template>
-    <div class="relative my-11 px-4 shadow-lg rounded-lg">
+    <div class="my-11 px-4 shadow-lg rounded-lg">
         <div class="relative flex items-center">
             <div class="flex h-[7dvh] rounded-lg items-center drop-shadow-md">
                 <input type="text" placeholder="Search" @input="search" v-model="search_applicants"
@@ -79,13 +81,14 @@ const assign_interview_modal = (id) => {
                     <td class="text-blue-700 font-bold cursor-pointer">
                         <h1 v-if="app_status.application_status === 'Received'" class="text-xs cursor-pointer" @click="assign_interview_modal(app_status.application_status_id)"> ASSIGN <br> INTERVIEW
                         </h1>
-                        <h1 v-else class="text-green-500">UPDATE</h1>
+                        <h1 v-else class="text-green-500" @click="assign_interview_modal(app_status.application_status_id)">UPDATE</h1>
                     </td>
                 </tr>
             </tbody>
-        </table>
-        <div class="absolute top-0 w-full flex justify-center" v-if="assign_interview">
+            <div class="absolute top-[50%] w-full flex justify-center" v-if="assign_interview">
             <AssignInterview :status_id="status_id" @assign_interview="assign_interview = !assign_interview"/>
         </div>
+        </table>
+        
     </div>
 </template>
