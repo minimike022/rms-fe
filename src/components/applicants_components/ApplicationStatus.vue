@@ -39,7 +39,7 @@ const assign_interview_modal = (id) => {
 
 <template>
     <div class="my-11 px-4 shadow-lg rounded-lg">
-        <div class="relative flex items-center">
+        <div class="flex items-center">
             <div class="flex h-[7dvh] rounded-lg items-center drop-shadow-md">
                 <input type="text" placeholder="Search" @input="search" v-model="search_applicants"
                     class="h-full w-[35vh] outline-none border-blue-600 border pl-4 rounded-l-md text-gray-600">
@@ -48,7 +48,7 @@ const assign_interview_modal = (id) => {
                 </div>
             </div>
         </div>
-        <table class="w-full relative mt-6">
+        <table class="w-full mt-6">
             <thead>
                 <tr class="text-blue-500 text-[18px] text-left">
                     <th class="h-[10dvh] px-3">Full Name</th>
@@ -59,7 +59,7 @@ const assign_interview_modal = (id) => {
                     <th class="h-[10dvh] text-center px-3">Application Status</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="relative">
                 <tr v-for="app_status in application_status"
                     class="border-y h-[10dvh] text-left text-sm text-gray-600 hover:bg-gray-100 cursor-pointer">
                     <td class="px-3 font-bold">{{ app_status.first_name }} {{ app_status.last_name }} {{
@@ -74,21 +74,25 @@ const assign_interview_modal = (id) => {
                     <td class=" text-center px-3">
                         <h1>{{ app_status.interview_time }}</h1>
                     </td>
-                    <td class="font-bold px-3 text-center "
-                        :class="{ 'text-green-500': app_status.application_status === 'Received' }">
-                        {{ app_status.application_status }}
+                    <td class="font-bold text-center">
+                        <div class=" h-[4dvh] rounded-lg flex justify-center items-center text-white p-4"
+                            :class="{ 'text-green-400': app_status.application_status === 'Received', 'text-yellow-400': app_status.application_status === 'Screening', 'text-red-400': app_status.application_status === 'Shortlisted', 'text-blue-400': app_status.application_status === 'Interview with Hiring Manager', 'text-green-600': app_status.application_status === 'Onboarding', 'text-violet-400': app_status.application_status === 'Interview with HR' }">
+                            <h1 class="text-xs">
+                                {{ app_status.application_status }}
+                            </h1>
+                        </div>
                     </td>
-                    <td class="text-blue-700 font-bold cursor-pointer">
-                        <h1 v-if="app_status.application_status === 'Received'" class="text-xs cursor-pointer" @click="assign_interview_modal(app_status.application_status_id)"> ASSIGN <br> INTERVIEW
-                        </h1>
-                        <h1 v-else class="text-green-500" @click="assign_interview_modal(app_status.application_status_id)">UPDATE</h1>
+                    <td class="flex justify-center items-center h-[10dvh]"
+                        @click="assign_interview_modal(app_status.application_status_id)">
+                        <div class="w-[6dvh] h-[6dvh] shadow-md rounded-lg flex items-center justify-center">
+                            <img src="/src/assets/edit.svg" alt="">
+                        </div>
                     </td>
                 </tr>
+                <div class="absolute top-[10dvh] w-full flex justify-center" v-if="assign_interview">
+                    <AssignInterview :status_id="status_id" @assign_interview="assign_interview = !assign_interview" />
+                </div>
             </tbody>
-            <div class="absolute top-[50%] w-full flex justify-center" v-if="assign_interview">
-            <AssignInterview :status_id="status_id" @assign_interview="assign_interview = !assign_interview"/>
-        </div>
         </table>
-        
     </div>
 </template>
