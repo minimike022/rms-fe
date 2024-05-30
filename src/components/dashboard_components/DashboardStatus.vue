@@ -1,5 +1,5 @@
 <script setup>
-
+import ProgressCharts from './Charts/ProgressCharts.vue';
 </script>
 
 <template>
@@ -20,5 +20,5 @@
         </div>
     </div>
     <!-- Recruitment Progress Graph -->
-    
+    <ProgressCharts/>
 </template>

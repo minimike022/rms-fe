@@ -46,11 +46,11 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="sticky bg-white drop-shadow-lg w-[60dvh] h-[60dvh] rounded-lg">
+    <div class="sticky bg-white drop-shadow-lg w-[60dvh] h-[65dvh] rounded-lg">
         <!-- Header -->
-        <div class="px-4 my-2 flex justify-between items-center">    
+        <div class="px-4 my-4 flex justify-between items-center">    
             <img src="/src/assets/x.svg" alt="" @click="hide_assign_modal()">
-            <h1 class="text-2xl font-bold text-blue-600">Change Status</h1>
+            <h1 class="text-2xl font-bold text-blue-600">Assign Interview</h1>
             <div>
 
             </div>

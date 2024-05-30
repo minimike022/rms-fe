@@ -2,7 +2,6 @@
 import axios from 'axios'
 import { ref, watch } from 'vue'
 
-
 const emit = defineEmits("app_data")
 const props = defineProps(["applicants_id"])
 const applicants_data = ref([])

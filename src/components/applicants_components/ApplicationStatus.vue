@@ -75,9 +75,9 @@ const assign_interview_modal = (id) => {
                         <h1>{{ app_status.interview_time }}</h1>
                     </td>
                     <td class="font-bold text-center">
-                        <div class=" h-[4dvh] rounded-lg flex justify-center items-center text-white p-4"
-                            :class="{ 'text-green-400': app_status.application_status === 'Received', 'text-yellow-400': app_status.application_status === 'Screening', 'text-red-400': app_status.application_status === 'Shortlisted', 'text-blue-400': app_status.application_status === 'Interview with Hiring Manager', 'text-green-600': app_status.application_status === 'Onboarding', 'text-violet-400': app_status.application_status === 'Interview with HR' }">
-                            <h1 class="text-xs">
+                        <div class=" h-[4dvh] rounded-lg flex justify-center items-center p-4"
+                            :class="{ 'text-green-500': app_status.application_status === 'Received', 'text-yellow-500': app_status.application_status === 'Screening', 'text-red-500': app_status.application_status === 'Shortlisted', 'text-blue-500': app_status.application_status === 'Interview with Hiring Manager', 'text-green-600': app_status.application_status === 'Onboarding', 'text-violet-500': app_status.application_status === 'Interview with HR' }">
+                            <h1>
                                 {{ app_status.application_status }}
                             </h1>
                         </div>
