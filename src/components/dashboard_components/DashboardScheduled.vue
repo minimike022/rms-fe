@@ -55,7 +55,7 @@ onMounted(() => {
         ">Upcoming Interview</h1>
             <RouterLink class="font-bold text-[#D1D1D1] hover:text-[#46D1FE]" to="/calendar">See all</RouterLink>
         </div>
-        <div class="overflow-y-scroll h-[50dvh] mt-4">
+        <div class="overflow-y-auto h-[50dvh] mt-4">
             <h1 class="text-center" v-if="application_schedule == ''">No Upcoming Interviews</h1>
             <div v-for="applicants_sched in application_schedule" >
                 <div class="flex items-center my-4" v-if="applicants_sched.interview_date != ''">
