@@ -3,8 +3,8 @@ import {RouterLink} from 'vue-router'
 </script>
 
 <template>
-    <div class="w-[35dvh] shadow-lg">
-        <div class="w-inherit sticky top-10 left-0">
+    <div class="w-[35dvh] shadow-lg h-[100%]">
+        <div class="w-inherit fixed top-10 left-0">
             <div class="flex justify-center my-10">
                 <img src="/src/assets/motivIT_logo.png" class="w-[25dvh]">
             </div>

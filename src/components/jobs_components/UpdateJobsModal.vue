@@ -53,7 +53,7 @@ onMounted(() => {
 
                 </div>
             </div>
-            <form @submit.prevent="update_jobs" class="flex flex-col my-2">
+            <form @submit="update_jobs" class="flex flex-col my-2">
                 <div class="relative my-2">
                     <input required type="text" v-model.lazy="jobs_modal.position_name" placeholder="Position Name*"
                         id="position_name" class="

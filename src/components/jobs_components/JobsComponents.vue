@@ -13,7 +13,7 @@ const search_jobs = ref('')
 const position_status_id = ref(null)
 
 const get_job_lists = () => {
-    axios.get('http://127.0.0.1:3000/jobs').then(res => {
+    axios.get('http://127.0.0.1:3000/jobs/search').then(res => {
         job_listing.value = res.data.job_positions
     })
 }
@@ -28,7 +28,7 @@ onMounted(() => {
 })
 
 const search = dash.debounce(() => {
-    axios.get(`http://127.0.0.1:3000/jobs?q=${search_jobs.value}`).then(res => {
+    axios.get(`http://127.0.0.1:3000/jobs/search?q=${search_jobs.value}`).then(res => {
         job_listing.value = res.data.job_positions
     })
 }, 500)

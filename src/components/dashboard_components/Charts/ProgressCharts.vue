@@ -5,23 +5,19 @@ import axios from 'axios'
 
 
 const application_progress = ref([])
-const chart_label = ref([])
-const chart_data = ref([])
+const progress_chart_label = ref([])
+const progress_chart_data = ref([])
+const recruitment_progress = ref("progress_chart")   
 
 const fetch_app_progress = () => {
     axios.get('http://127.0.0.1:3000/analysis/progress').then(res => {
         application_progress.value = res.data.progress_status
         for (var i = 0; i < application_progress.value.length; i++) {
-            chart_label.value.push(application_progress.value[i].app_status_name)
-            console.log(chart_label.value)
-            chart_data.value.push(application_progress.value[i].app_status_count)
-            console.log(chart_data.value)
+            progress_chart_label.value.push(application_progress.value[i].app_status_name)
+            progress_chart_data.value.push(application_progress.value[i].app_status_count)
         }
     })
 }
-
-const tag = ref("Hello")
-
 
 onMounted(() => {
     fetch_app_progress()
@@ -29,23 +25,39 @@ onMounted(() => {
 
 watch(application_progress, () => {
     const data = ref({
-        labels: chart_label.value,
+        labels: progress_chart_label.value,
         datasets: [{
-            label: "Recruitment Progress",
-            data: chart_data.value
+            data: progress_chart_data.value,
+            backgroundColor: [ // Specify the color for each bar
+                '#a3e635', 
+                '#facc15', 
+                '#f87171', 
+                '#3b82f6', 
+                '#7c3aed', 
+                '#06b6d4',
+                '#10b981'
+            ],
+            borderRadius: 10
         }]
     })
 
     const config = {
         type: 'bar',
-        data: data.value
+        data: data.value,
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
     }
-    const myChart = new Chart(tag.value, config)
+    const myChart = new Chart(recruitment_progress.value, config)
 })
 </script>
 
 <template>
     <div>
-        <canvas :id="tag"></canvas>
+        <canvas :id="recruitment_progress"></canvas>
     </div>
 </template>

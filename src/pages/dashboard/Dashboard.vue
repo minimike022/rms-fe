@@ -6,11 +6,11 @@ import DashboardStatus from '../../components/dashboard_components/DashboardStat
 </script>
 
 <template>
-    <div class="grid grid-cols-2 gap-x-[60dvh] w-full h-screen
+    <div class="grid grid-cols-2 gap-x-[60dvh] w-full h-full
         mt-[4dvh] font-Poppins
         ">
         <!--Left Components-->
-        <div class="w-[80dvh]">
+        <div class="w-[100dvh]">
             <DashboardHiring />
             <DashboardStatus />
         </div>

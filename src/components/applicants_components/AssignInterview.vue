@@ -33,8 +33,7 @@ const fetch_interviewee = () => {
 }
 
 const update_interview = () => {
-    console.log("Hello World")
-    axios.patch(`http://127.0.0.1:3000/application/status_update/${props.status_id}`, assign_interview.value).then(res => {
+    axios.patch(`http://127.0.0.1:3000/application/status/${props.status_id}`, assign_interview.value).then(res => {
         console.log(res.data)
     })
 }
@@ -56,7 +55,7 @@ onMounted(() => {
             </div>
         </div>
         <div>
-            <form @submit="update_interview" class="grid grid-cols-1 gap-y-4 px-4">
+            <form @submit.prevent="update_interview" class="grid grid-cols-1 gap-y-4 px-4">
                 <div class="grid grid-cols-1 gap-6">
                     <select name="users_data" v-model="assign_interview.interviewee_id" class="border-b outline-none h-[7dvh]">
                         <option value=null>Select Interviewer</option>
