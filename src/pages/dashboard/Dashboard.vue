@@ -10,7 +10,7 @@ import DashboardStatus from '../../components/dashboard_components/DashboardStat
         mt-[4dvh] font-Poppins
         ">
         <!--Left Components-->
-        <div class="w-[100dvh]">
+        <div class="w-[110dvh]">
             <DashboardHiring />
             <DashboardStatus />
         </div>
