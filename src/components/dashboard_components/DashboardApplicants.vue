@@ -36,7 +36,6 @@ onMounted(() => {
                         <h1 class="text-lg font-bold text-gray-500">{{ new_app.first_name }} {{ new_app.last_name }}</h1>
                         <h1 class="text-sm text-gray-400">{{ new_app.job_position }}</h1>
                     </div>
-                    <h1 class="text-blue-600 font-bold text-center text-sm">Change <br> Status</h1>
                 </div>
             </div>
         </div>
