@@ -14,6 +14,7 @@ const get_application_status = () => {
     axios.get('http://127.0.0.1:3000/application/status').then(
         res => {
             application_status.value = res.data.application_status
+            console.log(res.data)
         }
     )
 }

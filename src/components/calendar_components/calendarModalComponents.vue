@@ -1,13 +1,18 @@
 <script setup>
 import axios from 'axios'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import dash from 'lodash'
+
+const emit = defineEmits(['interview_modal'])
+const props = defineProps(['interview_data'])
+
+console.log(props)
 
 const set_interview = ref({
     app_status_id: null,
     interviewee_id: null,
     int_time: '',
-    int_date: ''
+    int_date: props.interview_data.int_date
 })
 
 const user_interviewee = ref([])
@@ -26,6 +31,10 @@ const search = dash.debounce(() => {
     })
 }, 500)
 
+const close_interview_modal = () => {
+    emit('close_modal')
+}
+
 const fetch_status_list = () => {
     axios.get('http://127.0.0.1:3000/status/list').then(res => {
         status_list.value = res.data.status_list
@@ -41,26 +50,47 @@ const fetch_interviewee = () => {
 </script>
 
 <template>
-    <img src="/src/assets/x.svg" alt="">
+    <img src="/src/assets/x.svg" @click="close_interview_modal()" alt="">
     <h1 class="text-xl font-bold text-blue-600 text-center my-6"> Set Interview </h1>
-    <form action="">
+    <form>
         <div>
             <input type="text" placeholder="Search Applicant" @input="search" v-model="search_applicants"
                 class="h-[6dvh] w-full outline-none border-blue-600 border pl-4 rounded-md text-gray-600">
         </div>
 
         <div class="grid grid-cols-1 gap-y-6 my-6">
-            <select name="" id="" class="w-full outline-none border-b-2 border-gray-400 h-[7dvh] focus:border-blue-500">
-                <option value="">Select Status</option>
-                <option v-for="status in status_list" value=status.app_status_id>{{ status.app_status_name }}</option>
-            </select>
+            <div>
+                <h1 class="font-bold text-blue-600 my-2">Application Status</h1>
+                <select name="" id=""
+                    class="w-full outline-none border-b border-gray-400 h-[7dvh] focus:border-blue-500">
+                    <option value="">Select Status</option>
+                    <option class="text-gray-500" v-for="status in status_list" value=status.app_status_id>{{
+                        status.app_status_name }}</option>
+                </select>
+            </div>
 
-            <select name="" id="" class="w-full outline-none border-b-2 border-gray-400 h-[7dvh] focus:border-blue-500">
-                <option value="">Select Interviewer</option>
-                <option v-for="interviewee in user_interviewee" value="">{{ interviewee.user_name }}</option>
-            </select>
-            <input type="time">
-            <input type="date">
+            <div>
+                <h1 class="font-bold text-blue-600 my-2">Interviewer</h1>
+                <select name="" id=""
+                    class="w-full outline-none border-b border-gray-400 h-[7dvh] focus:border-blue-500 ">
+                    <option value="">Select Interviewer</option>
+                    <option class="text-gray-500" v-for="interviewee in user_interviewee" value="">{{
+                        interviewee.user_name }}</option>
+                </select>
+            </div>
+            <label for="interview_time" class=" flex justify-between items-center h-[5dvh]">
+                <h1 class="font-bold text-blue-600">Interview Time:</h1>
+                <input type="time" value="00:00" v-model="set_interview.int_time" name="interview_time">
+            </label>
+
+            <label for="calendar_date" class="flex justify-between items-center h-[5dvh]">
+                <h1 class="font-bold text-blue-600">Interview Date:</h1>
+                <div class="flex">
+                    <input name="calendar_date" class="bg-transparent" type="date" v-model="set_interview.int_date"
+                        disabled>
+                    <img src="/src/assets/calendar.svg" alt="" class="h-[24px] w-[24px]">
+                </div>
+            </label>
             <input type="submit" class="text-white font-bold bg-blue-600 w-full h-[7dvh] rounded-lg">
         </div>
     </form>
