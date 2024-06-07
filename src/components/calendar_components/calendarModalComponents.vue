@@ -2,10 +2,15 @@
 import axios from 'axios'
 import { ref, onMounted } from 'vue'
 import dash from 'lodash'
+import { useCalendarStore } from '../../pinia/calendarModal';
+
+const calendarStore = useCalendarStore()
+
+console.log(calendarStore)
 
 const set_interview = ref({
-    app_status_id: null,
-    interviewee_id: null,
+    app_status_id: '',
+    interviewee_id: '',
     int_time: '',
     int_date: ''
 })
@@ -50,12 +55,12 @@ const fetch_interviewee = () => {
         </div>
 
         <div class="grid grid-cols-1 gap-y-6 my-6">
-            <select name="" id="" class="w-full outline-none border-b-2 border-gray-400 h-[7dvh] focus:border-blue-500">
+            <select v-model="set_interview.app_status_id" class="w-full outline-none border-b-2 border-gray-400 h-[7dvh] focus:border-blue-500">
                 <option value="">Select Status</option>
                 <option v-for="status in status_list" value=status.app_status_id>{{ status.app_status_name }}</option>
             </select>
 
-            <select name="" id="" class="w-full outline-none border-b-2 border-gray-400 h-[7dvh] focus:border-blue-500">
+            <select v-model="set_interview.interviewee_id" class="w-full outline-none border-b-2 border-gray-400 h-[7dvh] focus:border-blue-500">
                 <option value="">Select Interviewer</option>
                 <option v-for="interviewee in user_interviewee" value="">{{ interviewee.user_name }}</option>
             </select>
