@@ -6,7 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { options } from '@fullcalendar/core/preact.js';
 import { INITIAL_EVENTS, createEventId } from './event-utils'
-// import CalendarModal from '../../components/calendar_components/CalendarModal.vue'
+import CalendarModalComponents from '../../components/calendar_components/CalendarModalComponents.vue'
 
 const openCalendarModal = ref(false)
 const currentEvents = ref([])
@@ -75,6 +75,10 @@ const calendarOptions = ref({
 <template>
     <div class="h-screen">
         <FullCalendar :options="calendarOptions"/>
+    </div>
+
+    <div class="fixed top-0 right-0 bg-white w-[50dvh] h-[100%] z-[10] shadow-lg p-6">
+        <CalendarModalComponents />
     </div>
 
 </template>
