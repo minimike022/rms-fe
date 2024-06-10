@@ -1,13 +1,14 @@
 <script setup>
 import axios from 'axios'
-import { ref, onMounted} from 'vue'
-import dash from 'lodash'
+import { ref, onMounted, watch } from 'vue'
+import dash, { reduce } from 'lodash'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css'
+import { options } from '@fullcalendar/core/preact.js'
 
 
 const emit = defineEmits(['interview_modal'])
 const props = defineProps(['interview_data'])
-
-console.log(props)
 
 const set_interview = ref({
     app_status_id: '',
@@ -16,41 +17,39 @@ const set_interview = ref({
     int_date: props.interview_data.int_date
 })
 
-const user_interviewee = ref([])
-const status_list = ref([])
-const application_status = ref([])
-const search_applicants = ref('')
+const application_status_id = ref(null)
+const applicants_options = ref([])
+const interviewee_options = ref([])
+const status_list_options = ref([])
 
 const get_application_status = () => {
     axios.get('http://127.0.0.1:3000/application/status').then(
         res => {
-            application_status.value = res.data.application_status
-            console.log(application_status.value)
+            for(var i = 0; i < res.data.application_status.length; i++) {
+                let full_name = res.data.application_status[i].first_name+ ' ' + res.data.application_status[i].last_name
+                applicants_options.value.push({value: res.data.application_status[i].application_status_id, label: full_name})
+            }
         }
     )
 }
 
 const fetch_status_list = () => {
     axios.get('http://127.0.0.1:3000/status/list').then(res => {
-        status_list.value = res.data.status_list
-    })
+        for(var i = 0; i < res.data.status_list.length; i++) {
+            status_list_options.value.push({value: res.data.status_list[i].app_status_id, label: res.data.status_list[i].app_status_name})
+        }
+    }) 
 }
 
 const fetch_interviewee = () => {
     axios.get('http://127.0.0.1:3000/users').then(res => {
-        user_interviewee.value = res.data.users
+        // interviewee_options.value.push(res.data.users)
+        // console.log(interviewee_options.value)
+        for(var i = 0; i < res.data.users.length; i++) {
+            interviewee_options.value.push({value: res.data.users[i].account_id, label: res.data.users[i].user_name})
+        }
     })
 }
-
-
-
-const search = dash.debounce(() => {
-    axios.get(`http://127.0.0.1:3000/application/status?q=${search_applicants.value}`).then(res => {
-        application_status.value = res.data.application_status
-    })
-}, 500)
-
-
 
 const close_interview_modal = () => {
     emit('close_modal')
@@ -62,6 +61,13 @@ onMounted(() => {
     get_application_status()
 })
 
+watch(set_interview.value, () => {
+    console.log(set_interview.value)
+})
+
+watch(() => application_status_id.value, () => {
+    console.log(application_status_id.value)
+})
 
 
 </script>
@@ -69,34 +75,21 @@ onMounted(() => {
 <template>
     <img src="/src/assets/x.svg" @click="close_interview_modal()" alt="">
     <h1 class="text-xl font-bold text-blue-600 text-center my-6"> Set Interview </h1>
-    <div>
-        <input type="text" placeholder="Search Applicant" @input="search" v-model="search_applicants"
-            class="h-[6dvh] w-full outline-none border-blue-600 border pl-4 rounded-md text-gray-600">
-    </div>
-
+    
     <form>
         <div class="grid grid-cols-1 gap-y-6 my-6">
             <div>
                 <h1 class="font-bold text-blue-600 my-2">Applicant</h1>
+                <v-select v-model="application_status_id" placeholder="Select Applicant" :reduce="label => label.value" :options="applicants_options" class=""/>
             </div>
             <div>
                 <h1 class="font-bold text-blue-600 my-2">Application Status</h1>
-                <select name="" id=""
-                    class="w-full outline-none border-b border-gray-400 h-[7dvh] focus:border-blue-500">
-                    <option value="">Select Status</option>
-                    <option class="text-gray-500" v-for="status in status_list" value=status.app_status_id>{{
-                        status.app_status_name }}</option>
-                </select>
+                <v-select v-model="set_interview.app_status_id" placeholder="Select Status" :reduce="label => label.value" :options="status_list_options"/>
             </div>
 
             <div>
                 <h1 class="font-bold text-blue-600 my-2">Interviewer</h1>
-                <select name="" id=""
-                    class="w-full outline-none border-b border-gray-400 h-[7dvh] focus:border-blue-500 ">
-                    <option value="">Select Interviewer</option>
-                    <option class="text-gray-500" v-for="interviewee in user_interviewee" value="">{{
-                        interviewee.user_name }}</option>
-                </select>
+                <v-select v-model="set_interview.interviewee_id" placeholder="Select Interviewer" :reduce="label => label.value" :options="interviewee_options"/>
             </div>
             <label for="interview_time" class=" flex justify-between items-center h-[5dvh]">
                 <h1 class="font-bold text-blue-600">Interview Time:</h1>
