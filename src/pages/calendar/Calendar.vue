@@ -1,36 +1,45 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { options } from '@fullcalendar/core/preact.js';
-import { INITIAL_EVENTS, createEventId } from './event-utils'
+import {INITIAL_EVENTS,createEventId } from './event-utils'
 import CalendarModalComponents from '../../components/calendar_components/CalendarModalComponents.vue'
 
-const openCalendarModal = ref(false)
-const currentEvents = ref([])
+
+const set_interview = ref({
+    applicant_name: '',
+    app_status_id: null,
+    interviewee_id: null,
+    int_time: '',
+    int_date: ''
+})
+
+const open_calendar_modal = ref(false)
+const current_events = ref([])
 
 const handleWeekendsToggle = () => {
     calendarOptions.weekends = !calendarOptions.weekends
 }
 
 const handleDateSelect = (selectInfo) => {
-    // let title = prompt('Please enter a new title for your event')
     let calendarApi = selectInfo.view.calendar
-    openCalendarModal.value = true
+
+    open_calendar_modal.value = true
+
+    set_interview.value.int_date = selectInfo.startStr
+    
     calendarApi.unselect() // clear date selection
 
     // if (title) {
     //     calendarApi.addEvent({
     //         id: createEventId(),
+    //         title,
     //         start: selectInfo.startStr,
-    //         end: selectInfo.endStr,
-    //         allDay: selectInfo.allDay
     //     })
     // }
-
-    console.log(currentEvents.value)
 }
 
 const handleEventClick = (clickInfo) => {
@@ -40,8 +49,8 @@ const handleEventClick = (clickInfo) => {
 }
 
 const handleEvents = (events) => {
-    currentEvents.value = events
-    console.log(events)
+    current_events.value = events
+    console.log(current_events.value)
 }
 
 
@@ -53,8 +62,8 @@ const calendarOptions = ref({
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    initialEvents: INITIAL_EVENTS,
-    // events: currentEvents.value,
+    // initialEvents: INITIAL_EVENTS,
+    events: current_events.value,
     editable: true,
     selectable: true,
     selectMirror: true,
@@ -65,11 +74,6 @@ const calendarOptions = ref({
     eventsSet: handleEvents
 })
 
-
-
-
-
-
 </script>
 
 <template>
@@ -77,8 +81,8 @@ const calendarOptions = ref({
         <FullCalendar :options="calendarOptions"/>
     </div>
 
-    <div class="fixed top-0 right-0 bg-white w-[50dvh] h-[100%] z-[10] shadow-lg p-6">
-        <CalendarModalComponents />
+    <div v-if="open_calendar_modal" class="fixed top-0 right-0 bg-white w-[53dvh] h-[100%] z-[10] shadow-lg p-6">
+        <CalendarModalComponents :interview_data="set_interview" @close_modal="open_calendar_modal = false"/>
     </div>
 
 </template>
