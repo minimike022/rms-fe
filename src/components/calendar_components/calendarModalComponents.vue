@@ -1,10 +1,9 @@
 <script setup>
 import axios from 'axios'
 import { ref, onMounted, watch } from 'vue'
-import dash, { reduce } from 'lodash'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
-import { options } from '@fullcalendar/core/preact.js'
+
 
 
 const emit = defineEmits(['interview_modal'])
