@@ -2,11 +2,7 @@
 import axios from 'axios'
 import { ref, onMounted} from 'vue'
 import dash from 'lodash'
-import { useCalendarStore } from '../../pinia/calendarModal';
 
-const calendarStore = useCalendarStore()
-
-console.log(calendarStore)
 
 const emit = defineEmits(['interview_modal'])
 const props = defineProps(['interview_data'])
