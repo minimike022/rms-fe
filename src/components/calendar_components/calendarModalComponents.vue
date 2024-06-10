@@ -1,6 +1,6 @@
 <script setup>
 import axios from 'axios'
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted} from 'vue'
 import dash from 'lodash'
 
 const emit = defineEmits(['interview_modal'])
@@ -20,19 +20,13 @@ const status_list = ref([])
 const application_status = ref([])
 const search_applicants = ref('')
 
-onMounted(() => {
-    fetch_interviewee()
-    fetch_status_list()
-})
-
-const search = dash.debounce(() => {
-    axios.get(`http://127.0.0.1:3000/application/status?q=${search_applicants.value}`).then(res => {
-        application_status.value = res.data.application_status
-    })
-}, 500)
-
-const close_interview_modal = () => {
-    emit('close_modal')
+const get_application_status = () => {
+    axios.get('http://127.0.0.1:3000/application/status').then(
+        res => {
+            application_status.value = res.data.application_status
+            console.log(application_status.value)
+        }
+    )
 }
 
 const fetch_status_list = () => {
@@ -47,18 +41,43 @@ const fetch_interviewee = () => {
     })
 }
 
+
+
+const search = dash.debounce(() => {
+    axios.get(`http://127.0.0.1:3000/application/status?q=${search_applicants.value}`).then(res => {
+        application_status.value = res.data.application_status
+    })
+}, 500)
+
+
+
+const close_interview_modal = () => {
+    emit('close_modal')
+}
+
+onMounted(() => {
+    fetch_interviewee()
+    fetch_status_list()
+    get_application_status()
+})
+
+
+
 </script>
 
 <template>
     <img src="/src/assets/x.svg" @click="close_interview_modal()" alt="">
     <h1 class="text-xl font-bold text-blue-600 text-center my-6"> Set Interview </h1>
-    <form>
-        <div>
-            <input type="text" placeholder="Search Applicant" @input="search" v-model="search_applicants"
-                class="h-[6dvh] w-full outline-none border-blue-600 border pl-4 rounded-md text-gray-600">
-        </div>
+    <div>
+        <input type="text" placeholder="Search Applicant" @input="search" v-model="search_applicants"
+            class="h-[6dvh] w-full outline-none border-blue-600 border pl-4 rounded-md text-gray-600">
+    </div>
 
+    <form>
         <div class="grid grid-cols-1 gap-y-6 my-6">
+            <div>
+                <h1 class="font-bold text-blue-600 my-2">Applicant</h1>
+            </div>
             <div>
                 <h1 class="font-bold text-blue-600 my-2">Application Status</h1>
                 <select name="" id=""
