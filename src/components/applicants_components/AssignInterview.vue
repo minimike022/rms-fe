@@ -1,6 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css'
+
+
 
 const emit = defineEmits(["assign_interview"])
 const props = defineProps(["status_id"])
@@ -22,7 +26,10 @@ const hide_assign_modal = () => {
 
 const fetch_status_list = () => {
     axios.get('http://127.0.0.1:3000/status/list').then(res => {
-        status_list.value = res.data.status_list
+        for (var i = 0; i < 3; i++) {
+            status_list.value.push({ value: res.data.status_list[i].app_status_id, label: res.data.status_list[i].app_status_name })
+            console.log(status_list.value)
+        }
     })
 }
 
@@ -45,32 +52,19 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="sticky bg-white drop-shadow-lg w-[60dvh] h-[65dvh] rounded-lg">
+    <div class="sticky bg-white drop-shadow-lg w-[60dvh] h-auto py-4 rounded-lg">
         <!-- Header -->
         <div class="px-4 my-4 flex justify-between items-center">    
             <img src="/src/assets/x.svg" alt="" @click="hide_assign_modal()">
-            <h1 class="text-2xl font-bold text-blue-600">Assign Interview</h1>
+            <h1 class="text-2xl font-bold text-blue-600">Update Status</h1>
             <div>
 
             </div>
         </div>
         <div>
-            <form @submit.prevent="update_interview" class="grid grid-cols-1 gap-y-4 px-4">
+            <form @submit.prevent="update_status" class="grid grid-cols-1 gap-y-4 px-4">
                 <div class="grid grid-cols-1 gap-6">
-                    <select name="users_data" v-model="assign_interview.interviewee_id" class="border-b outline-none h-[7dvh]">
-                        <option value=null>Select Interviewer</option>
-                        <option v-for="users in user_interviewee" :value="users.account_id">
-                            <h1>{{ users.user_name }} - </h1>
-                            <h1 class="text-lg">{{ users.department_name }}</h1>
-                        </option>
-                    </select>
-                    <select name="status_list" class="border-b h-[7dvh] outline-none" v-model="assign_interview.app_status_id">
-                        <option value=null>Select Status</option>
-                        <option v-for="lists in status_list" :value=lists.app_status_id> {{ lists.app_status_name }}
-                        </option>
-                    </select>
-                    <input type="time" v-model="assign_interview.int_time">
-                    <input type="date" placeholder="Select Date" v-model="assign_interview.int_date">
+                    <v-select v-model="assign_interview.app_status_id" placeholder="Select Status" :reduce="label => label.value" :options="status_list"  />
                     <input type="submit" class="text-white font-bold bg-blue-600 w-full h-[10dvh] rounded-lg">
                 </div>
             </form>

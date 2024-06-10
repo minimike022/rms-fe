@@ -24,9 +24,9 @@ const status_list_options = ref([])
 const get_application_status = () => {
     axios.get('http://127.0.0.1:3000/application/status').then(
         res => {
-            for(var i = 0; i < res.data.application_status.length; i++) {
-                let full_name = res.data.application_status[i].first_name+ ' ' + res.data.application_status[i].last_name
-                applicants_options.value.push({value: res.data.application_status[i].application_status_id, label: full_name})
+            for (var i = 0; i < res.data.application_status.length; i++) {
+                let full_name = res.data.application_status[i].first_name + ' ' + res.data.application_status[i].last_name
+                applicants_options.value.push({ value: res.data.application_status[i].application_status_id, label: full_name })
             }
         }
     )
@@ -34,19 +34,25 @@ const get_application_status = () => {
 
 const fetch_status_list = () => {
     axios.get('http://127.0.0.1:3000/status/list').then(res => {
-        for(var i = 0; i < res.data.status_list.length; i++) {
-            status_list_options.value.push({value: res.data.status_list[i].app_status_id, label: res.data.status_list[i].app_status_name})
+        for (var i = 3; i < res.data.status_list.length; i++) {
+            status_list_options.value.push({ value: res.data.status_list[i].app_status_id, label: res.data.status_list[i].app_status_name })
         }
-    }) 
+    })
 }
 
 const fetch_interviewee = () => {
     axios.get('http://127.0.0.1:3000/users').then(res => {
         // interviewee_options.value.push(res.data.users)
         // console.log(interviewee_options.value)
-        for(var i = 0; i < res.data.users.length; i++) {
-            interviewee_options.value.push({value: res.data.users[i].account_id, label: res.data.users[i].user_name})
+        for (var i = 0; i < res.data.users.length; i++) {
+            interviewee_options.value.push({ value: res.data.users[i].account_id, label: res.data.users[i].user_name })
         }
+    })
+}
+
+const update_interview = () => {
+    axios.patch(`http://127.0.0.1:3000/application/status/${application_status_id.value}`, set_interview.value).then(res => {
+        emit('fetch_schedule')
     })
 }
 
@@ -74,21 +80,24 @@ watch(() => application_status_id.value, () => {
 <template>
     <img src="/src/assets/x.svg" @click="close_interview_modal()" alt="">
     <h1 class="text-xl font-bold text-blue-600 text-center my-6"> Set Interview </h1>
-    
-    <form>
+
+    <form @submit.prevent="update_interview">
         <div class="grid grid-cols-1 gap-y-6 my-6">
             <div>
                 <h1 class="font-bold text-blue-600 my-2">Applicant</h1>
-                <v-select v-model="application_status_id" placeholder="Select Applicant" :reduce="label => label.value" :options="applicants_options" class=""/>
+                <v-select required v-model="application_status_id" placeholder="Select Applicant"
+                    :reduce="label => label.value" :options="applicants_options" class="" />
             </div>
             <div>
                 <h1 class="font-bold text-blue-600 my-2">Application Status</h1>
-                <v-select v-model="set_interview.app_status_id" placeholder="Select Status" :reduce="label => label.value" :options="status_list_options"/>
+                <v-select v-model="set_interview.app_status_id" placeholder="Select Status"
+                    :reduce="label => label.value" :options="status_list_options" />
             </div>
 
             <div>
                 <h1 class="font-bold text-blue-600 my-2">Interviewer</h1>
-                <v-select v-model="set_interview.interviewee_id" placeholder="Select Interviewer" :reduce="label => label.value" :options="interviewee_options"/>
+                <v-select v-model="set_interview.interviewee_id" placeholder="Select Interviewer"
+                    :reduce="label => label.value" :options="interviewee_options" />
             </div>
             <label for="interview_time" class=" flex justify-between items-center h-[5dvh]">
                 <h1 class="font-bold text-blue-600">Interview Time:</h1>

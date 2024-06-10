@@ -1,12 +1,33 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import moment from 'moment'
+import axios from 'axios'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { options } from '@fullcalendar/core/preact.js';
-import {INITIAL_EVENTS,createEventId } from './event-utils'
+import {createEventId } from './event-utils'
 import CalendarModalComponents from '../../components/calendar_components/CalendarModalComponents.vue'
+
+
+const fetch_schedule = () => {
+    axios.get('http://127.0.0.1:3000/application/status').then(
+        res => {
+            for(var i = 0; i < res.data.application_status.length; i++) {
+                const start_date = res.data.application_status[i].interview_date + ' ' + res.data.application_status[i].interview_time
+                console.log(start_date)
+                const full_name = res.data.application_status[i].first_name + ' ' + res.data.application_status[i].last_name
+                current_events.value.push({id: createEventId(), title: full_name, start: start_date})
+                // console.log(current_events.value)
+            }
+            console.log(current_events.value)
+        }
+    )
+}
+
+onMounted(() => {
+    fetch_schedule()
+})
 
 
 const set_interview = ref({
@@ -17,29 +38,18 @@ const set_interview = ref({
     int_date: ''
 })
 
+
+
 const open_calendar_modal = ref(false)
-const current_events = ref([])
+const current_events = ref([{}])
 
 const handleWeekendsToggle = () => {
     calendarOptions.weekends = !calendarOptions.weekends
 }
 
 const handleDateSelect = (selectInfo) => {
-    let calendarApi = selectInfo.view.calendar
-
     open_calendar_modal.value = true
-
     set_interview.value.int_date = selectInfo.startStr
-    
-    calendarApi.unselect() // clear date selection
-
-    // if (title) {
-    //     calendarApi.addEvent({
-    //         id: createEventId(),
-    //         title,
-    //         start: selectInfo.startStr,
-    //     })
-    // }
 }
 
 const handleEventClick = (clickInfo) => {
@@ -49,8 +59,8 @@ const handleEventClick = (clickInfo) => {
 }
 
 const handleEvents = (events) => {
-    current_events.value = events
     console.log(current_events.value)
+    events = current_events.value 
 }
 
 
@@ -62,7 +72,6 @@ const calendarOptions = ref({
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    // initialEvents: INITIAL_EVENTS,
     events: current_events.value,
     editable: true,
     selectable: true,
@@ -82,7 +91,7 @@ const calendarOptions = ref({
     </div>
 
     <div v-if="open_calendar_modal" class="fixed top-0 right-0 bg-white w-[53dvh] h-[100%] z-[10] shadow-lg p-6">
-        <CalendarModalComponents :interview_data="set_interview" @close_modal="open_calendar_modal = false"/>
+        <CalendarModalComponents :interview_data="set_interview" @close_modal="open_calendar_modal = false" @fetch_schedule="fetch_schedule"/>
     </div>
 
 </template>
