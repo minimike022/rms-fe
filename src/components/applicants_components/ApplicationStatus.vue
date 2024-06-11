@@ -59,7 +59,7 @@ const assign_interview_modal = (id) => {
                     <th class="h-[10dvh] text-center px-3">Application Status</th>
                 </tr>
             </thead>
-            <tbody class="relative">
+            <tbody>
                 <tr v-for="app_status in application_status"
                     class="border-y h-[10dvh] text-left text-sm text-gray-600 hover:bg-gray-100 cursor-pointer">
                     <td class="px-3 font-bold">{{ app_status.first_name }} {{ app_status.last_name }} {{
@@ -89,10 +89,10 @@ const assign_interview_modal = (id) => {
                         </div>
                     </td>
                 </tr>
-                <div class="absolute top-[10dvh] w-full flex justify-center" v-if="assign_interview">
-                    <AssignInterview :status_id="status_id" @assign_interview="assign_interview = !assign_interview" />
-                </div>
             </tbody>
         </table>
+        <div class="fixed bg-white w-[53dvh] h-[100%] z-[10] top-0 right-0 shadow-lg py-6" v-if="assign_interview">
+            <AssignInterview :status_id="status_id" @hide_modal="assign_interview = !assign_interview" @update_status="get_application_status()" />
+        </div>
     </div>
 </template>

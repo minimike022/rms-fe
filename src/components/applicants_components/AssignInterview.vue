@@ -1,71 +1,58 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import axios from 'axios'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 
 
-
+//Define emits and props value
 const emit = defineEmits(["assign_interview"])
 const props = defineProps(["status_id"])
-const user_interviewee = ref([])
+
+//Store data fetched from the database
 const status_list = ref([])
 
-const assign_interview = ref({
-    app_status_id: null,
-    interviewee_id: null,
-})
+//Store selected status id
+const application_status_id = ref(null)
 
-console.log(props)
 
+//Hide modal when clicked 'x' img
 const hide_assign_modal = () => {
-    emit("assign_interview")
+    emit("hide_modal")
 }
 
+//fetch the list of different status
 const fetch_status_list = () => {
     axios.get('http://127.0.0.1:3000/status/list').then(res => {
         for (var i = 0; i < 3; i++) {
             status_list.value.push({ value: res.data.status_list[i].app_status_id, label: res.data.status_list[i].app_status_name })
-            console.log(status_list.value)
         }
     })
 }
-
-const fetch_interviewee = () => {
-    axios.get('http://127.0.0.1:3000/users').then(res => {
-        user_interviewee.value = res.data.users
-    })
-}
-
+//HTTP request to application status
 const update_status = () => {
-    axios.patch(`http://127.0.0.1:3000/application/status/${props.status_id}`, assign_interview.value).then(res => {
-        console.log(res.data)
+    axios.patch(`http://127.0.0.1:3000/application/status/${props.status_id}`, {app_status_id: application_status_id.value}).then(res => {
+        emit('update_status')
+        hide_assign_modal()
     })
 }
 
 onMounted(() => {
-    fetch_interviewee()
     fetch_status_list()
 })
+
 </script>
 
 <template>
-    <div class="sticky bg-white drop-shadow-lg w-[60dvh] h-auto py-4 rounded-lg">
-        <!-- Header -->
-        <div class="px-4 my-4 flex justify-between items-center">    
-            <img src="/src/assets/x.svg" alt="" @click="hide_assign_modal()">
-            <h1 class="text-2xl font-bold text-blue-600">Update Status</h1>
-            <div>
-
+    <img src="/src/assets/x.svg" @click="hide_assign_modal" alt="">
+    <h1 class="text-xl font-bold text-blue-600 text-center my-6"> Set Interview </h1>
+    <div>
+        <form @submit.prevent="update_status()" class="grid grid-cols-1 gap-y-4 px-4">
+            <div class="grid grid-cols-1 gap-6">
+                <v-select v-model="application_status_id" placeholder="Select Status" :reduce="label => label.value"
+                    :options="status_list" />
+                <input type="submit" class="text-white font-bold bg-blue-600 w-full h-[7dvh] rounded-lg">
             </div>
-        </div>
-        <div>
-            <form @submit.prevent="update_status" class="grid grid-cols-1 gap-y-4 px-4">
-                <div class="grid grid-cols-1 gap-6">
-                    <v-select v-model="assign_interview.app_status_id" placeholder="Select Status" :reduce="label => label.value" :options="status_list"  />
-                    <input type="submit" class="text-white font-bold bg-blue-600 w-full h-[10dvh] rounded-lg">
-                </div>
-            </form>
-        </div>
+        </form>
     </div>
 </template>

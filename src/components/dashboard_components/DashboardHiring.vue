@@ -2,7 +2,7 @@
 import { RouterLink } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import HiringCharts from './Charts/HiringCharts.vue';
+import HiringCharts from './charts/HiringCharts.vue';
 
 const job_listing = ref([])
 
