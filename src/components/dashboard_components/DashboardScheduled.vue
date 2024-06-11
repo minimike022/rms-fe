@@ -24,7 +24,7 @@ const get_application_schedule = () => {
                 console.log(application_schedule.value)
             }
         }
-        
+
     })
 
 }
@@ -55,13 +55,10 @@ onMounted(() => {
 
 <template>
     <div class="p-4 shadow-lg">
-        <div class="flex items-center justify-between">
-            <h1 class="text-xl text-transparent bg-clip-text w-[36dvh]
+        <h1 class="text-xl text-transparent bg-clip-text w-[36dvh]
             bg-gradient-to-r from-blue-400 to-blue-800 drop-shadow-lg
         font-bold
         ">Upcoming Interview</h1>
-            <RouterLink class="font-bold text-[#D1D1D1] hover:text-[#46D1FE]" to="/calendar">See all</RouterLink>
-        </div>
         <div class="overflow-y-auto h-[50dvh] mt-4">
             <h1 class="text-center font-bold text-gray-500 mt-5" v-if="application_schedule == ''">No Upcoming
                 Interviews
@@ -77,7 +74,7 @@ onMounted(() => {
                     </div>
                     <div class="">
                         <h1> {{ applicants_sched.first_name }} {{ applicants_sched.last_name }} {{
-                        applicants_sched.extension_name }}</h1>
+                            applicants_sched.extension_name }}</h1>
                         <h1 class="text-xs font-bold text-gray-500"> {{ applicants_sched.position_name }}</h1>
                     </div>
                 </div>

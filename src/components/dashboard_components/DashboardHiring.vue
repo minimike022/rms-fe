@@ -39,7 +39,6 @@ onMounted(() => {
                     </h1>
                 </div>
             </div>
-            <RouterLink class="font-bold text-[#D1D1D1] hover:text-[#46D1FE]" to="/jobs">See all</RouterLink>
         </div>
         <!-- List of Jobs-->
         <HiringCharts />
