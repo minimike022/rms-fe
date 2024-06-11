@@ -1,6 +1,6 @@
 <script setup>
 import axios from 'axios'
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const get_today_date = () => {
     var today = new Date()
@@ -19,14 +19,16 @@ const get_application_schedule = () => {
     axios.get('http://127.0.0.1:3000/application/status').then(res => {
         for (var i = 0; i < res.data.application_status.length; i++) {
             if (res.data.application_status[i].interview_date >= get_today_date()) {
-                if (res.data.application_status[i].application_status === 'Interview with HR') {
+                // if (res.data.application_status[i].application_status === 'Interview with HR') {
 
-                    application_schedule.value.push(res.data.application_status[i])
+                //     application_schedule.value.push(res.data.application_status[i])
 
-                    console.log(application_schedule.value)
-                }
+                //     console.log(application_schedule.value)
+                // }
+                
             }
         }
+        console.log(res.data.application_status)
     })
 
 }
