@@ -45,7 +45,7 @@ onMounted(() => {
 
 <template>
     <img src="/src/assets/x.svg" @click="hide_assign_modal" alt="">
-    <h1 class="text-xl font-bold text-blue-600 text-center my-6"> Set Interview </h1>
+    <h1 class="text-xl font-bold text-blue-600 text-center my-6"> Update Status </h1>
     <div>
         <form @submit.prevent="update_status()" class="grid grid-cols-1 gap-y-4 px-4">
             <div class="grid grid-cols-1 gap-6">
