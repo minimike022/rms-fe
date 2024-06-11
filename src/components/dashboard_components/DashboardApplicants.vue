@@ -1,15 +1,29 @@
 <script setup>
 import axios from 'axios'
 import { ref, onMounted } from 'vue'
+import moment from 'moment';
 
 const new_applicants = ref([])
 
-
 const fetch_new_applicants = () => {
     axios.get(`http://127.0.0.1:3000/new_applicants`).then(res => {
-        new_applicants.value = res.data.new_applicants
+        for (var i = 0; i < res.data.new_applicants.length; i++) {
+            let duration = moment(res.data.new_applicants[i].app_date).startOf('hours').fromNow()
+            let time_limit = moment.duration(moment().diff(res.data.new_applicants[i].app_date))
 
+            let hours = time_limit.asHours();
+
+            let hours_int = Math.trunc(hours)
+
+            if (hours_int < 24) {
+                new_applicants.value.push({data_value: res.data.new_applicants[i], time_elapsed: duration})
+            }
+        }
     })
+}
+const refresh_applicants = () => {
+    new_applicants.value = []
+    fetch_new_applicants()
 }
 
 onMounted(() => {
@@ -21,18 +35,21 @@ onMounted(() => {
 
 <template>
     <div class="px-[2dvh] p-4 my-4 shadow-lg ">
-        <h1 class="text-xl text-transparent bg-clip-text w-[30dvh]
+        <div class="flex justify-between">
+            <h1 class="text-xl text-transparent bg-clip-text w-[30dvh]
             bg-gradient-to-r from-blue-400 to-blue-800 drop-shadow-lg
         font-bold
         ">New Applicants</h1>
+            <img src="/src/assets/refresh-cw.svg" alt="" class="cursor-pointer w-[20px]" @click="refresh_applicants">
+        </div>
         <div class="overflow-y-auto h-[50dvh] mt-4 scroll-smooth">
-            <div v-for="new_app in new_applicants" class="mb-8 px-2">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <h1 class="text-lg font-bold text-gray-500">{{ new_app.first_name }} {{ new_app.last_name }}</h1>
-                        <h1 class="text-sm text-gray-400">{{ new_app.job_position }}</h1>
-                    </div>
+            <div v-for="new_app in new_applicants" class="mb-8 px-2 flex justify-between items-center">
+                <div>
+                    <h1 class="text-md font-bold">{{ new_app.data_value.first_name }} {{ new_app.data_value.last_name }}
+                    </h1>
+                    <h1 class="text-xs">{{ new_app.data_value.job_position }}</h1>
                 </div>
+                <h1 class="text-xs font-bold text-gray-600 text-right">{{ new_app.time_elapsed }}</h1>
             </div>
         </div>
     </div>

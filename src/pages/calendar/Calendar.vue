@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
-import moment from 'moment'
 import axios from 'axios'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -13,14 +12,32 @@ import CalendarModalComponents from '../../components/calendar_components/Calend
 const fetch_schedule = () => {
     axios.get('http://127.0.0.1:3000/application/status').then(
         res => {
+            
             for(var i = 0; i < res.data.application_status.length; i++) {
+                let color = ref('')
                 const start_date = res.data.application_status[i].interview_date + ' ' + res.data.application_status[i].interview_time
-                console.log(start_date)
                 const full_name = res.data.application_status[i].first_name + ' ' + res.data.application_status[i].last_name
-                current_events.value.push({id: createEventId(), title: full_name, start: start_date})
+                switch(res.data.application_status[i].application_status) {
+                    case 'Initial Interview': {
+                        color = '#3b82f6'
+                        console.log("II")
+                        break
+                    }
+                    case 'Interview with HR': {
+                        color = '#7c3aed'
+                        console.log("IH")
+                        break
+                    }
+                    case 'Interview with Hiring Manager': {
+                        color = '#06b6d4'
+                        console.log("IHM")
+                        break
+                    }
+
+                }
+                current_events.value.push({id: createEventId(), title: full_name, start: start_date, backgroundColor: color})
                 // console.log(current_events.value)
             }
-            console.log(current_events.value)
         }
     )
 }
@@ -59,7 +76,6 @@ const handleEventClick = (clickInfo) => {
 }
 
 const handleEvents = (events) => {
-    console.log(current_events.value)
     events = current_events.value 
 }
 

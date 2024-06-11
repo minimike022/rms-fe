@@ -43,7 +43,7 @@ const date_toString = (dateStr) => {
 
 const time_format = (rawTime) => {
     var time = rawTime
-    var formatted_time = moment(time, "HH:mm").format("HH:mm A")
+    var formatted_time = moment(time, "H:mm").format("LT")
     return formatted_time
 }
 
@@ -64,18 +64,18 @@ onMounted(() => {
                 Interviews
             </h1>
             <div v-for="applicants_sched in application_schedule">
-                <div class="flex items-center my-4" v-if="applicants_sched.interview_date != ''">
-                    <div class="text-sm">
+                <div class="flex items-center my-4" v-if="applicants_sched.interview_date != ''" :class="{ 'text-[#3b82f6]': applicants_sched.application_status === 'Initial Interview', 'text-[#7c3aed]': applicants_sched.application_status === 'Interview with HR', 'text-[#06b6d4]': applicants_sched.application_status === 'Interview with Hiring Manager' }">
+                    <div class="text-sm font-bold">
                         <h1>{{ date_toString(applicants_sched.interview_date) }}</h1>
                         <h1>{{ time_format(applicants_sched.interview_time) }}</h1>
                     </div>
                     <div class="w-[1.8dvh] h-[7dvh] rounded-sm mx-2"
-                        :class="{ 'bg-[#3b82f6]': applicants_sched.application_status === 'Initial Interview', 'bg-[#7c3aed]': applicants_sched.application_status === 'Interview with HR', 'bg-[#06b6d4]': applicants_sched.application_status === 'Interview with Hiring Manager', 'bg-[#10b981]': applicants_sched.application_status === 'Onboarding' }">
+                        :class="{ 'bg-[#3b82f6]': applicants_sched.application_status === 'Initial Interview', 'bg-[#7c3aed]': applicants_sched.application_status === 'Interview with HR', 'bg-[#06b6d4]': applicants_sched.application_status === 'Interview with Hiring Manager'}">
                     </div>
-                    <div class="">
+                    <div class="font-bold">
                         <h1> {{ applicants_sched.first_name }} {{ applicants_sched.last_name }} {{
                             applicants_sched.extension_name }}</h1>
-                        <h1 class="text-xs font-bold text-gray-500"> {{ applicants_sched.position_name }}</h1>
+                        <h1 class="text-xs text-gray-500"> {{ applicants_sched.position_name }}</h1>
                     </div>
                 </div>
             </div>
