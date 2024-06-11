@@ -8,8 +8,6 @@ const new_applicants = ref([])
 const fetch_new_applicants = () => {
     axios.get(`http://127.0.0.1:3000/new_applicants`).then(res => {
         new_applicants.value = res.data.new_applicants
-        console.log(new_applicants.value)
-
     })
 }
 

@@ -13,7 +13,6 @@ const change_bar_color = (data) => {
     data.forEach(value => {
         if (value > 3) {
             colors.push('#ef4444')
-            console.log("Urgent")
         }
         else {
             colors.push('#60a5fa')
@@ -29,9 +28,7 @@ const get_job_lists = () => {
         for (var i = 0; i < hiring_progress_data.value.length; i++) {
             if (hiring_progress_data.value[i].available_slot > 0) {
                 hiring_chart_label.value.push(hiring_progress_data.value[i].position_name)
-                console.log(hiring_chart_label.value)
                 hiring_chart_data.value.push(hiring_progress_data.value[i].available_slot)
-                console.log(hiring_chart_data.value)
             }
         }
     })

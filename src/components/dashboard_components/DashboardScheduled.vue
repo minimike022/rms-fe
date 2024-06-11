@@ -1,6 +1,7 @@
 <script setup>
 import axios from 'axios'
 import { ref, onMounted } from 'vue'
+import moment from 'moment';
 
 const get_today_date = () => {
     var today = new Date()
@@ -19,23 +20,17 @@ const get_application_schedule = () => {
     axios.get('http://127.0.0.1:3000/application/status').then(res => {
         for (var i = 0; i < res.data.application_status.length; i++) {
             if (res.data.application_status[i].interview_date >= get_today_date()) {
-                // if (res.data.application_status[i].application_status === 'Interview with HR') {
-
-                //     application_schedule.value.push(res.data.application_status[i])
-
-                //     console.log(application_schedule.value)
-                // }
-                
+                application_schedule.value.push(res.data.application_status[i])
+                console.log(application_schedule.value)
             }
         }
-        console.log(res.data.application_status)
+        
     })
 
 }
 
 const date_toString = (dateStr) => {
     const options = ref({
-        year: 'numeric',
         month: 'long',
         day: '2-digit'
     })
@@ -44,6 +39,12 @@ const date_toString = (dateStr) => {
     const formattedDate = date.toLocaleDateString('en-US', options.value)
 
     return formattedDate
+}
+
+const time_format = (rawTime) => {
+    var time = rawTime
+    var formatted_time = moment(time, "HH:mm").format("HH:mm A")
+    return formatted_time
 }
 
 onMounted(() => {
@@ -67,12 +68,18 @@ onMounted(() => {
             </h1>
             <div v-for="applicants_sched in application_schedule">
                 <div class="flex items-center my-4" v-if="applicants_sched.interview_date != ''">
-                    <h1>{{ date_toString(applicants_sched.interview_date) }}</h1>
-                    <div class="w-[1.4dvh] h-[7dvh] bg-black"
+                    <div class="text-sm">
+                        <h1>{{ date_toString(applicants_sched.interview_date) }}</h1>
+                        <h1>{{ time_format(applicants_sched.interview_time) }}</h1>
+                    </div>
+                    <div class="w-[1.8dvh] h-[7dvh] rounded-sm mx-2"
                         :class="{ 'bg-[#3b82f6]': applicants_sched.application_status === 'Initial Interview', 'bg-[#7c3aed]': applicants_sched.application_status === 'Interview with HR', 'bg-[#06b6d4]': applicants_sched.application_status === 'Interview with Hiring Manager', 'bg-[#10b981]': applicants_sched.application_status === 'Onboarding' }">
                     </div>
-                    <h1> {{ applicants_sched.first_name }} {{ applicants_sched.last_name }} {{
+                    <div class="">
+                        <h1> {{ applicants_sched.first_name }} {{ applicants_sched.last_name }} {{
                         applicants_sched.extension_name }}</h1>
+                        <h1 class="text-xs font-bold text-gray-500"> {{ applicants_sched.position_name }}</h1>
+                    </div>
                 </div>
             </div>
         </div>
