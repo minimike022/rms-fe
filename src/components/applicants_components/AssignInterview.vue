@@ -14,8 +14,6 @@ const status_list = ref([])
 const assign_interview = ref({
     app_status_id: null,
     interviewee_id: null,
-    int_time: '',
-    int_date: ''
 })
 
 console.log(props)
@@ -39,7 +37,7 @@ const fetch_interviewee = () => {
     })
 }
 
-const update_interview = () => {
+const update_status = () => {
     axios.patch(`http://127.0.0.1:3000/application/status/${props.status_id}`, assign_interview.value).then(res => {
         console.log(res.data)
     })
