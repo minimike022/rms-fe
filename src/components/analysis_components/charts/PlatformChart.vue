@@ -1,26 +1,38 @@
 <script setup>
 import Chart from 'chart.js/auto';
-import {ref, watch, onMounted} from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import axios from 'axios'
 
-var test_data = ref(['Google', 'Canva'])
-var test_platform_data = ref([2,4])
-const platform_chart = ref('platform_chart')
+var chart_platform_label = ref([])
+var chart_platform_data = ref([])
+const chart_id = ref('platform_chart')
 
+const fetch_platforms_data = () => {
+    axios.get('http://127.0.0.1:3000/analysis/platform').then(res => {
+        for (let i = 0; i < res.data.platform_list.length; i++) {
+            chart_platform_label.value.push(res.data.platform_list[i].platform_name)
+        }
+        for (let i = 0; i < res.data.platform_analysis.length; i++) {
+            console.log(res.data.platform_analysis[i])
 
-const fetch_applicants_data = () => {
-    axios.get('http://127.0.0.1:3000/applicants').then(res => {
-        console.log(res.data)
+            // const recurringValue = chart_platform_label.filter((value, index, self) => {
+        //         return self.indexOf(value) !== index;
+        //     });
+        // console.log(recurringValue)
+        }
+
+        
+
     })
 }
 
 onMounted(() => {
-    fetch_applicants_data()
+    fetch_platforms_data()
 })
 
-watch(test_data.value, () => {
+watch(chart_platform_label.value, () => {
     const data = ref({
-        labels: test_data.value,
+        labels: chart_platform_label.value,
         datasets: [{
             label: 'Platform Data',
             data: test_platform_data.value
@@ -31,10 +43,9 @@ watch(test_data.value, () => {
         data: data.value
     })
 
-    new Chart(platform_chart.value, config.value)
-    console.log(test_data.value)
+    new Chart(chart_id.value, config.value)
 })
-test_data.value.push('text1')
+
 
 
 
@@ -43,7 +54,7 @@ test_data.value.push('text1')
 <template>
     <div>
         <h1>Platform Data</h1>
-        <canvas :id="platform_chart">
+        <canvas :id="chart_id">
 
         </canvas>
     </div>

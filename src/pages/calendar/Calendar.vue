@@ -12,7 +12,7 @@ import CalendarModalComponents from '../../components/calendar_components/Calend
 const fetch_schedule = () => {
     axios.get('http://127.0.0.1:3000/application/status').then(
         res => {
-            
+            console.log(res.data)
             for(var i = 0; i < res.data.application_status.length; i++) {
                 let color = ref('')
                 const start_date = res.data.application_status[i].interview_date + ' ' + res.data.application_status[i].interview_time
@@ -60,20 +60,20 @@ const set_interview = ref({
 const open_calendar_modal = ref(false)
 const current_events = ref([{}])
 
-const handleWeekendsToggle = () => {
-    calendarOptions.weekends = !calendarOptions.weekends
-}
+// const handleWeekendsToggle = () => {
+//     calendarOptions.weekends = !calendarOptions.weekends
+// }
 
 const handleDateSelect = (selectInfo) => {
     open_calendar_modal.value = true
     set_interview.value.int_date = selectInfo.startStr
 }
 
-const handleEventClick = (clickInfo) => {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-        clickInfo.event.remove()
-    }
-}
+// const handleEventClick = (clickInfo) => {
+//     if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+//         clickInfo.event.remove()
+//     }
+// }
 
 const handleEvents = (events) => {
     events = current_events.value 
@@ -95,7 +95,7 @@ const calendarOptions = ref({
     dayMaxEvents: true,
     weekends: true,
     select: handleDateSelect,
-    eventClick: handleEventClick,
+    // eventClick: handleEventClick,
     eventsSet: handleEvents
 })
 
