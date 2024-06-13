@@ -61,7 +61,7 @@ watch(hiring_progress_data, () => {
             }
         }
     }
-    const myChart = new Chart(hiring_progress.value, config)
+    new Chart(hiring_progress.value, config)
 })
 </script>
 
