@@ -5,7 +5,6 @@ const Dashboard = () => import("/src/pages/dashboard/Dashboard.vue")
 const Applicants = () => import("/src/pages/applicants/Applicants.vue")
 const Jobs = () => import("/src/pages/jobs/Jobs.vue")
 const Calendar = () => import("/src/pages/calendar/Calendar.vue")
-const Analysis = () => import("/src/pages/analysis/Analysis.vue")
 const Main = () => import("/src/pages/main.vue")
 
 const routes = [
@@ -40,15 +39,7 @@ const routes = [
                 meta: {
                     header: "Jobs"
                 }
-            },
-            {
-                path:"/analysis",
-                component: Analysis,
-                meta: {
-                    header: "Analysis"
-                }
             }
-        
         ]
     },
     {

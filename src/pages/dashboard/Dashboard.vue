@@ -3,6 +3,9 @@ import DashboardScheduled from '../../components/dashboard_components/DashboardS
 import DashboardHiring from '../../components/dashboard_components/DashboardHiring.vue';
 import DashboardApplicants from '../../components/dashboard_components/DashboardApplicants.vue';
 import DashboardStatus from '../../components/dashboard_components/DashboardStatus.vue';
+import DashboardApplications from '../../components/dashboard_components/DashboardApplications.vue';
+import DashboardPlatform from '../../components/dashboard_components/DashboardPlatform.vue';
+
 </script>
 
 <template>
@@ -20,4 +23,6 @@ import DashboardStatus from '../../components/dashboard_components/DashboardStat
             <DashboardApplicants />
         </div>
     </div>
+    <DashboardPlatform/>
+    <DashboardApplications/>
 </template>

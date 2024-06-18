@@ -15,7 +15,6 @@ import {RouterLink} from 'vue-router'
                 <RouterLink activeClass="bg-clip-text text-transparent bg-gradient-to-r from-[#0390EA] to-blue-800" to="/applicants" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#0390EA] to-blue-800"> Applicants </RouterLink>
                 <RouterLink activeClass="bg-clip-text text-transparent bg-gradient-to-r from-[#0390EA] to-blue-800" to="/calendar" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#0390EA] to-blue-800"> Calendar </RouterLink>
                 <RouterLink activeClass="bg-clip-text text-transparent bg-gradient-to-r from-[#0390EA] to-blue-800" to="/jobs" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#0390EA] to-blue-800"> Jobs </RouterLink>
-                <RouterLink activeClass="bg-clip-text text-transparent bg-gradient-to-r from-[#0390EA] to-blue-800" to="/analysis" class="my-[3dvh] bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-[#0390EA] to-blue-800"> Analysis </RouterLink>
             </div>
         </div>
     </div>

@@ -37,8 +37,8 @@ const assign_interview_modal = (id) => {
 </script>
 
 <template>
-    <div class="my-11 px-4 shadow-lg rounded-lg">
-        <div class="flex items-center">
+    <div class="my-11 px-4">
+        <div class="flex items-center justify-between">
             <div class="flex h-[7dvh] rounded-lg items-center drop-shadow-md">
                 <input type="text" placeholder="Search" @input="search" v-model="search_applicants"
                     class="h-full w-[35vh] outline-none border-blue-600 border pl-4 rounded-l-md text-gray-600">
@@ -46,8 +46,11 @@ const assign_interview_modal = (id) => {
                     <img src="/src/assets/search.svg" alt="">
                 </div>
             </div>
+            <div class="cursor-pointer bg-blue-600 h-[7dvh] w-[25dvh] rounded-md flex items-center justify-center">
+                <h1 class="text-white font-bold">Generate Report</h1>
+            </div>
         </div>
-        <table class="w-full mt-6">
+        <table class="w-full mt-6 shadow-lg rounded-lg">
             <thead>
                 <tr class="text-blue-500 text-[18px] text-left">
                     <th class="h-[10dvh] px-3">Full Name</th>
