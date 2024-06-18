@@ -5,7 +5,7 @@ import axios from 'axios'
 
 var chart_platform_label = ref([])
 var chart_platform_data = ref([])
-const chart_id = ref('platform_chart')
+const platform_chart_id = ref('platform_chart')
 
 const fetch_platforms_data = () => {
     axios.get('http://127.0.0.1:3000/analysis/platform').then(res => {
@@ -20,9 +20,6 @@ const fetch_platforms_data = () => {
         //     });
         // console.log(recurringValue)
         }
-
-        
-
     })
 }
 
@@ -35,7 +32,7 @@ watch(chart_platform_label.value, () => {
         labels: chart_platform_label.value,
         datasets: [{
             label: 'Platform Data',
-            data: test_platform_data.value
+            data: [1,2,3,4,5]
         }]
     })
     const config = ref({
@@ -54,7 +51,7 @@ watch(chart_platform_label.value, () => {
 <template>
     <div>
         <h1>Platform Data</h1>
-        <canvas :id="chart_id">
+        <canvas :id="platform_chart_id">
 
         </canvas>
     </div>

@@ -1,5 +1,6 @@
 <script setup>
+import PlatformChart from './charts/PlatformChart.vue';
 </script>
 <template>
-    hello world
+    <PlatformChart/>
 </template>

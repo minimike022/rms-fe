@@ -4,10 +4,8 @@ import Chart from 'chart.js/auto';
 import axios from 'axios'
 import moment from 'moment';
 
-const chart_id = ref('applicants_chart')
+const applications_chart_id = ref('applicants_chart')
 const chart_applied_date = ref([])
-
-
 
 const fetch_applicants_data = () => {
     axios.get('http://127.0.0.1:3000/analysis/date').then(res => {
@@ -43,8 +41,9 @@ watch(chart_applied_date.value, () => {
 
 <template>
     <div>
-        <canvas :id="chart_id">
+        <canvas :id="applications_chart_id">
 
         </canvas>
+        dwa
     </div>
 </template>

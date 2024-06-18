@@ -1,5 +1,6 @@
 <script setup>
+import ApplicationsChart from './charts/ApplicationsChart.vue';
 </script>
 <template>
-    hello
+    <ApplicationsChart/>
 </template>
