@@ -9,7 +9,7 @@ import DashboardPlatform from '../../components/dashboard_components/DashboardPl
 </script>
 
 <template>
-    <div class="grid grid-cols-2 gap-x-[60dvh] w-full h-full 
+    <div class="flex justify-between  w-full h-full 
         mt-[4dvh] font-Poppins
         ">
         <!--Left Components-->

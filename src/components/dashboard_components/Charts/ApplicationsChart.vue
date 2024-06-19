@@ -31,19 +31,25 @@ watch(chart_applied_date.value, () => {
     })
     const config = ref({
         type: 'line',
-        data: data.value
+        data: data.value,
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
     })
 
-    new Chart(chart_id.value, config.value)
+    new Chart(applications_chart_id.value, config.value)
 })
 
 </script>
 
 <template>
-    <div>
+    <div class="h-[45dvh]">
         <canvas :id="applications_chart_id">
-
         </canvas>
-        dwa
     </div>
 </template>
