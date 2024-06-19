@@ -4,7 +4,7 @@ import ProgressCharts from './charts/ProgressCharts.vue';
 
 <template>
     <!--Header Title-->
-    <div class="shadow-lg rounded-lg p-4 my-4">
+    <div class="bg-white rounded-lg p-4 my-3 shadow-md">
         <div>
             <div class="flex items-center justify-between">
                 <div class="flex items-center">

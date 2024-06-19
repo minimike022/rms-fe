@@ -54,6 +54,7 @@ watch(hiring_progress_data, () => {
         type: 'bar',
         data: data.value,
         options: {
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     display: false
@@ -66,7 +67,7 @@ watch(hiring_progress_data, () => {
 </script>
 
 <template>
-    <div>
+    <div class="h-[45dvh] mt-4">
         <canvas :id="hiring_progress">
 
         </canvas>

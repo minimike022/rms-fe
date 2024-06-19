@@ -54,12 +54,12 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="p-4 shadow-lg">
+    <div class="p-4 my-3 shadow-md bg-white rounded-lg">
         <h1 class="text-xl text-transparent bg-clip-text w-[36dvh]
             bg-gradient-to-r from-blue-400 to-blue-800 drop-shadow-lg
         font-bold
         ">Upcoming Interview</h1>
-        <div class="overflow-y-auto h-[50dvh] mt-4">
+        <div class="overflow-y-auto h-[45.4dvh] mt-4">
             <h1 class="text-center font-bold text-gray-500 mt-5" v-if="application_schedule == ''">No Upcoming
                 Interviews
             </h1>

@@ -45,6 +45,7 @@ watch(application_progress, () => {
         type: 'bar',
         data: data.value,
         options: {
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     display: false
@@ -57,7 +58,7 @@ watch(application_progress, () => {
 </script>
 
 <template>
-    <div>
+    <div class="h-[45dvh] mt-4">
         <canvas :id="recruitment_progress"></canvas>
     </div>
 </template>

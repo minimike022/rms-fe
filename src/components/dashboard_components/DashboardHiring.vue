@@ -18,12 +18,12 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="shadow-lg rounded-lg p-4">
+    <div class="bg-white rounded-lg my-3 p-4 shadow-md">
         <!-- Header -->
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <h1 class="text-2xl text-transparent bg-clip-text w-[35dvh]
-            bg-gradient-to-r from-blue-400 to-blue-800 drop-shadow-lg
+            bg-gradient-to-r from-blue-400 to-blue-800
             font-bold">You Need to Hire!
                 </h1>
                 <div class="flex items-center">

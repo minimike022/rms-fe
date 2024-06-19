@@ -9,20 +9,20 @@ import DashboardPlatform from '../../components/dashboard_components/DashboardPl
 </script>
 
 <template>
-    <div class="grid grid-cols-2 gap-x-[60dvh] w-full h-full
+    <div class="grid grid-cols-2 gap-x-[60dvh] w-full h-full 
         mt-[4dvh] font-Poppins
         ">
         <!--Left Components-->
-        <div class="w-[110dvh]">
+        <div class="w-[110dvh] flex flex-col">
             <DashboardHiring />
             <DashboardStatus />
+            <DashboardApplications/>
         </div>
 
         <div class="w-[50dvh] flex flex-col">
             <DashboardScheduled />
             <DashboardApplicants />
+            <DashboardPlatform/>
         </div>
     </div>
-    <DashboardPlatform/>
-    <DashboardApplications/>
 </template>

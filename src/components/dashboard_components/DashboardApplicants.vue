@@ -34,7 +34,7 @@ onMounted(() => {
 
 
 <template>
-    <div class="px-[2dvh] p-4 my-4 shadow-lg ">
+    <div class="px-[2dvh] bg-white rounded-lg p-4 my-3 shadow-md">
         <div class="flex justify-between">
             <h1 class="text-xl text-transparent bg-clip-text w-[30dvh]
             bg-gradient-to-r from-blue-400 to-blue-800 drop-shadow-lg
@@ -42,7 +42,7 @@ onMounted(() => {
         ">New Applicants</h1>
             <img src="/src/assets/refresh-cw.svg" alt="" class="cursor-pointer w-[20px]" @click="refresh_applicants">
         </div>
-        <div class="overflow-y-auto h-[50dvh] mt-4 scroll-smooth">
+        <div class="overflow-y-auto h-[45.4dvh] mt-4 scroll-smooth">
             <div v-for="new_app in new_applicants" class="mb-8 px-2 flex justify-between items-center">
                 <div>
                     <h1 class="text-md font-bold">{{ new_app.data_value.first_name }} {{ new_app.data_value.last_name }}
