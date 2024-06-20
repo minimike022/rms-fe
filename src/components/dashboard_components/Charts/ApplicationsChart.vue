@@ -10,7 +10,7 @@ const chart_applied_date = ref([])
 const fetch_applicants_data = () => {
     axios.get('http://127.0.0.1:3000/analysis/date').then(res => {
         for(let i = 0; i < res.data.application_date.length; i++) {
-            const converted_date = moment(res.data.application_date[i].created_At).format('MM/DD/YY')
+            const converted_date = moment(res.data.application_date[i].created_At).format('MM/YYYY')
             chart_applied_date.value.push(converted_date)
         }
     })
