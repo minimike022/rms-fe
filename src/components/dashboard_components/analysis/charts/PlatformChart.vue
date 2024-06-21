@@ -53,9 +53,8 @@ watch(chart_platform_data.value, () => {
 </script>
 
 <template>
-    <div class="w-[45dvh]">
+    <div class="w-[45dvh] mt-4">
         <canvas  :id="platform_chart_id">
-
         </canvas>
     </div>
 

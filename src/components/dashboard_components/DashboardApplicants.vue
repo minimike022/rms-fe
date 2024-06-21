@@ -42,7 +42,13 @@ onMounted(() => {
         ">New Applicants</h1>
             <img src="/src/assets/refresh-cw.svg" alt="" class="cursor-pointer w-[20px]" @click="refresh_applicants">
         </div>
+        
         <div class="overflow-y-auto h-[45.4dvh] mt-4 scroll-smooth">
+            <div class="flex flex-col mt-5 items-center">
+                <img src="/src/assets/applicants_dashboard.png" alt="" class="h-[23dvh]">
+                <h1 class="text-lg text-center font-bold text-gray-400 mt-5" v-if="new_applicants == ''">No New Applicants
+                </h1>
+            </div>
             <div v-for="new_app in new_applicants" class="mb-8 px-2 flex justify-between items-center">
                 <div>
                     <h1 class="text-md font-bold">{{ new_app.data_value.first_name }} {{ new_app.data_value.last_name }}

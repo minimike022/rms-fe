@@ -102,7 +102,7 @@ const calendarOptions = ref({
 </script>
 
 <template>
-    <div class="h-screen mt-4">
+    <div class="my-4">
         <FullCalendar :options="calendarOptions"/>
     </div>
 

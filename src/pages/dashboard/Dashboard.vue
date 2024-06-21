@@ -3,26 +3,37 @@ import DashboardScheduled from '../../components/dashboard_components/DashboardS
 import DashboardHiring from '../../components/dashboard_components/DashboardHiring.vue';
 import DashboardApplicants from '../../components/dashboard_components/DashboardApplicants.vue';
 import DashboardStatus from '../../components/dashboard_components/DashboardStatus.vue';
-import DashboardApplications from '../../components/dashboard_components/DashboardApplications.vue';
-import DashboardPlatform from '../../components/dashboard_components/DashboardPlatform.vue';
+import DashboardApplications from '../../components/dashboard_components/analysis/DashboardApplications.vue';
+import DashboardPlatform from '../../components/dashboard_components/analysis/DashboardPlatform.vue';
 
 </script>
 
 <template>
-    <div class="flex justify-between  w-full h-full 
+    <div class="w-full h-full">
+        <div class="flex justify-between  
         mt-[4dvh] font-Poppins
         ">
-        <!--Left Components-->
-        <div class="w-[110dvh] flex flex-col">
-            <DashboardHiring />
-            <DashboardStatus />
-            <DashboardApplications/>
-        </div>
+            <!--Left Components-->
+            <div class="w-[110dvh] flex flex-col">
+                <DashboardHiring />
+                <DashboardStatus />
 
-        <div class="w-[50dvh] flex flex-col">
-            <DashboardScheduled />
-            <DashboardApplicants />
-            <DashboardPlatform/>
+            </div>
+            <div class="w-[50dvh] flex flex-col">
+                <DashboardScheduled />
+                <DashboardApplicants />
+
+            </div>
+        </div>
+        <!-- Analysis -->
+        <div class="bg-white flex justify-between rounded-lg">
+            <div class="w-[110dvh] flex flex-col">
+                <DashboardApplications />
+            </div>
+
+            <div class="w-[50dvh] flex flex-col">
+                <DashboardPlatform />
+            </div>
         </div>
     </div>
 </template>

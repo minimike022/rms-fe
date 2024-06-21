@@ -37,7 +37,7 @@ const assign_interview_modal = (id) => {
 </script>
 
 <template>
-    <div class="my-11 px-4">
+    <div class="my-11">
         <div class="flex items-center justify-between">
             <div class="flex h-[7dvh] rounded-lg items-center drop-shadow-md">
                 <input type="text" placeholder="Search" @input="search" v-model="search_applicants"
@@ -50,7 +50,7 @@ const assign_interview_modal = (id) => {
                 <h1 class="text-white font-bold">Generate Report</h1>
             </div>
         </div>
-        <table class="w-full mt-6 shadow-lg rounded-lg">
+        <table class="w-full mt-6 shadow-lg rounded-lg bg-white">
             <thead>
                 <tr class="text-blue-500 text-[18px] text-left">
                     <th class="h-[10dvh] px-3">Full Name</th>
@@ -84,7 +84,7 @@ const assign_interview_modal = (id) => {
                             </h1>
                         </div>
                     </td>
-                    <td class="flex justify-center items-center h-[10dvh]"
+                    <td class="flex justify-center items-center h-[10dvh] px-3"
                         @click="assign_interview_modal(app_status.application_status_id)">
                         <div class="w-[6dvh] h-[6dvh] shadow-md rounded-lg flex items-center justify-center">
                             <img src="/src/assets/edit.svg" alt="">

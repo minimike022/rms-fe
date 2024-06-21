@@ -30,7 +30,7 @@ watch(chart_applied_date.value, () => {
         }]
     })
     const config = ref({
-        type: 'line',
+        type: 'bar',
         data: data.value,
         options: {
             maintainAspectRatio: false,
@@ -48,7 +48,7 @@ watch(chart_applied_date.value, () => {
 </script>
 
 <template>
-    <div class="h-[45dvh]">
+    <div class="h-[45dvh] mt-4">
         <canvas :id="applications_chart_id">
         </canvas>
     </div>

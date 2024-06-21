@@ -10,7 +10,7 @@ const is_add_active = ref(false)
 const is_update_active = ref(false)
 const search_jobs = ref('')
 
-const position_status_id = ref(null)
+const job_position_status = ref({})
 
 const get_job_lists = () => {
     axios.get('http://127.0.0.1:3000/jobs/search').then(res => {
@@ -18,8 +18,16 @@ const get_job_lists = () => {
     })
 }
 
-const update_jobs_data = (id) => {
-    position_status_id.value = id
+
+const update_jobs_data = (position_id, position_name, department_id, department_name, position_status, available_slot) => {
+    job_position_status.value = {
+        position_id: position_id,
+        position_name: position_name,
+        department_name: department_name,
+        department_id: department_id,
+        position_status: position_status,
+        available_slot: available_slot,
+    }
     is_update_active.value = true
 }
 
@@ -35,7 +43,7 @@ const search = dash.debounce(() => {
 
 </script>
 <template>
-    <div class="w-full px-4 shadow-lg rounded-lg my-11">
+    <div class="w-full rounded-lg my-11">
         <div class="flex justify-between items-center">
             <div class="flex h-[7dvh] rounded-lg items-center drop-shadow-md">
                 <input type="text" placeholder="Search" @input="search" v-model="search_jobs"
@@ -51,7 +59,7 @@ const search = dash.debounce(() => {
             </button>
         </div>
 
-        <table class="w-full mt-6 relative">
+        <table class="w-full mt-6 bg-white shadow-lg rounded-lg">
             <thead>
                 <tr class="text-blue-500 text-[18px]">
                     <th class="text-left h-[10dvh] px-3">Position</th>
@@ -72,8 +80,10 @@ const search = dash.debounce(() => {
                             <h1>{{ jobs.position_status }}</h1>
                         </div>
                     </td>
-                    <td class="flex justify-center items-center h-[10dvh]" @click="update_jobs_data(jobs.position_id)">
-                        <div class="w-[6dvh] h-[6dvh] shadow-md rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-1  00">
+                    <td class="flex justify-center items-center h-[10dvh]"
+                        @click="update_jobs_data(jobs.position_id, jobs.position_name, jobs.department_id, jobs.department_name, jobs.position_status, jobs.available_slot)">
+                        <div
+                            class="w-[6dvh] h-[6dvh] shadow-md rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-1  00">
                             <img src="/src/assets/edit.svg" alt="">
                         </div>
                     </td>
@@ -83,7 +93,7 @@ const search = dash.debounce(() => {
                 <AddJobsModal @add_jobs="is_add_active = !is_add_active" />
             </div>
             <div class="absolute top-[10dvh] flex items-center justify-center w-full" v-if="is_update_active">
-                <UpdateJobsModal :position_id="position_status_id" @update_modal="is_update_active = false" />
+                <UpdateJobsModal :job_position="job_position_status" @update_modal="is_update_active = false" />
             </div>
         </table>
     </div>

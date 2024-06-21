@@ -20,25 +20,12 @@ onMounted(() => {
 <template>
     <div class="bg-white rounded-lg my-3 p-4 shadow-md">
         <!-- Header -->
-        <div class="flex items-center justify-between">
-            <div class="flex items-center">
-                <h1 class="text-2xl text-transparent bg-clip-text w-[35dvh]
+        <div class="flex items-center">
+            <h1 class="text-2xl text-transparent bg-clip-text w-[35dvh]
             bg-gradient-to-r from-blue-400 to-blue-800
             font-bold">You Need to Hire!
-                </h1>
-                <div class="flex items-center">
-                    <div class="w-[20px] h-[20px] bg-red-500 rounded-md"></div>
-                    <h1 class="ml-2 text-sm text-gray-400">
-                        Urgent
-                    </h1>
-                </div>
-                <div class="flex items-center ml-4">
-                    <div class="w-[20px] h-[20px] bg-blue-500 rounded-md"></div>
-                    <h1 class="ml-2 text-sm text-gray-400">
-                        Not Urgent
-                    </h1>
-                </div>
-            </div>
+            </h1>
+
         </div>
         <!-- List of Jobs-->
         <HiringCharts />
