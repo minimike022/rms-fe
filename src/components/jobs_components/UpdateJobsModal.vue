@@ -53,7 +53,7 @@ onMounted(() => {
         <img src="/src/assets/x.svg" alt="" @click="hide_modal()" class="cursor-pointer">
         <h1 class="text-2xl font-bold text-blue-600 text-center my-6">Update Jobs</h1>
 
-        <form @submit.prevent="update_jobs">
+        <form @submit="update_jobs">
             <div class="my-6">
                 <h1 class="font-bold text-blue-600 my-3">
                     Position Name
