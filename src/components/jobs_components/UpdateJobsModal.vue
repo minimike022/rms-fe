@@ -1,12 +1,18 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted} from 'vue'
 import axios from 'axios'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 
 const emit = defineEmits(["update_modal"])
+
 const props = defineProps(["job_position"])
-const job_status_options = ["Open", "Urgent", "Inactive"]
+
+const job_status_options = ([
+    {value: "Open", label: "Open"},
+    {value: "Urgent", label: "Urgent"},
+    {value: "Inactive", label: "Inactive"},
+])
 
 const departments = ref([])
 
@@ -32,9 +38,7 @@ const fetch_departments = () => {
 }
 
 const update_jobs = () => {
-    axios.patch(`http://127.0.0.1:3000/jobs/update/${props.job_position.position_id}`, jobs_modal.value).then(res => {
-        console.log(res)
-    })
+    axios.patch(`http://127.0.0.1:3000/jobs/update/${props.job_position.position_id}`, jobs_modal.value)
 }
 
 onMounted(() => {
@@ -49,7 +53,7 @@ onMounted(() => {
         <img src="/src/assets/x.svg" alt="" @click="hide_modal()" class="cursor-pointer">
         <h1 class="text-2xl font-bold text-blue-600 text-center my-6">Update Jobs</h1>
 
-        <form @submit="update_jobs">
+        <form @submit.prevent="update_jobs">
             <div class="my-6">
                 <h1 class="font-bold text-blue-600 my-3">
                     Position Name

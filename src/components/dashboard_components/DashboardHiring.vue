@@ -1,14 +1,13 @@
 <script setup>
-import { RouterLink } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import HiringCharts from './charts/HiringCharts.vue';
 
 const job_listing = ref([])
 
 const get_job_lists = () => {
     axios.get('http://127.0.0.1:3000/jobs').then(res => {
-        job_listing.value = res.data
+        job_listing.value = res.data.job_positions
+        console.log(job_listing.value)
     })
 }
 
@@ -25,9 +24,19 @@ onMounted(() => {
             bg-gradient-to-r from-blue-400 to-blue-800
             font-bold">You Need to Hire!
             </h1>
-
         </div>
         <!-- List of Jobs-->
-        <HiringCharts />
+        <div class="h-[45dvh] mt-2 grid grid-cols-2 overflow-y-auto px-4">
+            <div v-for="jobs in job_listing"
+                class="flex items-center my-2 w-[47dvh] h-[16dvh] shadow-lg rounded-lg p-2" >
+                <div class="flex items-center justify-center h-[11dvh] w-[10dvh] mx-2 rounded-lg" :class="{ 'bg-red-500': jobs.position_status === 'Urgent', 'bg-blue-500': jobs.position_status === 'Open'}">
+                    <h1 class="text-3xl text-white font-bold ">{{ jobs.available_slot }}</h1>
+                </div>
+                <span class="flex flex-col">
+                    <h1 class="font-bold text-blue-600">{{ jobs.position_name }}</h1>
+                    <h1 class="text-sm text-gray-500">{{ jobs.department_name }}</h1>
+                </span>
+            </div>
+        </div>
     </div>
 </template>
