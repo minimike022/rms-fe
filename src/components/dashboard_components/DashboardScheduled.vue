@@ -59,7 +59,7 @@ onMounted(() => {
             bg-gradient-to-r from-blue-400 to-blue-800 drop-shadow-lg
         font-bold
         ">Upcoming Interview</h1>
-        <div class=" overflow-y-auto h-[45.4dvh] mt-4">
+        <div class="overflow-y-auto h-[45.4dvh] mt-4">
             <div v-if="application_schedule == ''" class="flex flex-col mt-10 items-center">
                 <img src="/src/assets/calendar_dashboard.png" alt="" class="h-[15dvh]">
                 <h1 class="text-center font-bold text-gray-400 mt-5" >No Upcoming

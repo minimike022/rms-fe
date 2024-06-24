@@ -4,30 +4,36 @@ import axios from 'axios'
 
 const no_of_pages = ref()
 const limit = 4
-
+const page = 1
 
 const job_listing = ref([])
 
-const get_job_lists = () => {
+const get_jobs_count = () => {
     axios.get('http://127.0.0.1:3000/jobs').then(res => {
-        job_listing.value = res.data.job_positions
         no_of_pages.value = Math.ceil(res.data.count / limit)
+    })
+}
+
+const get_jobs_list = () =>{
+    axios.get(`http://127.0.0.1:3000/jobs?page=${page}&limit=${limit}`).then(res => {
+        job_listing.value = res.data.job_positions
     })
 }
 
 const get_page = (page) => {
     axios.get(`http://127.0.0.1:3000/jobs?page=${page}&limit=${limit}`).then(res => {
-        console.log(res.data)
+        job_listing.value = res.data.job_positions
     })
 }
 
 onMounted(() => {
-    get_job_lists()
+    get_jobs_list()
+    get_jobs_count()
 })
 </script>
 
 <template>
-    <div class="bg-white rounded-lg my-3 p-4 shadow-md">
+    <div class="bg-white rounded-lg my-3 p-4 shadow-md h-[57dvh]">
         <!-- Header -->
         <div class="flex items-center">
             <h1 class="text-2xl text-transparent bg-clip-text w-[35dvh]
@@ -36,8 +42,8 @@ onMounted(() => {
             </h1>
         </div>
         <!-- List of Jobs-->
-        <div class="h-[45dvh] mt-2 grid grid-cols-2 px-4">
-            <div v-for="jobs in job_listing" class="flex items-center my-2 w-[47dvh] h-[16dvh] shadow-lg rounded-lg p-2"
+        <div class="h-auto my-4 grid grid-cols-2 px-4">
+            <div v-for="jobs in job_listing" class="flex items-center my-2 w-[47dvh] h-[18dvh] shadow-lg rounded-lg p-2"
                 :class="{ 'bg-red-500': jobs.position_status === 'Urgent' }">
                 <div class="flex items-center justify-center h-[11dvh] w-[10dvh] ml-2 mr-4 rounded-lg drop-shadow-lg"
                     :class="{ 'bg-red-600': jobs.position_status === 'Urgent', 'bg-blue-500': jobs.position_status === 'Open' }">
@@ -51,9 +57,8 @@ onMounted(() => {
                 </span>
             </div>
         </div>
-        <div class="w-full flex items-center justify-end">
-            <div @click="get_page(index)" v-for="index in no_of_pages" class="mx-2 rounded-md w-[8dvh] h-[8dvh] border border-gray-400 flex items-center justify-center">
-                <h1 class="font-bold text-lg text-blue-500">{{ index }}</h1>
+        <div class="w-full flex items-center justify-center">
+            <div @click="get_page(index)" v-for="index in no_of_pages" class="mx-2 w-[5dvh] h-[1dvh] bg-blue-500">
             </div>
         </div>
     </div>
