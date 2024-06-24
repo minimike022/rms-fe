@@ -29,8 +29,8 @@ onMounted(() => {
 
 
 <template>
-    <div class="p-4 bg-white rounded-lg p-4 my-3 shadow-md">
-        <h1 class="text-xl text-transparent bg-clip-text w-[30dvh]
+    <div class="bg-white rounded-lg p-4 my-3 shadow-md">
+        <h1 class="text-xl text-transparent bg-clip-text w-auto
             bg-gradient-to-r from-blue-400 to-blue-800 drop-shadow-lg
         font-bold
         ">New Applicants</h1>
