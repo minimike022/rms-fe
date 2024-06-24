@@ -1,5 +1,5 @@
 <script setup>
-import ProgressCharts from './charts/ProgressCharts.vue';
+import ProgressCharts from './Charts/ProgressCharts.vue';
 </script>
 
 <template>
