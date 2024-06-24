@@ -28,13 +28,13 @@ onMounted(() => {
         <!-- List of Jobs-->
         <div class="h-[45dvh] mt-2 grid grid-cols-2 overflow-y-auto px-4">
             <div v-for="jobs in job_listing"
-                class="flex items-center my-2 w-[47dvh] h-[16dvh] shadow-lg rounded-lg p-2" >
-                <div class="flex items-center justify-center h-[11dvh] w-[10dvh] mx-2 rounded-lg" :class="{ 'bg-red-500': jobs.position_status === 'Urgent', 'bg-blue-500': jobs.position_status === 'Open'}">
+                class="flex items-center my-2 w-[47dvh] h-[16dvh] shadow-lg rounded-lg p-2" :class="{ 'bg-red-500': jobs.position_status === 'Urgent'}">
+                <div class="flex items-center justify-center h-[11dvh] w-[10dvh] ml-2 mr-4 rounded-lg drop-shadow-lg" :class="{ 'bg-red-600': jobs.position_status === 'Urgent', 'bg-blue-500': jobs.position_status === 'Open'}">
                     <h1 class="text-3xl text-white font-bold ">{{ jobs.available_slot }}</h1>
                 </div>
                 <span class="flex flex-col">
-                    <h1 class="font-bold text-blue-600">{{ jobs.position_name }}</h1>
-                    <h1 class="text-sm text-gray-500">{{ jobs.department_name }}</h1>
+                    <h1 class="font-bold text-blue-600" :class="{ 'text-white': jobs.position_status === 'Urgent'}">{{ jobs.position_name }}</h1>
+                    <h1 class="text-sm text-gray-500" :class="{ 'text-white': jobs.position_status === 'Urgent'}">{{ jobs.department_name }}</h1>
                 </span>
             </div>
         </div>
