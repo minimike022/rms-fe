@@ -75,7 +75,7 @@ const search = dash.debounce(() => {
 
         <table class="w-full h-auto mt-4 bg-white shadow-lg rounded-lg">
             <thead>
-                <tr class="text-blue-500 text-[16px]">
+                <tr class="text-blue-600 text-[16px]">
                     <th class="text-left h-[10dvh] px-3">Position</th>
                     <th class="text-left h-[10dvh] px-3">Department</th>
                     <th class="text-center h-[10dvh] px-3">Available Slots</th>
@@ -84,11 +84,11 @@ const search = dash.debounce(() => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="jobs in job_listing" class="text-gray-600">
-                    <td class="text-left text-sm h-[8dvh] px-3 font-bold">{{ jobs.position_name }}</td>
-                    <td class="text-left text-sm h-[8dvh] px-3">{{ jobs.department_name }}</td>
-                    <td class="text-center text-sm h-[8dvh] px-3">{{ jobs.available_slot }}</td>
-                    <td class="text-center text-sm h-[8dvh] font-bold text-white">
+                <tr v-for="jobs in job_listing" class="text-blue-600 text-sm">
+                    <td class="text-left h-[8dvh] px-3 font-bold">{{ jobs.position_name }}</td>
+                    <td class="text-left h-[8dvh] px-3">{{ jobs.department_name }}</td>
+                    <td class="text-center h-[8dvh] px-3">{{ jobs.available_slot }}</td>
+                    <td class="text-center h-[8dvh] font-bold text-white">
                         <div class="w-auto h-auto py-0.5 rounded-lg flex items-center justify-center"
                             :class="{ 'bg-red-500': jobs.position_status === 'Urgent', 'bg-green-500': jobs.position_status === 'Open', 'bg-gray-400': jobs.position_status === 'Inactive' }">
                             <h1 class="text-xs">{{ jobs.position_status }}</h1>
@@ -112,11 +112,11 @@ const search = dash.debounce(() => {
             </div>
         </table>
         <div class=" font-bold px-4 my-4 w-full flex justify-end items-center text-blue-500">
-            <button :disabled="current_page <= 1" @click="get_page(current_page -= 1)" class="cursor-pointer h-[6dvh] rounded-md w-auto px-4 flex items-center justify-center enabled:border enabled:border-blue-500 enabled:hover:bg-blue-500 hover:text-white disabled:text-gray-400 disabled:bg-gray-200">
+            <button :disabled="current_page <= 1" @click="get_page(current_page -= 1)" class="cursor-pointer h-[6dvh] rounded-md w-auto px-4 flex items-center justify-center enabled:border enabled:border-blue-500 enabled:hover:bg-blue-500 hover:text-white disabled:text-gray-400 disabled:bg-gray-200 mr-2">
                 <h1>Prev</h1>
             </button>
             <div @click="get_page(index)" :class="{ 'bg-blue-500 text-white': current_page === index }" v-for="index in no_of_pages"
-                class="cursor-pointer rounded-md border border-blue-500  h-[6dvh] w-[6dvh] mx-3 flex items-center justify-center hover:bg-blue-500 hover:text-white transition ease-out duration-400">
+                class="cursor-pointer rounded-md border border-blue-500 mr-2  h-[6dvh] w-[6dvh] flex items-center justify-center hover:bg-blue-500 hover:text-white transition ease-out duration-400">
                 <h1>
                     {{ index }}
                 </h1>

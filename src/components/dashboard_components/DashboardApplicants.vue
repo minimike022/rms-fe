@@ -31,17 +31,17 @@ onMounted(() => {
 <template>
     <div class="bg-white rounded-lg p-4 my-3 shadow-md">
         <h1 class="text-xl text-transparent bg-clip-text w-auto
-            bg-gradient-to-r from-blue-400 to-blue-800 drop-shadow-lg
+            bg-gradient-to-r from-blue-600 to-blue-800 drop-shadow-lg
         font-bold
         ">New Applicants</h1>
 
         <div class="overflow-y-auto h-[45.4dvh] mt-4 scroll-smooth">
-            <div class="flex flex-col mt-10 items-center">
+            <div class="flex flex-col mt-10 items-center" v-if="new_applicants == ''">
                 <img src="/src/assets/applicants_dashboard.png" alt="" class="h-[15dvh]">
-                <h1 class="text-center font-bold text-gray-400 mt-5" v-if="new_applicants == ''">No New Applicants
+                <h1 class="text-center font-bold text-gray-400 mt-5" >No New Applicants
                 </h1>
             </div>
-            <div v-for="new_app in new_applicants" class="mb-8 px-2 flex justify-between items-center">
+            <div v-for="new_app in new_applicants" class="mb-8 px-2 flex justify-between items-center text-blue-600">
                 <div>
                     <h1 class="text-md font-bold">{{ new_app.data_value.first_name }} {{ new_app.data_value.last_name }}
                     </h1>

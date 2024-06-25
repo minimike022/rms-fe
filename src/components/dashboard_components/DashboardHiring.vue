@@ -33,7 +33,7 @@ onMounted(() => {
         <!-- Header -->
         <div class="flex items-center">
             <h1 class="text-2xl text-transparent bg-clip-text w-[35dvh]
-            bg-gradient-to-r from-blue-400 to-blue-800
+            bg-gradient-to-r from-blue-600 to-blue-800
             font-bold">You Need to Hire!
             </h1>
         </div>

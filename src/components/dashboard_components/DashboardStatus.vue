@@ -9,7 +9,7 @@ import ProgressCharts from './charts/ProgressCharts.vue';
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
                     <h1 class="text-2xl text-transparent bg-clip-text w-[40dvh]
-                bg-gradient-to-r from-blue-400 to-blue-800 drop-shadow-lg
+                bg-gradient-to-r from-blue-600 to-blue-800 drop-shadow-lg
             font-bold">Recruitment Progress
                     </h1>
                 </div>
