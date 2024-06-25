@@ -73,7 +73,7 @@ const search = dash.debounce(() => {
             </button>
         </div>
 
-        <table class="w-full h-auto mt-4 bg-white shadow-lg rounded-lg">
+        <table class="relative w-full h-auto mt-4  shadow-lg rounded-lg">
             <thead>
                 <tr class="text-blue-500 text-[18px]">
                     <th class="text-left h-[10dvh] px-3">Position</th>
@@ -84,7 +84,7 @@ const search = dash.debounce(() => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="jobs in job_listing" class="text-gray-600 border-y">
+                <tr v-for="jobs in job_listing" class="text-gray-600">
                     <td class="text-left h-[10dvh] px-3 font-bold">{{ jobs.position_name }}</td>
                     <td class="text-left text-sm h-[10dvh] px-3">{{ jobs.department_name }}</td>
                     <td class="text-center text-sm h-[10dvh] px-3">{{ jobs.available_slot }}</td>
@@ -111,12 +111,12 @@ const search = dash.debounce(() => {
                 <UpdateJobsModal :job_position="job_position_status" @update_modal="is_update_active = false" />
             </div>
         </table>
-        <div class="font-bold px-4 my-4 w-full flex justify-end items-center text-blue-500">
+        <div class="absolute bottom-5 right-0 font-bold px-4 my-4 w-full flex justify-end items-center text-blue-500">
             <button :disabled="current_page <= 1" @click="get_page(current_page -= 1)" class="cursor-pointer  h-[6dvh] rounded-md w-auto px-4 flex items-center justify-center enabled:border enabled:border-blue-500 enabled:hover:bg-blue-500 hover:text-white disabled:text-gray-400 disabled:bg-gray-200">
                 <h1>Prev</h1>
             </button>
             <div @click="get_page(index)" :class="{ 'bg-blue-500 text-white': current_page === index }" v-for="index in no_of_pages"
-                class="cursor-pointer rounded-md border border-blue-500  h-[6dvh] w-[6dvh] mx-3 flex items-center justify-center hover:bg-blue-500 hover:text-white">
+                class="cursor-pointer rounded-md border border-blue-500  h-[6dvh] w-[6dvh] mx-3 flex items-center justify-center hover:bg-blue-500 hover:text-white transition ease-out duration-400">
                 <h1>
                     {{ index }}
                 </h1>
