@@ -57,7 +57,7 @@ const search = dash.debounce(() => {
 
 </script>
 <template>
-    <div class="w-full rounded-lg my-11">
+    <div class="w-full rounded-lg my-8">
         <div class="flex justify-between items-center">
             <div class="flex h-[7dvh] rounded-lg items-center drop-shadow-md">
                 <input type="text" placeholder="Search" @input="search" v-model="search_jobs"
@@ -73,7 +73,7 @@ const search = dash.debounce(() => {
             </button>
         </div>
 
-        <table class="w-full h-auto mt-6 bg-white shadow-lg rounded-lg">
+        <table class="w-full h-auto mt-4 bg-white shadow-lg rounded-lg">
             <thead>
                 <tr class="text-blue-500 text-[18px]">
                     <th class="text-left h-[10dvh] px-3">Position</th>
@@ -104,11 +104,10 @@ const search = dash.debounce(() => {
                 </tr>
             </tbody>
 
-
-            <div class="absolute top-[10dvh] flex items-center justify-center w-full" v-if="is_add_active">
+            <div class="flex items-center justify-center w-full" v-if="is_add_active">
                 <AddJobsModal @add_jobs="is_add_active = !is_add_active" />
             </div>
-            <div class="absolute top-[10dvh] flex items-center justify-center w-full" v-if="is_update_active">
+            <div class="flex items-center justify-center w-full" v-if="is_update_active">
                 <UpdateJobsModal :job_position="job_position_status" @update_modal="is_update_active = false" />
             </div>
         </table>
