@@ -14,7 +14,7 @@ const job_position_status = ref({})
 
 const no_of_pages = ref()
 var current_page = 1
-const limit = 4
+const limit = 10
 
 const get_jobs_data = () => {
     axios.get(`http://127.0.0.1:3000/jobs/search?page=${current_page}&limit=${limit}`).then(res => {
@@ -73,9 +73,9 @@ const search = dash.debounce(() => {
             </button>
         </div>
 
-        <table class="relative w-full h-auto mt-4  shadow-lg rounded-lg">
+        <table class="w-full h-auto mt-4 bg-white shadow-lg rounded-lg">
             <thead>
-                <tr class="text-blue-500 text-[18px]">
+                <tr class="text-blue-500 text-[16px]">
                     <th class="text-left h-[10dvh] px-3">Position</th>
                     <th class="text-left h-[10dvh] px-3">Department</th>
                     <th class="text-center h-[10dvh] px-3">Available Slots</th>
@@ -85,16 +85,16 @@ const search = dash.debounce(() => {
             </thead>
             <tbody>
                 <tr v-for="jobs in job_listing" class="text-gray-600">
-                    <td class="text-left h-[10dvh] px-3 font-bold">{{ jobs.position_name }}</td>
-                    <td class="text-left text-sm h-[10dvh] px-3">{{ jobs.department_name }}</td>
-                    <td class="text-center text-sm h-[10dvh] px-3">{{ jobs.available_slot }}</td>
-                    <td class="text-center text-sm h-[10dvh] font-bold text-white">
-                        <div class="w-[17dvh] h-[4dvh] rounded-lg flex items-center justify-center"
-                            :class="{ 'bg-red-500': jobs.position_status === 'Urgent', 'bg-green-500': jobs.position_status === 'Open', 'bg-yellow-500': jobs.position_status === 'Filled' }">
-                            <h1>{{ jobs.position_status }}</h1>
+                    <td class="text-left text-sm h-[8dvh] px-3 font-bold">{{ jobs.position_name }}</td>
+                    <td class="text-left text-sm h-[8dvh] px-3">{{ jobs.department_name }}</td>
+                    <td class="text-center text-sm h-[8dvh] px-3">{{ jobs.available_slot }}</td>
+                    <td class="text-center text-sm h-[8dvh] font-bold text-white">
+                        <div class="w-auto h-auto py-0.5 rounded-lg flex items-center justify-center"
+                            :class="{ 'bg-red-500': jobs.position_status === 'Urgent', 'bg-green-500': jobs.position_status === 'Open', 'bg-gray-400': jobs.position_status === 'Inactive' }">
+                            <h1 class="text-xs">{{ jobs.position_status }}</h1>
                         </div>
                     </td>
-                    <td class="flex justify-center items-center h-[10dvh]"
+                    <td class="flex justify-center items-center h-[8dvh]"
                         @click="update_jobs_data(jobs.position_id, jobs.position_name, jobs.department_id, jobs.department_name, jobs.position_status, jobs.available_slot)">
                         <div
                             class="w-[6dvh] h-[6dvh] shadow-md rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-1  00">
@@ -111,8 +111,8 @@ const search = dash.debounce(() => {
                 <UpdateJobsModal :job_position="job_position_status" @update_modal="is_update_active = false" />
             </div>
         </table>
-        <div class="absolute bottom-5 right-0 font-bold px-4 my-4 w-full flex justify-end items-center text-blue-500">
-            <button :disabled="current_page <= 1" @click="get_page(current_page -= 1)" class="cursor-pointer  h-[6dvh] rounded-md w-auto px-4 flex items-center justify-center enabled:border enabled:border-blue-500 enabled:hover:bg-blue-500 hover:text-white disabled:text-gray-400 disabled:bg-gray-200">
+        <div class=" font-bold px-4 my-4 w-full flex justify-end items-center text-blue-500">
+            <button :disabled="current_page <= 1" @click="get_page(current_page -= 1)" class="cursor-pointer h-[6dvh] rounded-md w-auto px-4 flex items-center justify-center enabled:border enabled:border-blue-500 enabled:hover:bg-blue-500 hover:text-white disabled:text-gray-400 disabled:bg-gray-200">
                 <h1>Prev</h1>
             </button>
             <div @click="get_page(index)" :class="{ 'bg-blue-500 text-white': current_page === index }" v-for="index in no_of_pages"
