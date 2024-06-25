@@ -8,14 +8,9 @@ const page = 1
 
 const job_listing = ref([])
 
-const get_jobs_count = () => {
-    axios.get('http://127.0.0.1:3000/jobs').then(res => {
-        no_of_pages.value = Math.ceil(res.data.count / limit)
-    })
-}
-
 const get_jobs_list = () =>{
     axios.get(`http://127.0.0.1:3000/jobs?page=${page}&limit=${limit}`).then(res => {
+        no_of_pages.value = Math.ceil(res.data.count / limit)
         job_listing.value = res.data.job_positions
     })
 }
@@ -28,7 +23,6 @@ const get_page = (page) => {
 
 onMounted(() => {
     get_jobs_list()
-    get_jobs_count()
 })
 </script>
 
@@ -59,7 +53,6 @@ onMounted(() => {
         </div>
         <div class="w-full flex items-center justify-center">
             <div @click="get_page(index)" v-for="index in no_of_pages" class="mx-2 w-[5dvh] h-[1dvh] bg-blue-500">
-            test3
             </div>
         </div>
     </div>
