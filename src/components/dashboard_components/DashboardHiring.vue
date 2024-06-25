@@ -59,6 +59,7 @@ onMounted(() => {
         </div>
         <div class="w-full flex items-center justify-center">
             <div @click="get_page(index)" v-for="index in no_of_pages" class="mx-2 w-[5dvh] h-[1dvh] bg-blue-500">
+            try
             </div>
         </div>
     </div>
