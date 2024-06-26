@@ -29,7 +29,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class=" bg-white rounded-lg my-3 p-4 shadow-md h-[57dvh]">
+    <div class=" my-3 p-4 shadow-md h-auto">
         <!-- Header -->
         <div class="flex items-center">
             <h1 class="text-2xl text-transparent bg-clip-text w-[35dvh]

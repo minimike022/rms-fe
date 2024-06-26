@@ -75,7 +75,7 @@ const search = dash.debounce(() => {
 
         <table class="w-full h-auto mt-4 bg-white shadow-lg rounded-lg">
             <thead>
-                <tr class="text-blue-600 text-[16px]">
+                <tr class="text-gray-500 text-[16px]">
                     <th class="text-left h-[10dvh] px-3">Position</th>
                     <th class="text-left h-[10dvh] px-3">Department</th>
                     <th class="text-center h-[10dvh] px-3">Available Slots</th>
@@ -84,7 +84,7 @@ const search = dash.debounce(() => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="jobs in job_listing" class="text-blue-600 text-sm">
+                <tr v-for="jobs in job_listing" class="text-gray-500 text-sm">
                     <td class="text-left h-[8dvh] px-3 font-bold">{{ jobs.position_name }}</td>
                     <td class="text-left h-[8dvh] px-3">{{ jobs.department_name }}</td>
                     <td class="text-center h-[8dvh] px-3">{{ jobs.available_slot }}</td>
@@ -96,10 +96,7 @@ const search = dash.debounce(() => {
                     </td>
                     <td class="flex justify-center items-center h-[8dvh]"
                         @click="update_jobs_data(jobs.position_id, jobs.position_name, jobs.department_id, jobs.department_name, jobs.position_status, jobs.available_slot)">
-                        <div
-                            class="w-[6dvh] h-[6dvh] shadow-md rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-1  00">
-                            <img src="/src/assets/edit.svg" alt="">
-                        </div>
+                        <img src="/src/assets/edit.svg" alt="" class="cursor-pointer">
                     </td>
                 </tr>
             </tbody>
