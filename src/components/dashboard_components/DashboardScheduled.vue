@@ -54,7 +54,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="p-4 my-3 shadow-md bg-white rounded-lg">
+    <div class="p-4 my-3  rounded-lg">
         <h1 class="text-xl text-transparent bg-clip-text w-[36dvh]
             bg-gradient-to-r from-blue-600 to-blue-800 drop-shadow-lg
         font-bold

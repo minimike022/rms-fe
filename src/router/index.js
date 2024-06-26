@@ -1,6 +1,6 @@
 import {createRouter, createWebHistory}from 'vue-router'
 import Login from "/src/pages/login/Login.vue"
-const Application = () => import("/src/pages/application/Application.vue")
+const Forms = () => import("/src/pages/application_forms/Forms.vue")
 const Dashboard = () => import("/src/pages/dashboard/Dashboard.vue")
 const Applicants = () => import("/src/pages/applicants/Applicants.vue")
 const Jobs = () => import("/src/pages/jobs/Jobs.vue")
@@ -48,7 +48,7 @@ const routes = [
     },
     {
         path:"/application_forms",
-        component: Application
+        component: Forms
     },
     
 ]
