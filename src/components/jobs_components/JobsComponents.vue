@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import axios from 'axios'
 import AddJobsModal from './AddJobsModal.vue';
 import dash from 'lodash'
@@ -14,12 +14,13 @@ const job_position_status = ref({})
 
 const no_of_pages = ref()
 var current_page = 1
-const limit = 10
+const limit = 4
 
 const sort_order = ref({
     col: "",
     order: "ASC"
 })
+
 
 const get_jobs_data = () => {
     axios.get(`http://127.0.0.1:3000/jobs/search?page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
@@ -31,7 +32,23 @@ const get_jobs_data = () => {
 const get_page = (page) => {
     current_page = page
 
-    axios.get(`http://127.0.0.1:3000/jobs/search?q=${search_jobs.value}&page=${current_page}&limit=${limit}`).then(res => {
+    axios.get(`http://127.0.0.1:3000/jobs/search?q=${search_jobs.value}&page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
+        job_listing.value = res.data.job_positions
+    })
+}
+
+const sort = (sort_col) => {
+    current_page = 1
+    sort_order.value.col = sort_col
+    
+    if(sort_order.value.order === "ASC") {
+        sort_order.value.order = "DESC"
+    }else {
+        sort_order.value.order = "ASC"
+    }
+
+    axios.get(`http://127.0.0.1:3000/jobs/search?q=${search_jobs.value}&page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
+        no_of_pages.value = Math.ceil(res.data.count / limit)
         job_listing.value = res.data.job_positions
     })
 }
@@ -53,6 +70,7 @@ onMounted(() => {
 })
 
 const search = dash.debounce(() => {
+    current_page = 1
     axios.get(`http://127.0.0.1:3000/jobs/search?q=${search_jobs.value}&page=${current_page}&limit=${limit}`).then(res => {
         no_of_pages.value = Math.ceil(res.data.count / limit)
         job_listing.value = res.data.job_positions
@@ -80,10 +98,10 @@ const search = dash.debounce(() => {
         <table class="w-full h-auto mt-4 bg-white shadow-lg rounded-lg">
             <thead>
                 <tr class="text-blue-600 text-[16px]">
-                    <th class="text-left h-[10dvh] px-3" @click="">Position</th>
-                    <th class="text-left h-[10dvh] px-3">Department</th>
-                    <th class="text-center h-[10dvh] px-3">Available Slots</th>
-                    <th class="text-center h-[10dvh] px-3">Status</th>
+                    <th class="text-left h-[10dvh] px-3" @click="sort('JP.position_name')">Position</th>
+                    <th class="text-left h-[10dvh] px-3" @click="sort('DP.department_name')">Department</th>
+                    <th class="text-center h-[10dvh] px-3" @click="sort('JP.available_slot')">Available Slots</th>
+                    <th class="text-center h-[10dvh] px-3" @click="sort('JP.position_status')">Status</th>
                     <th class="text-center h-[10dvh] px-3">Action</th>
                 </tr>
             </thead>
