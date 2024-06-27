@@ -14,7 +14,7 @@ const job_position_status = ref({})
 
 const no_of_pages = ref()
 var current_page = 1
-const limit = 4
+const limit = 10
 
 const sort_order = ref({
     col: "",
@@ -98,11 +98,11 @@ const search = dash.debounce(() => {
         <table class="w-full h-auto mt-4 bg-white shadow-lg rounded-lg">
             <thead>
                 <tr class="text-blue-600 text-[16px]">
-                    <th class="text-left h-[10dvh] px-3" @click="sort('JP.position_name')">Position</th>
-                    <th class="text-left h-[10dvh] px-3" @click="sort('DP.department_name')">Department</th>
-                    <th class="text-center h-[10dvh] px-3" @click="sort('JP.available_slot')">Available Slots</th>
-                    <th class="text-center h-[10dvh] px-3" @click="sort('JP.position_status')">Status</th>
-                    <th class="text-center h-[10dvh] px-3">Action</th>
+                    <th class="text-left h-[10dvh] px-3 cursor-pointer" @click="sort('JP.position_name')">Position</th>
+                    <th class="text-left h-[10dvh] px-3 cursor-pointer" @click="sort('DP.department_name')">Department</th>
+                    <th class="text-center h-[10dvh] px-3 cursor-pointer" @click="sort('JP.available_slot')">Available Slots</th>
+                    <th class="text-center h-[10dvh] px-3 cursor-pointer" @click="sort('JP.position_status')">Status</th>
+                    <th class="text-center h-[10dvh] px-3 cursor-pointer">Action</th>
                 </tr>
             </thead>
             <tbody>
