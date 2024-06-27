@@ -69,7 +69,7 @@ const search = dash.debounce(() => {
             <button @click="is_add_active = true" class="bg-blue-600 h-[7dvh] w-[19vh] outline-none rounded-md 
                     text-center text-white font-bold
                     shadow-md">
-                <h1>Add </h1>
+                <h1>Add Jobs</h1>
             </button>
         </div>
 
