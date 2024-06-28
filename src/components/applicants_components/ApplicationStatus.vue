@@ -1,6 +1,6 @@
 <script setup>
 import axios from 'axios'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import dash from 'lodash'
 import UpdateStatus from './UpdateStatus.vue';
 
@@ -12,19 +12,19 @@ const update_status = ref(false)
 
 const no_of_pages = ref()
 var current_page = 1
-const limit = 4
+const limit = ref(5)
 
 const sort_order = ref({
     col: "AD.first_name",
     order: "ASC"
-}) 
+})
 
 
 const get_application_status = () => {
-    axios.get(`http://127.0.0.1:3000/application/status?page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(
+    axios.get(`http://127.0.0.1:3000/application/status?page=${current_page}&limit=${limit.value}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(
         res => {
             application_status.value = res.data.application_status
-            no_of_pages.value = Math.ceil(res.data.count / limit)
+            no_of_pages.value = Math.ceil(res.data.count / limit.value)
         }
     )
 }
@@ -32,7 +32,7 @@ const get_application_status = () => {
 const get_page = (page) => {
     current_page = page
 
-    axios.get(`http://127.0.0.1:3000/application/status?page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
+    axios.get(`http://127.0.0.1:3000/application/status?page=${current_page}&limit=${limit.value}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
         application_status.value = res.data.application_status
     })
     console.log(sort_order.value)
@@ -41,13 +41,13 @@ const get_page = (page) => {
 const sort = (sort_col) => {
     current_page = 1
     sort_order.value.col = sort_col
-    
-    if(sort_order.value.order === "ASC") {
+
+    if (sort_order.value.order === "ASC") {
         sort_order.value.order = "DESC"
-    }else {
+    } else {
         sort_order.value.order = "ASC"
     }
-    axios.get(`http://127.0.0.1:3000/application/status?q=${search_applicants.value}&page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
+    axios.get(`http://127.0.0.1:3000/application/status?q=${search_applicants.value}&page=${current_page}&limit=${limit.value}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
         application_status.value = res.data.application_status
         console.log(application_status.value)
     })
@@ -57,10 +57,14 @@ onMounted(() => {
     get_application_status()
 })
 
+watch(() => limit.value, () => {
+    get_application_status()
+})
+
 const search = dash.debounce(() => {
-    axios.get(`http://127.0.0.1:3000/application/status?q=${search_applicants.value}&page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
+    axios.get(`http://127.0.0.1:3000/application/status?q=${search_applicants.value}&page=${current_page}&limit=${limit.value}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
         application_status.value = res.data.application_status
-        no_of_pages.value = Math.ceil(res.data.count / limit)
+        no_of_pages.value = Math.ceil(res.data.count / limit.value)
         console.log(no_of_pages.value)
     })
 }, 500)
@@ -95,12 +99,13 @@ const update_status_modal = (id) => {
                     <th class="h-[10dvh] px-3">Interviewee</th>
                     <th class="h-[10dvh] text-center px-3">Interview Date</th>
                     <th class="h-[10dvh] text-center px-3">Interview Time</th>
-                    <th class="h-[10dvh] text-center px-3 cursor-pointer" @click="sort('ASL.application_status_name')">Application Status</th>
+                    <th class="h-[10dvh] text-center px-3 cursor-pointer" @click="sort('ASL.application_status_name')">
+                        Application Status</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="app_status in application_status"
-                    class="border-y h-[10dvh] text-left text-sm text-blue-600 hover:bg-gray-100 cursor-pointer">
+                    class="h-[10dvh] text-left text-sm text-blue-600 hover:bg-gray-100 cursor-pointer">
                     <td class="px-3 font-bold">{{ app_status.first_name }} {{ app_status.last_name }} {{
                         app_status.extension_name }} </td>
                     <td class="px-3">{{ app_status.position_name }}</td>
@@ -131,20 +136,24 @@ const update_status_modal = (id) => {
             </tbody>
         </table>
         <div class="fixed bg-white w-[53dvh] h-[100%] z-[10] top-0 right-0 shadow-lg px-4 py-6" v-if="update_status">
-            <UpdateStatus :status_id="status_id" @hide_modal="update_status = !update_status" @update_status="get_application_status()" />
+            <UpdateStatus :status_id="status_id" @hide_modal="update_status = !update_status"
+                @update_status="get_application_status()" />
         </div>
 
         <div class=" font-bold px-4 my-4 w-full flex justify-end items-center text-blue-500">
-            <button :disabled="current_page <= 1" @click="get_page(current_page -= 1)" class="cursor-pointer h-[6dvh] rounded-md w-auto px-4 flex items-center justify-center enabled:border enabled:border-blue-500 enabled:hover:bg-blue-500 hover:text-white disabled:text-gray-400 disabled:bg-gray-200 mr-2">
+            <button :disabled="current_page <= 1" @click="get_page(current_page -= 1)"
+                class="cursor-pointer h-[6dvh] rounded-md w-auto px-4 flex items-center justify-center enabled:border enabled:border-blue-500 enabled:hover:bg-blue-500 hover:text-white disabled:text-gray-400 disabled:bg-gray-200 mr-2">
                 <h1>Prev</h1>
             </button>
-            <div @click="get_page(index)" :class="{ 'bg-blue-500 text-white': current_page === index }" v-for="index in no_of_pages"
+            <div @click="get_page(index)" :class="{ 'bg-blue-500 text-white': current_page === index }"
+                v-for="index in no_of_pages"
                 class="cursor-pointer rounded-md border border-blue-500 mr-2  h-[6dvh] w-[6dvh] flex items-center justify-center hover:bg-blue-500 hover:text-white transition ease-out duration-400">
                 <h1>
                     {{ index }}
                 </h1>
             </div>
-            <button :disabled="current_page >= no_of_pages" @click="get_page(current_page += 1)" class="cursor-pointer  h-[6dvh] rounded-md w-auto px-4 flex items-center justify-center enabled:border enabled:border-blue-500 enabled:hover:bg-blue-500 hover:text-white disabled:text-gray-400 disabled:bg-gray-200">
+            <button :disabled="current_page >= no_of_pages" @click="get_page(current_page += 1)"
+                class="cursor-pointer  h-[6dvh] rounded-md w-auto px-4 flex items-center justify-center enabled:border enabled:border-blue-500 enabled:hover:bg-blue-500 hover:text-white disabled:text-gray-400 disabled:bg-gray-200">
                 <h1>Next</h1>
             </button>
         </div>

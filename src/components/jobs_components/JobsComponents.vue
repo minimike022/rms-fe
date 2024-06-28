@@ -14,7 +14,7 @@ const job_position_status = ref({})
 
 const no_of_pages = ref()
 var current_page = 1
-const limit = 5
+const limit = ref(5)
 
 const sort_order = ref({
     col: "",
@@ -23,8 +23,8 @@ const sort_order = ref({
 
 
 const get_jobs_data = () => {
-    axios.get(`http://127.0.0.1:3000/jobs/search?page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
-        no_of_pages.value = Math.ceil(res.data.count / limit)
+    axios.get(`http://127.0.0.1:3000/jobs/search?page=${current_page}&limit=${limit.value}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
+        no_of_pages.value = Math.ceil(res.data.count / limit.value)
         job_listing.value = res.data.job_positions
     })
 }
@@ -32,10 +32,14 @@ const get_jobs_data = () => {
 const get_page = (page) => {
     current_page = page
 
-    axios.get(`http://127.0.0.1:3000/jobs/search?q=${search_jobs.value}&page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
+    axios.get(`http://127.0.0.1:3000/jobs/search?q=${search_jobs.value}&page=${current_page}&limit=${limit.value}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
         job_listing.value = res.data.job_positions
     })
 }
+
+watch(() => limit.value, () => {
+    get_jobs_data()
+})
 
 const sort = (sort_col) => {
     current_page = 1
@@ -47,8 +51,8 @@ const sort = (sort_col) => {
         sort_order.value.order = "ASC"
     }
 
-    axios.get(`http://127.0.0.1:3000/jobs/search?q=${search_jobs.value}&page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
-        no_of_pages.value = Math.ceil(res.data.count / limit)
+    axios.get(`http://127.0.0.1:3000/jobs/search?q=${search_jobs.value}&page=${current_page}&limit=${limit.value}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
+        no_of_pages.value = Math.ceil(res.data.count / limit.value)
         job_listing.value = res.data.job_positions
     })
 }
@@ -71,8 +75,8 @@ onMounted(() => {
 
 const search = dash.debounce(() => {
     current_page = 1
-    axios.get(`http://127.0.0.1:3000/jobs/search?q=${search_jobs.value}&page=${current_page}&limit=${limit}`).then(res => {
-        no_of_pages.value = Math.ceil(res.data.count / limit)
+    axios.get(`http://127.0.0.1:3000/jobs/search?q=${search_jobs.value}&page=${current_page}&limit=${limit.value}`).then(res => {
+        no_of_pages.value = Math.ceil(res.data.count / limit.value)
         job_listing.value = res.data.job_positions
     })
 }, 500)
@@ -94,7 +98,6 @@ const search = dash.debounce(() => {
                 <h1>Add Jobs</h1>
             </button>
         </div>
-
         <table class="w-full h-auto mt-4 bg-white shadow-lg rounded-lg">
             <thead>
                 <tr class="text-blue-600 text-[16px]">
