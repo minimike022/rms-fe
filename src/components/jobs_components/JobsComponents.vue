@@ -14,7 +14,7 @@ const job_position_status = ref({})
 
 const no_of_pages = ref()
 var current_page = 1
-const limit = 10
+const limit = 5
 
 const sort_order = ref({
     col: "",

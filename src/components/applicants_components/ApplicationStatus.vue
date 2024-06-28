@@ -14,9 +14,14 @@ const no_of_pages = ref()
 var current_page = 1
 const limit = 4
 
+const sort_order = ref({
+    col: "AD.first_name",
+    order: "ASC"
+}) 
+
 
 const get_application_status = () => {
-    axios.get(`http://127.0.0.1:3000/application/status?page=${current_page}&limit=${limit}`).then(
+    axios.get(`http://127.0.0.1:3000/application/status?page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(
         res => {
             application_status.value = res.data.application_status
             no_of_pages.value = Math.ceil(res.data.count / limit)
@@ -27,7 +32,22 @@ const get_application_status = () => {
 const get_page = (page) => {
     current_page = page
 
-    axios.get(`http://127.0.0.1:3000/application/status?page=${current_page}&limit=${limit}`).then(res => {
+    axios.get(`http://127.0.0.1:3000/application/status?page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
+        application_status.value = res.data.application_status
+    })
+    console.log(sort_order.value)
+}
+
+const sort = (sort_col) => {
+    current_page = 1
+    sort_order.value.col = sort_col
+    
+    if(sort_order.value.order === "ASC") {
+        sort_order.value.order = "DESC"
+    }else {
+        sort_order.value.order = "ASC"
+    }
+    axios.get(`http://127.0.0.1:3000/application/status?q=${search_applicants.value}&page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
         application_status.value = res.data.application_status
         console.log(application_status.value)
     })
@@ -38,9 +58,10 @@ onMounted(() => {
 })
 
 const search = dash.debounce(() => {
-    axios.get(`http://127.0.0.1:3000/application/status?q=${search_applicants.value}&page=${current_page}&limit=${limit}`).then(res => {
+    axios.get(`http://127.0.0.1:3000/application/status?q=${search_applicants.value}&page=${current_page}&limit=${limit}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
         application_status.value = res.data.application_status
-        console.log(application_status.value)
+        no_of_pages.value = Math.ceil(res.data.count / limit)
+        console.log(no_of_pages.value)
     })
 }, 500)
 
@@ -69,12 +90,12 @@ const update_status_modal = (id) => {
         <table class="w-full mt-4 shadow-lg rounded-lg bg-white">
             <thead>
                 <tr class="text-blue-600 text-[16px] text-left">
-                    <th class="h-[10dvh] px-3">Full Name</th>
-                    <th class="h-[10dvh] px-3">Position Name</th>
+                    <th class="h-[10dvh] px-3 cursor-pointer" @click="sort('AD.first_name')">Full Name</th>
+                    <th class="h-[10dvh] px-3 cursor-pointer" @click="sort('JP.position_name')">Position Name</th>
                     <th class="h-[10dvh] px-3">Interviewee</th>
                     <th class="h-[10dvh] text-center px-3">Interview Date</th>
                     <th class="h-[10dvh] text-center px-3">Interview Time</th>
-                    <th class="h-[10dvh] text-center px-3">Application Status</th>
+                    <th class="h-[10dvh] text-center px-3 cursor-pointer" @click="sort('ASL.application_status_name')">Application Status</th>
                 </tr>
             </thead>
             <tbody>
