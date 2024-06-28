@@ -122,7 +122,7 @@ const search = dash.debounce(() => {
                     <td class="flex justify-center items-center h-[8dvh]"
                         @click="update_jobs_data(jobs.position_id, jobs.position_name, jobs.department_id, jobs.department_name, jobs.position_status, jobs.available_slot)">
                         <div
-                            class="w-[6dvh] h-[6dvh] shadow-md rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-1  00">
+                            class="flex items-center justify-center cursor-pointer">
                             <img src="/src/assets/edit.svg" alt="">
                         </div>
                     </td>
