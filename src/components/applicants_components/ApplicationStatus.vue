@@ -3,6 +3,7 @@ import axios from 'axios'
 import { ref, onMounted, watch } from 'vue'
 import dash from 'lodash'
 import UpdateStatus from './UpdateStatus.vue';
+import router from '../../router';
 
 const status_id = ref(null)
 
@@ -25,6 +26,7 @@ const get_application_status = () => {
         res => {
             application_status.value = res.data.application_status
             no_of_pages.value = Math.ceil(res.data.count / limit.value)
+            console.log(application_status.value)
         }
     )
 }
@@ -60,6 +62,10 @@ onMounted(() => {
 watch(() => limit.value, () => {
     get_application_status()
 })
+
+const go_to = (id) => {
+    router.push(`/applicants_data/${id}`)
+}
 
 const search = dash.debounce(() => {
     axios.get(`http://127.0.0.1:3000/application/status?q=${search_applicants.value}&page=${current_page}&limit=${limit.value}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
@@ -105,8 +111,8 @@ const update_status_modal = (id) => {
             </thead>
             <tbody>
                 <tr v-for="app_status in application_status"
-                    class="h-[10dvh] text-left text-sm text-blue-600 hover:bg-gray-100 cursor-pointer">
-                    <td class="px-3 font-bold">{{ app_status.first_name }} {{ app_status.last_name }} {{
+                    class="h-[10dvh] text-left text-sm text-blue-600">
+                    <td class="px-3 font-bold cursor-pointer hover:text-gray-600" @click="go_to(app_status.applicant_id)" >{{ app_status.first_name }} {{ app_status.last_name }} {{
                         app_status.extension_name }} </td>
                     <td class="px-3">{{ app_status.position_name }}</td>
                     <td class="px-3">
@@ -126,9 +132,9 @@ const update_status_modal = (id) => {
                             </h1>
                         </div>
                     </td>
-                    <td class="flex justify-center items-center h-[10dvh] px-3"
+                    <td class="flex justify-center items-center h-[10dvh] px-3 z-[9999]"
                         @click="update_status_modal(app_status.application_status_id)">
-                        <div class="w-[6dvh] h-[6dvh] shadow-md rounded-lg flex items-center justify-center">
+                        <div class="flex items-center justify-center">
                             <img src="/src/assets/edit.svg" alt="">
                         </div>
                     </td>
