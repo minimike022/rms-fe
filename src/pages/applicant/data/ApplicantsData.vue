@@ -2,9 +2,11 @@
 import axios from 'axios'
 import { ref, onMounted } from 'vue'
 import router from '../../../router';
+import AssessApplicants from '../../../components/applicants_components/AssessApplicants.vue';
+
 const props = defineProps(['id'])
 
-const platforms = ref()
+const assessment_modal = ref(false)
 const applicants_data = ref([])
 
 const get_applicants_data = () => {
@@ -25,11 +27,12 @@ onMounted(() => {
 <template>
 
     <div v-for="applicant in applicants_data" class="px-2 flex flex-col">
-        <div class="flex items-center mt-8 mb-4" >
+        <div class="flex items-center justify-between mt-8 mb-4">
             <span class="bg-blue-600 flex items-center py-2 px-4 rounded-lg cursor-pointer" @click="go_back()">
                 <img src="/src/assets/back_button.svg" alt="" class="w-[24px]">
                 <h1 class="text-white font-bold text-sm">Go Back</h1>
             </span>
+
         </div>
         <div>
             <div class="w-full h-[7dvh] rounded-lg px-4 flex items-center bg-blue-600">
@@ -156,8 +159,9 @@ onMounted(() => {
                 </div>
                 <div class="flex items-center">
                     <h1 class="font-bold text-blue-600">Where did you heard about us: </h1>
-                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 text-gray-600 font-bold"> {{ applicant.platforms.toString() }} </h1>
-                        
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 text-gray-600 font-bold"> {{
+                        applicant.platforms.toString() }} </h1>
+
                 </div>
 
             </div>
@@ -197,16 +201,22 @@ onMounted(() => {
             </div>
         </div>
         <div>
-            <div class="w-full h-[7dvh] rounded-lg px-4 flex items-center bg-blue-600">
+            <div class="w-full h-[7dvh] px-4 rounded-lg flex items-center bg-blue-600">
                 <h1 class="text-lg font-bold text-white">
                     Assessments
                 </h1>
             </div>
-            <div class="flex justify-center my-4">
+            <div class="flex flex-col justify-center my-8 px-4">
+                <div class="mb-4">
+                    <h1 class="text-blue-600 hover:text-blue-800 font-bold cursor-pointer" @click="assessment_modal = !assessment_modal">Add Assessment</h1>
+                </div>
                 <h1>
                     None
                 </h1>
             </div>
         </div>
+    </div>
+    <div v-if="assessment_modal" class="fixed top-0 right-0 bg-white w-[53dvh] h-[100%] z-[10] shadow-lg p-6">
+        <AssessApplicants @close_modal="assessment_modal = false"/>
     </div>
 </template>

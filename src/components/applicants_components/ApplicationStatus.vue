@@ -134,7 +134,7 @@ const update_status_modal = (id) => {
                     </td>
                     <td class="flex justify-center items-center h-[10dvh] px-3 z-[9999]"
                         @click="update_status_modal(app_status.application_status_id)">
-                        <div class="w-[6dvh] h-[6dvh] shadow-md rounded-lg flex items-center justify-center">
+                        <div class="flex items-center justify-center">
                             <img src="/src/assets/edit.svg" alt="">
                         </div>
                     </td>
