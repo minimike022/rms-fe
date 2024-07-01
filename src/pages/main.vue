@@ -9,8 +9,8 @@ import HeaderComponent from "/src/components/HeaderComponent.vue"
   font-Poppins">
     <Navigation />
     <div class="
-    px-[2dvh]
-    h-full
+    sm:ml-52
+    px-4
     w-screen
     ">
       <HeaderComponent />
