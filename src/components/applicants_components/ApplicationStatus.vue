@@ -110,9 +110,9 @@ const update_status_modal = (id) => {
                 </tr>
             </thead>
             <tbody>
-                <tr @click="go_to(app_status.applicant_id)" v-for="app_status in application_status"
-                    class="h-[10dvh] text-left text-sm text-blue-600 hover:bg-gray-100 cursor-pointer">
-                    <td class="px-3 font-bold">{{ app_status.first_name }} {{ app_status.last_name }} {{
+                <tr v-for="app_status in application_status"
+                    class="h-[10dvh] text-left text-sm text-blue-600">
+                    <td class="px-3 font-bold cursor-pointer hover:text-gray-600" @click="go_to(app_status.applicant_id)" >{{ app_status.first_name }} {{ app_status.last_name }} {{
                         app_status.extension_name }} </td>
                     <td class="px-3">{{ app_status.position_name }}</td>
                     <td class="px-3">
@@ -132,7 +132,7 @@ const update_status_modal = (id) => {
                             </h1>
                         </div>
                     </td>
-                    <td class="flex justify-center items-center h-[10dvh] px-3"
+                    <td class="flex justify-center items-center h-[10dvh] px-3 z-[9999]"
                         @click="update_status_modal(app_status.application_status_id)">
                         <div class="w-[6dvh] h-[6dvh] shadow-md rounded-lg flex items-center justify-center">
                             <img src="/src/assets/edit.svg" alt="">
