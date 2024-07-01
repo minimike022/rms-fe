@@ -49,7 +49,7 @@ watch(personal_information.value,
 </script>
 
 <template>
-    <div class="w-[95dvh] h-auto mt-6 px-11 py-8 
+    <div class="h-auto mt-6 px-11 py-8 
         drop-shadow-xl
         bg-white  rounded-2xl">
         <h1 class="text-2xl font-semibold">Personal Information</h1>

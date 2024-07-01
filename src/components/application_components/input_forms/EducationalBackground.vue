@@ -23,11 +23,11 @@ watch(educational_background.value,
 
 <template>
     <!--Contact Information-->
-    <div class="w-[95dvh] h-auto mt-6 px-11 py-8
+    <div class="h-auto mt-6 px-11 py-8
                         drop-shadow-xl
                         bg-white  rounded-2xl">
         <h1 class="text-2xl font-semibold">Educational Background</h1>
-        <h1 class="text-sm text-gray-500">Highest Educational Attainment*</h1>
+        <h1 class="text-sm mt-4 text-gray-500">Highest Educational Attainment*</h1>
         <!-- Input Forms -->
         <div class="grid grid-cols-1 gap-y-7">
             <select required v-model="educational_background.educational_attainment" class="text-lg

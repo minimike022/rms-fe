@@ -1,5 +1,5 @@
 <script setup>
-import {ref, watch} from 'vue'
+import { ref, watch } from 'vue'
 
 const emit = defineEmits(['contact_info'])
 
@@ -25,7 +25,7 @@ watch(contact_info.value,
 
 <template>
     <!--Contact Information-->
-    <div class="w-[95dvh] h-auto mt-6 px-11 py-8
+    <div class="h-auto mt-6 px-11 py-8
                         drop-shadow-xl
                         bg-white  rounded-2xl">
         <h1 class="text-2xl font-semibold">Contact Information</h1>
@@ -33,7 +33,8 @@ watch(contact_info.value,
         <div class="grid grid-cols-1  gap-y-8
                                 mt-4">
             <div class="relative">
-                <input required type="text" v-model.lazy="contact_info.mobile_number" placeholder="Mobile Number*" id="mobile_number" class="
+                <input required type="text" v-model.lazy="contact_info.mobile_number" placeholder="Mobile Number*"
+                    id="mobile_number" class="
                                         w-full
                                      focus:border-blue-600 focus:border-b-2 placeholder-transparent
                                         outline-none border-b border-gray-400 
@@ -48,7 +49,8 @@ watch(contact_info.value,
                                         ">Mobile Number*</label>
             </div>
             <div class="relative">
-                <input required type="text" v-model.lazy="contact_info.email_address" placeholder="Email Address*" id="email_address" class="
+                <input required type="text" v-model.lazy="contact_info.email_address" placeholder="Email Address*"
+                    id="email_address" class="
                                         w-full
                                      focus:border-blue-600 focus:border-b-2 placeholder-transparent
                                         outline-none border-b border-gray-400 
@@ -63,7 +65,8 @@ watch(contact_info.value,
                                         ">Email Address*</label>
             </div>
             <div class="relative">
-                <input required type="text" v-model.lazy="contact_info.facebook_link" placeholder="Facebook_Username/link" id="facebook_link" class="
+                <input required type="text" v-model.lazy="contact_info.facebook_link"
+                    placeholder="Facebook_Username/link" id="facebook_link" class="
                                         w-full
                                      focus:border-blue-600 focus:border-b-2 placeholder-transparent
                                         outline-none border-b border-gray-400 

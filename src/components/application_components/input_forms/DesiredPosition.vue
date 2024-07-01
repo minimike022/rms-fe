@@ -1,7 +1,11 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
+import axios from 'axios'
+
 
 const emit = defineEmits(['desired_position'])
+const job_positions = ref([])
+
 
 const desiredPosition_toParent = () => {
     emit('desired_position', selected_answer.value)
@@ -13,6 +17,21 @@ const selected_answer = ref({
     shift: '',
     holiday: '',
     work_site:''
+})
+
+const get_job_positions = () => {
+    axios.get(`http://127.0.0.1:3000/jobs`).then(results => {
+        job_positions.value = results.data.job_positions
+    //     for (var i = 0; i < res.data.job_positions.length; i++) {
+    //         if(res.data.job_positions[i].position_status !== "Inactive") {
+    //             job_positions.value.push(res.data.job_positions[i])
+    //         }
+    //     }
+    })
+}
+
+onMounted(() => {
+    get_job_positions()
 })
 
 
@@ -28,7 +47,7 @@ watch(selected_answer.value,
 
 <template>
     <!--Contact Information-->
-    <div class="w-[95dvh] h-auto mt-6 px-11 py-8
+    <div class="h-auto mt-6 px-11 py-8
                         drop-shadow-xl
                         bg-white  rounded-2xl">
         <h1 class="text-2xl font-semibold">Desired Position</h1>
@@ -36,14 +55,12 @@ watch(selected_answer.value,
         <div class="w-full
         grid grid-cols-1
         gap-y-4 mt-4">
-            <select v-model="selected_answer.selected_position" class="text-lg
+            <select v-model="selected_answer.selected_position"  class="text-lg text-gray-400
                 h-[7dvh]
                 outline-none border-b border-black
                 ">
-                <option disabled value="">Choose Available Position</option>
-                <option value=1 class="text-blue-500 h-">Linux Administrator</option>
-                <option value=2>Web Developer</option>
-                <option value=3>Data Analyst</option>
+                <option disabled value="" >Choose Available Position</option>
+                <option v-for="jobs in job_positions" :value=jobs.position_id  class="text-blue-500">{{jobs.position_name}} {{ jobs.position_id }}</option>
             </select>
             <div class="grid grid-cols-2 gap-y-4 items-center">
                 <!-- Do you have BPO Experience? -->
