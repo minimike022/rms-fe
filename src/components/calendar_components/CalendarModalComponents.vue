@@ -37,7 +37,7 @@ const get_application_status = () => {
 
 const fetch_status_list = () => {
     axios.get('http://127.0.0.1:3000/status/list').then(res => {
-        for (var i = 3; i < res.data.status_list.length; i++) {
+        for (var i = 5; i < res.data.status_list.length; i++) {
             if (res.data.status_list[i].app_status_name != "Onboarding") {
                 status_list_options.value.push({ value: res.data.status_list[i].app_status_id, label: res.data.status_list[i].app_status_name })
             }

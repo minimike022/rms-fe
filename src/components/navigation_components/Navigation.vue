@@ -3,6 +3,7 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
+    
     <aside class="fixed w-48 left-0 top-0 z-40 h-screen shadow-lg">
         <div class="flex justify-center my-10">
             <img src="/src/assets/motivIT_logo.png" class="w-[25dvh]">
@@ -28,4 +29,5 @@ import { RouterLink } from 'vue-router'
                 Jobs </RouterLink>
         </div>
     </aside>
+
 </template>

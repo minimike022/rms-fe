@@ -30,7 +30,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="w-full my-3 p-4 h-auto">
+    <div class="w-full px-4 h-auto">
         <!-- Header -->
         <div class="flex items-center">
             <h1 class="text-2xl text-transparent bg-clip-text w-auto
@@ -39,7 +39,7 @@ onMounted(() => {
             </h1>
         </div>
         <!-- List of Jobs-->
-        <div class="h-[40dvh] my-6 flex flex-wrap">
+        <div class="h-[40dvh] my-2 flex flex-wrap">
             <div v-for="jobs in job_listing" class="flex items-center my-2 ml-8 w-[47dvh] h-[18dvh] shadow-lg rounded-lg p-2"
                 :class="{ 'bg-red-500': jobs.position_status === 'Urgent' }">
                 <div class="flex items-center justify-center h-[11dvh] w-[10dvh] ml-2 mr-4 rounded-lg drop-shadow-lg"
@@ -54,7 +54,7 @@ onMounted(() => {
                 </span>
             </div>
         </div>
-        <div class="w-full flex items-center justify-center">
+        <div class="w-full flex items-center justify-center mt-6">
             <div @click="get_page(index)" v-for="index in no_of_pages" :class="{ 'bg-blue-500': current_page === index, 'bg-gray-200': current_page != index }" class="mx-2 w-[5dvh] h-[1dvh]  hover:bg-blue-500 transition ease-out duration-200">
             </div>
         </div>

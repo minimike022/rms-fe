@@ -54,12 +54,8 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="w-[120dvh] shadow-md p-4 my-3">
-        <h1 class="text-xl text-transparent bg-clip-text w-auto
-            bg-gradient-to-r from-blue-600 to-blue-800 drop-shadow-lg
-        font-bold
-        ">Upcoming Interview</h1>
-        <div class="overflow-y-auto h-[45.4dvh] mt-4">
+    <div class="px-4 mt-2">
+        <div class="overflow-y-auto h-[45.4dvh]">
             <div v-if="application_schedule == ''" class="flex flex-col mt-10 items-center">
                 <img src="/src/assets/calendar_dashboard.png" alt="" class="h-[15dvh]">
                 <h1 class="text-center font-bold text-gray-400 mt-5" >No Upcoming

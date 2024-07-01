@@ -9,6 +9,9 @@ const Jobs = () => import("/src/pages/jobs/Jobs.vue")
 const Calendar = () => import("/src/pages/calendar/Calendar.vue")
 const Main = () => import("/src/pages/main.vue")
 
+const DashboardScheduled = () => import("/src/components/dashboard_components/DashboardScheduled.vue")
+const DashboardApplicants = () => import("/src/components/dashboard_components/DashboardApplicants.vue")
+
 const routes = [
     {
         path:"/",
@@ -19,7 +22,17 @@ const routes = [
                 component: Dashboard,
                 meta: {
                     header: "Dashboard"
-                }
+                },
+                children: [
+                    {
+                        path: "/scheduled",
+                        component: DashboardScheduled,
+                    },
+                    {
+                        path: "/new_applicant",
+                        component: DashboardApplicants,
+                    }
+                ]
             },
             {
                 path:"/applications",
