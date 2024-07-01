@@ -58,7 +58,7 @@ watch(application_progress, () => {
 </script>
 
 <template>
-    <div class="h-[45dvh] mt-4">
+    <div class="h-[45dvh] w-full mt-4">
         <canvas :id="recruitment_progress"></canvas>
     </div>
 </template>

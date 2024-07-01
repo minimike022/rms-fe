@@ -15,16 +15,15 @@ import DashboardPlatform from '../../components/dashboard_components/analysis/Da
         ">
             <DashboardHiring />
             <div class="w-full flex justify-between">
-                <DashboardScheduled />
+                <DashboardStatus/>
                 <DashboardApplicants />
             </div>
+
             <!-- <div class="w-[110dvh] flex flex-col">
                 <DashboardHiring />
-                <DashboardStatus />
-
+                
             </div>
             <div class="w-[50dvh] flex flex-col">
-                
 
             </div> -->
         </div>
