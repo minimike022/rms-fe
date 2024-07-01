@@ -10,20 +10,23 @@ import DashboardPlatform from '../../components/dashboard_components/analysis/Da
 
 <template>
     <div class="w-full h-full">
-        <div class="flex justify-between  
+        <div class="flex flex-col 
         mt-[4dvh] font-Poppins
         ">
-            <!--Left Components-->
-            <div class="w-[110dvh] flex flex-col">
+            <DashboardHiring />
+            <div class="w-full flex justify-between">
+                <DashboardScheduled />
+                <DashboardApplicants />
+            </div>
+            <!-- <div class="w-[110dvh] flex flex-col">
                 <DashboardHiring />
                 <DashboardStatus />
 
             </div>
             <div class="w-[50dvh] flex flex-col">
-                <DashboardScheduled />
-                <DashboardApplicants />
+                
 
-            </div>
+            </div> -->
         </div>
         <!-- Analysis -->
         <div class="bg-white flex justify-between rounded-lg">

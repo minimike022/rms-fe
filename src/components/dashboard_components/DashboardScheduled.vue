@@ -54,8 +54,8 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="p-4 my-3 shadow-md bg-white rounded-lg">
-        <h1 class="text-xl text-transparent bg-clip-text w-[36dvh]
+    <div class="w-[120dvh] shadow-md p-4 my-3">
+        <h1 class="text-xl text-transparent bg-clip-text w-auto
             bg-gradient-to-r from-blue-600 to-blue-800 drop-shadow-lg
         font-bold
         ">Upcoming Interview</h1>

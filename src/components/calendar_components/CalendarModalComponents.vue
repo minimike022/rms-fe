@@ -21,9 +21,12 @@ const applicants_options = ref([])
 const interviewee_options = ref([])
 const status_list_options = ref([])
 
+
+
 const get_application_status = () => {
     axios.get('http://127.0.0.1:3000/application/status').then(
         res => {
+            console.log(res.data)
             for (var i = 0; i < res.data.application_status.length; i++) {
                 let full_name = res.data.application_status[i].first_name + ' ' + res.data.application_status[i].last_name
                 applicants_options.value.push({ value: res.data.application_status[i].application_status_id, label: full_name })

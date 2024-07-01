@@ -29,7 +29,7 @@ onMounted(() => {
 
 
 <template>
-    <div class="bg-white rounded-lg p-4 my-3 shadow-md">
+    <div class="w-[50dvh] shadow-md p-4 my-3">
         <h1 class="text-xl text-transparent bg-clip-text w-auto
             bg-gradient-to-r from-blue-600 to-blue-800 drop-shadow-lg
         font-bold

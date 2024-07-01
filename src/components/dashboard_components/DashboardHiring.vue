@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
 const no_of_pages = ref()
-const limit = 4
+const limit = 6
 var current_page = 1
 
 const job_listing = ref([])
@@ -26,20 +26,21 @@ const get_page = (page) => {
 onMounted(() => {
     get_jobs_list()
 })
+
 </script>
 
 <template>
-    <div class=" bg-white rounded-lg my-3 p-4 shadow-md h-[57dvh]">
+    <div class="w-full my-3 p-4 h-auto">
         <!-- Header -->
         <div class="flex items-center">
-            <h1 class="text-2xl text-transparent bg-clip-text w-[35dvh]
+            <h1 class="text-2xl text-transparent bg-clip-text w-auto
             bg-gradient-to-r from-blue-600 to-blue-800
             font-bold">You Need to Hire!
             </h1>
         </div>
         <!-- List of Jobs-->
-        <div class="h-[40dvh] my-4 grid grid-cols-2 px-4">
-            <div v-for="jobs in job_listing" class="flex items-center my-2 w-[47dvh] h-[18dvh] shadow-lg rounded-lg p-2"
+        <div class="h-[40dvh] my-6 flex flex-wrap">
+            <div v-for="jobs in job_listing" class="flex items-center my-2 ml-8 w-[47dvh] h-[18dvh] shadow-lg rounded-lg p-2"
                 :class="{ 'bg-red-500': jobs.position_status === 'Urgent' }">
                 <div class="flex items-center justify-center h-[11dvh] w-[10dvh] ml-2 mr-4 rounded-lg drop-shadow-lg"
                     :class="{ 'bg-red-600': jobs.position_status === 'Urgent', 'bg-blue-500': jobs.position_status === 'Open' }">
