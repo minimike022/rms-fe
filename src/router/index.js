@@ -2,7 +2,9 @@ import {createRouter, createWebHistory}from 'vue-router'
 import Login from "/src/pages/login/Login.vue"
 const Application = () => import("/src/pages/application/Application.vue")
 const Dashboard = () => import("/src/pages/dashboard/Dashboard.vue")
-const Applicants = () => import("/src/pages/applicants/Applicants.vue")
+const ApplicantsData = () => import("/src/pages/applicant/data/ApplicantsData.vue")
+const ApplicationStatus = () => import("/src/pages/applicant/status/ApplicationStatus.vue")
+const Applicants = () => import("/src/pages/applicant/Applicants.vue")
 const Jobs = () => import("/src/pages/jobs/Jobs.vue")
 const Calendar = () => import("/src/pages/calendar/Calendar.vue")
 const Main = () => import("/src/pages/main.vue")
@@ -20,12 +22,24 @@ const routes = [
                 }
             },
             {
-                path:"/applicants",
+                path:"/applications",
                 component: Applicants,
                 meta: {
                     header: "Applicants"
-                }
+                },
+                children: [
+                    {
+                        path: "/applicants_data/:id",
+                        component: ApplicantsData,
+                        props: true,
+                    },
+                    {
+                        path: "/applicants_status",
+                        component: ApplicationStatus,
+                    },
+                ]
             },
+            
             {
                 path:"/calendar",
                 component: Calendar,

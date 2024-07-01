@@ -1,0 +1,213 @@
+<script setup>
+import axios from 'axios'
+import { ref, onMounted } from 'vue'
+import router from '../../../router';
+const props = defineProps(['id'])
+
+
+const applicants_data = ref([])
+
+const get_applicants_data = () => {
+    axios.get(`http://127.0.0.1:3000/applicants/${props.id}`).then(res => {
+        applicants_data.value = res.data.Applicants
+        console.log(applicants_data.value)
+    })
+}
+
+const go_back = () => {
+    router.push('/applicants_status')
+}
+
+onMounted(() => {
+    get_applicants_data()
+})
+</script>
+
+<template>
+
+    <div v-for="applicant in applicants_data" class="px-2 flex flex-col">
+        <div class="flex items-center my-5" >
+            <span class="bg-blue-600 flex items-center py-2 px-4 rounded-lg cursor-pointer" @click="go_back()">
+                <img src="/src/assets/back_button.svg" alt="" class="w-[24px]">
+                <h1 class="text-white font-bold text-sm">Go Back</h1>
+            </span>
+        </div>
+        <div>
+            <div class="w-full h-[7dvh] rounded-lg px-4 flex items-center bg-blue-600">
+                <h1 class="text-lg font-bold text-white">
+                    Personal Information
+                </h1>
+            </div>
+            <div class="my-4 grid grid-cols-3 gap-x-4 gap-y-7 px-4">
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">First Name: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm">{{
+                        applicant.first_name }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Middle Name: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm"
+                        v-if="applicant.middle_name !== ''">{{ applicant.middle_name }}</h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm" v-else>
+                        N/A</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Last Name: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm">{{
+                        applicant.last_name }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Extension Name: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm"
+                        v-if="applicant.extension_name !== ''">{{ applicant.extension_name }}</h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm" v-else>
+                        N/A</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Birthdate: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm">{{
+                        applicant.birthdate }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Age: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm">{{
+                        applicant.age }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Present Address: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm">{{
+                        applicant.present_address }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Mobile Number: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm"
+                        v-if="applicant.mobile_number !== ''">{{ applicant.mobile_number }}</h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm" v-else>
+                        N/A</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Email Address: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm">{{
+                        applicant.email_address }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Facebook Link: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm">{{
+                        applicant.facebook_link }}</h1>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="w-full h-[7dvh] rounded-lg px-4 flex items-center bg-blue-600">
+                <h1 class="text-lg font-bold text-white">
+                    Educational Attainment
+                </h1>
+            </div>
+            <div class="my-4 px-4 grid grid-cols-1 gap-y-7">
+                <div class="flex items-center ">
+                    <h1 class="font-bold text-blue-600">Highest Education: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm"
+                        v-if="applicant.highest_education !== ''">{{ applicant.highest_education }}</h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm" v-else>
+                        N/A</h1>
+                </div>
+                <div class="flex items-center ">
+                    <h1 class="font-bold text-blue-600">Degree Course: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm"
+                        v-if="applicant.degree_course !== ''">{{ applicant.degree_course }}</h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm" v-else>
+                        N/A</h1>
+                </div>
+                <div class="flex items-center ">
+                    <h1 class="font-bold text-blue-600">School Name: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm"
+                        v-if="applicant.school_name !== ''">{{ applicant.school_name }}</h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold text-sm" v-else>
+                        N/A</h1>
+                </div>
+
+            </div>
+        </div>
+        <div>
+            <div class="w-full h-[7dvh] rounded-lg px-4 flex items-center bg-blue-600">
+                <h1 class="text-lg font-bold text-white">
+                    Others
+                </h1>
+            </div>
+            <div class="my-4 px-4 grid grid-cols-1 gap-y-7">
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Has BPO Experience? </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold">{{
+                        applicant.bpo_exp }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Willing to work night shift? </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold">{{
+                        applicant.shift_sched }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Willing to work on weekdays and holidays? </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold">{{
+                        applicant.work_report }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Willing to work onsite in Sto. Domingo. Nueva Ecija? </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold">{{
+                        applicant.work_site_location }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Where did you heard about us? </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold"
+                        v-for="platforms in applicant.platforms">{{ platforms }}</h1>
+                </div>
+
+            </div>
+        </div>
+        <div>
+            <div class="w-full h-[7dvh] rounded-lg px-4 flex items-center bg-blue-600">
+                <h1 class="text-lg font-bold text-white">
+                    Referral
+                </h1>
+            </div>
+            <div class="my-4 px-4 grid grid-cols-1 gap-y-7">
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Full Name: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold">{{
+                        applicant.ref_full_name }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Company: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold">{{
+                        applicant.ref_company }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Position: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold">{{
+                        applicant.ref_position }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Contact Number: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold">{{
+                        applicant.ref_contact_num }}</h1>
+                </div>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-blue-600">Email Address: </h1>
+                    <h1 class="w-auto h-auto py-2 px-4 rounded-lg ml-2 bg-blue-600 text-white font-bold">{{
+                        applicant.ref_email }}</h1>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="w-full h-[7dvh] rounded-lg px-4 flex items-center bg-blue-600">
+                <h1 class="text-lg font-bold text-white">
+                    Assessments
+                </h1>
+            </div>
+            <div class="flex justify-center my-4">
+                <h1>
+                    None
+                </h1>
+            </div>
+        </div>
+    </div>
+</template>

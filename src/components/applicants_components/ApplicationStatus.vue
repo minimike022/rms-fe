@@ -3,6 +3,7 @@ import axios from 'axios'
 import { ref, onMounted, watch } from 'vue'
 import dash from 'lodash'
 import UpdateStatus from './UpdateStatus.vue';
+import router from '../../router';
 
 const status_id = ref(null)
 
@@ -25,6 +26,7 @@ const get_application_status = () => {
         res => {
             application_status.value = res.data.application_status
             no_of_pages.value = Math.ceil(res.data.count / limit.value)
+            console.log(application_status.value)
         }
     )
 }
@@ -60,6 +62,10 @@ onMounted(() => {
 watch(() => limit.value, () => {
     get_application_status()
 })
+
+const go_to = (id) => {
+    router.push(`/applicants_data/${id}`)
+}
 
 const search = dash.debounce(() => {
     axios.get(`http://127.0.0.1:3000/application/status?q=${search_applicants.value}&page=${current_page}&limit=${limit.value}&sort_col=${sort_order.value.col}&sort_order=${sort_order.value.order}`).then(res => {
@@ -104,7 +110,7 @@ const update_status_modal = (id) => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="app_status in application_status"
+                <tr @click="go_to(app_status.applicant_id)" v-for="app_status in application_status"
                     class="h-[10dvh] text-left text-sm text-blue-600 hover:bg-gray-100 cursor-pointer">
                     <td class="px-3 font-bold">{{ app_status.first_name }} {{ app_status.last_name }} {{
                         app_status.extension_name }} </td>
