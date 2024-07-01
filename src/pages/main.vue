@@ -12,6 +12,7 @@ import HeaderComponent from "/src/components/HeaderComponent.vue"
     sm:ml-52
     px-2
     w-screen
+    h-full
     ">
       <HeaderComponent />
       <RouterView />

@@ -24,7 +24,7 @@ const hide_assign_modal = () => {
 //fetch the list of different status
 const fetch_status_list = () => {
     axios.get('http://127.0.0.1:3000/status/list').then(res => {
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 5; i++) {
             status_list.value.push({ value: res.data.status_list[i].app_status_id, label: res.data.status_list[i].app_status_name })
         }
     })
