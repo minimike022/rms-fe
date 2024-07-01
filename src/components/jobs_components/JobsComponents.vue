@@ -100,7 +100,7 @@ const search = dash.debounce(() => {
         </div>
         <table class="w-full h-auto mt-4 bg-white shadow-lg rounded-lg">
             <thead>
-                <tr class="text-blue-600 text-[16px]">
+                <tr class="text-blue-600 text-sm">
                     <th class="text-left h-[10dvh] px-3 cursor-pointer" @click="sort('JP.position_name')">Position</th>
                     <th class="text-left h-[10dvh] px-3 cursor-pointer" @click="sort('DP.department_name')">Department</th>
                     <th class="text-center h-[10dvh] px-3 cursor-pointer" @click="sort('JP.available_slot')">Available Slots</th>
@@ -109,7 +109,7 @@ const search = dash.debounce(() => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="jobs in job_listing" class="text-blue-600 text-sm">
+                <tr v-for="jobs in job_listing" class="text-blue-600 text-xs">
                     <td class="text-left h-[8dvh] px-3 font-bold">{{ jobs.position_name }}</td>
                     <td class="text-left h-[8dvh] px-3">{{ jobs.department_name }}</td>
                     <td class="text-center h-[8dvh] px-3">{{ jobs.available_slot }}</td>

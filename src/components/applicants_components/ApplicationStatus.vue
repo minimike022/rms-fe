@@ -99,7 +99,7 @@ const update_status_modal = (id) => {
         </div>
         <table class="w-full mt-4 shadow-lg rounded-lg bg-white">
             <thead>
-                <tr class="text-blue-600 text-[16px] text-left">
+                <tr class="text-blue-600 text-sm text-left">
                     <th class="h-[10dvh] px-3 cursor-pointer" @click="sort('AD.first_name')">Full Name</th>
                     <th class="h-[10dvh] px-3 cursor-pointer" @click="sort('JP.position_name')">Position Name</th>
                     <th class="h-[10dvh] px-3">Interviewee</th>
@@ -111,7 +111,7 @@ const update_status_modal = (id) => {
             </thead>
             <tbody>
                 <tr v-for="app_status in application_status"
-                    class="h-[10dvh] text-left text-sm text-blue-600">
+                    class="h-[10dvh] text-left text-xs text-blue-600">
                     <td class="px-3 font-bold cursor-pointer hover:text-gray-600" @click="go_to(app_status.applicant_id)" >{{ app_status.first_name }} {{ app_status.last_name }} {{
                         app_status.extension_name }} </td>
                     <td class="px-3">{{ app_status.position_name }}</td>
